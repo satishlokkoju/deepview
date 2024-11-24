@@ -20,6 +20,8 @@ dependencies = [
     "numpy>=1.21.0",
     "torch>=2.0.0",
     "pillow>=9.0.0",
+    "matplotlib>=3.7.0",
+    "networkx>=3.0",
 ]
 
 [project.optional-dependencies]
@@ -31,3 +33,8 @@ dev = [
 [project.urls]
 Homepage = "https://github.com/satishlokkoju/deepview"
 Issues = "https://github.com/satishlokkoju/deepview/issues"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "--cov=src/deepview --cov-report=term-missing"
