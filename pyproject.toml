@@ -22,6 +22,12 @@ dependencies = [
     "pillow>=9.0.0",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+]
+
 [project.urls]
 Homepage = "https://github.com/satishlokkoju/deepview"
 Issues = "https://github.com/satishlokkoju/deepview/issues"

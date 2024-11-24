@@ -1,7 +1,7 @@
 # DeepView
 
-[![Tests](https://github.com/USERNAME/deepview/actions/workflows/tests.yml/badge.svg)](https://github.com/USERNAME/deepview/actions/workflows/tests.yml)
-[![codecov](https://codecov.io/gh/USERNAME/deepview/branch/main/graph/badge.svg)](https://codecov.io/gh/USERNAME/deepview)
+[![Tests](https://github.com/satishlokkoju/deepview/actions/workflows/tests.yml/badge.svg)](https://github.com/USERNAME/deepview/actions/workflows/tests.yml)
+[![codecov](https://codecov.io/gh/satishlokkoju/deepview/branch/main/graph/badge.svg)](https://codecov.io/gh/USERNAME/deepview)
 
 A deep learning visualization toolkit that helps you understand and debug your neural networks.
 
