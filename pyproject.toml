@@ -1,0 +1,27 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "deepview"
+version = "0.0.1"
+authors = [
+  { name="Satish Lokkoju", email="satish.lokkoju@example.com" },
+]
+description = "A deep learning visualization toolkit"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "numpy>=1.21.0",
+    "torch>=2.0.0",
+    "pillow>=9.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/satishlokkoju/deepview"
+Issues = "https://github.com/satishlokkoju/deepview/issues"
