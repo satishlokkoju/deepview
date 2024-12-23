@@ -38,7 +38,10 @@ from tqdm import tqdm
 import os
 import glob
 import typing as t
-from typing import Final
+try:
+    from typing import Final
+except ImportError:
+    from typing_extensions import Final
 
 from deepview.base import TrainTestSplitProducer
 from deepview._logging import _Logged
