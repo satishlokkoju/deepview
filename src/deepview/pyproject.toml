@@ -1,0 +1,108 @@
+# Tell pip to use flit to build this package
+[build-system]
+requires = ["flit_core >=2,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.metadata]
+module = "deepview"
+home-page = "https://github.com/satishlokkoju/deepview"
+license = "Apache-2.0"
+description-file="README.md"
+
+author = "Satish Lokkoju"
+author-email = "satish.lokkoju@gmail.com"
+classifiers = [
+    'Topic :: Scientific/Engineering :: Artificial Intelligence',
+    'Topic :: Scientific/Engineering :: Information Analysis',
+    'Development Status :: 5 - Production/Stable',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Operating System :: MacOS',
+    'Operating System :: POSIX :: Linux',
+    'Intended Audience :: Developers',
+    'Intended Audience :: Education',
+    'Intended Audience :: Science/Research',
+]
+
+requires-python = ">=3.7"
+requires = [
+    "annoy",  # duplicates -- approximate nearest neighbor oh yeah
+    "numpy",
+    "scikit-learn",
+    "typing_extensions; python_version < '3.8'",
+]
+
+[tool.flit.metadata.requires-extra]
+# DeepView BASE EXTENSIONS
+image = [
+    "opencv-python-headless",
+    "Pillow",  # Pillow AKA PIL
+]
+dimreduction = [
+    "umap-learn",
+    "pacmap",
+]
+dataset-report = [
+    "pandas",
+    "umap-learn",
+    "pacmap",
+]
+
+# MODEL EXTENSIONS
+tensorflow = ["deepview_tensorflow[tf2]==3.0.0"]
+tensorflow1 = ["deepview_tensorflow[tf1]==3.0.0"]
+tensorflow1-gpu = ["deepview_tensorflow[tf1-gpu]==3.0.0"]
+torch = ["deepview_torch==3.0.0"]
+
+# DEV EXTENSIONS
+test = [
+    # An issue between pytest-flake8 and flake8 (ConfigFileFinder not found)
+    "flake8 < 5.0.0",
+    # flake8 now has this requirement because importlib-metadata's update is API breaking
+    "importlib-metadata < 4.3; python_version < '3.8'",
+
+    "mypy",
+    "pytest",
+    "pytest-cov",
+    "pytest-flake8",
+    "pytest-mypy",
+    "pytest-xdist[psutil]",
+    "pytest-timeout",
+    "flake8-copyright",
+
+    # not really a test, but a dev tool
+    "bumpversion",
+]
+doc = [
+    "ipykernel",
+    "jupyter_client",
+    "nbsphinx",
+    "pandoc",
+    "sphinx",
+    "sphinx-book-theme",
+    "matplotlib", # to build notebooks
+    "pandas",
+    "jupyter-datatables",
+    "seaborn",
+]
+notebook = [
+    "notebook < 7.0.0",
+    "matplotlib",
+    "pandas",
+    "jupyter-datatables",
+    "plotly",
+]
+complete = [
+    "deepview[image]==3.0.0",
+    "deepview[dimreduction]==3.0.0",
+    "deepview[duplicates]==3.0.0",
+    "deepview[dataset-report]==3.0.0",
+    "deepview[tensorflow]==3.0.0",
+    "deepview[notebook]==3.0.0",
+]
+
+[tool.flit.metadata.urls]
+Documentation = "https://satishlokkoju.github.io/deepview"
+Changelog = "https://github.com/satishlokkoju/deepview/blob/main/CHANGELOG.md"

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="1" skipped="1" tests="22" time="2.333" timestamp="2024-12-22T22:14:18.647022-08:00" hostname="visionraga"><testcase classname="src.deepview_tensorflow.tests.test_custom_datasets.flake-8" name="FLAKE8" time="0.001"><skipped type="pytest.skip" message="file(s) previously passed FLAKE8 checks">/home/satish/.local/lib/python3.10/site-packages/pytest_flake8.py:130: file(s) previously passed FLAKE8 checks</skipped></testcase><testcase classname="src.deepview_tensorflow.tests.test_custom_datasets" name="mypy" time="0.480" /><testcase classname="src.deepview_tensorflow.tests.test_custom_datasets" name="mypy-status" time="0.000" /><testcase classname="src.deepview_tensorflow.tests.test_custom_datasets.TestImageFolderDataset" name="test_additional_metadata" time="0.007" /><testcase classname="src.deepview_tensorflow.tests.test_custom_datasets.TestImageFolderDataset" name="test_array_writability" time="0.003" /><testcase classname="src.deepview_tensorflow.tests.test_custom_datasets.TestImageFolderDataset" name="test_custom_train_split" time="0.003" /><testcase classname="src.deepview_tensorflow.tests.test_custom_datasets.TestImageFolderDataset" name="test_empty_directory" time="0.002" /><testcase classname="src.deepview_tensorflow.tests.test_custom_datasets.TestImageFolderDataset" name="test_get_producer" time="0.003"><failure message="ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()">self = &lt;tests.test_custom_datasets.TestImageFolderDataset testMethod=test_get_producer&gt;
+
+    def test_get_producer(self) -&gt; None:
+        """Test that get_producer returns a correctly configured TrainTestSplitProducer."""
+        max_samples = 6
+        dataset = TFCustomDatasets.ImageFolderDataset(
+            root_folder=self.test_dir,
+            image_size=self.image_size,
+            max_samples=max_samples
+        )
+    
+        # Test producer configuration
+        self.assertEqual(dataset.max_samples, max_samples)
+        self.assertTrue(dataset.attach_metadata)
+        self.assertTrue(dataset.write_to_folder)
+    
+        # Test producer output
+        batch_iter = dataset(batch_size=3)
+&gt;       batch = next(iter(batch_iter))
+
+test_custom_datasets.py:263: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../deepview/deepview/base/_traintest_producer.py:264: in __call__
+    yield builder.make_batch()
+../../deepview/deepview/base/_batch/_batch.py:888: in make_batch
+    metadata=_meta._copy_metadata_storage(self.metadata._storage)
+../../deepview/deepview/base/_batch/_metadata_storage.py:96: in _copy_metadata_storage
+    return {
+../../deepview/deepview/base/_batch/_metadata_storage.py:97: in &lt;dictcomp&gt;
+    meta_key: {
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+.0 = &lt;dict_itemiterator object at 0x7d0354366980&gt;
+
+&gt;       meta_key: {
+            key: list(value)
+            for key, value in meta_values.items()
+            if value
+        }
+        for meta_key, meta_values in storage.items()
+        if meta_values
+    }
+E   ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+
+../../deepview/deepview/base/_batch/_metadata_storage.py:97: ValueError</failure></testcase><testcase classname="src.deepview_tensorflow.tests.test_custom_datasets.TestImageFolderDataset" name="test_image_format" time="0.003" /><testcase classname="src.deepview_tensorflow.tests.test_custom_datasets.TestImageFolderDataset" name="test_initialization" time="0.003" /><testcase classname="src.deepview_tensorflow.tests.test_custom_datasets.TestImageFolderDataset" name="test_invalid_image" time="0.003" /><testcase classname="src.deepview_tensorflow.tests.test_custom_datasets.TestImageFolderDataset" name="test_load_data_with_corrupted_image" time="0.003" /><testcase classname="src.deepview_tensorflow.tests.test_custom_datasets.TestImageFolderDataset" name="test_load_data_with_empty_class" time="0.003" /><testcase classname="src.deepview_tensorflow.tests.test_custom_datasets.TestImageFolderDataset" name="test_load_data_with_invalid_extension" time="0.003" /><testcase classname="src.deepview_tensorflow.tests.test_custom_datasets.TestImageFolderDataset" name="test_load_from_folder" time="0.003" /><testcase classname="src.deepview_tensorflow.tests.test_custom_datasets.TestImageFolderDataset" name="test_max_samples" time="0.003" /><testcase classname="src.deepview_tensorflow.tests.test_custom_datasets.TestImageFolderDataset" name="test_max_samples_balanced" time="0.003" /><testcase classname="src.deepview_tensorflow.tests.test_custom_datasets.TestImageFolderDataset" name="test_max_samples_minimum_representation" time="0.002" /><testcase classname="src.deepview_tensorflow.tests.test_custom_datasets.TestImageFolderDataset" name="test_no_valid_class_folders" time="0.002" /><testcase classname="src.deepview_tensorflow.tests.test_custom_datasets.TestImageFolderDataset" name="test_no_valid_images" time="0.002" /><testcase classname="src.deepview_tensorflow.tests.test_custom_datasets.TestImageFolderDataset" name="test_train_split_with_invalid_ratio" time="0.002" /><testcase classname="src.deepview_tensorflow.tests.test_custom_datasets.TestImageFolderDataset" name="test_valid_extensions" time="0.003" /></testsuite></testsuites>
