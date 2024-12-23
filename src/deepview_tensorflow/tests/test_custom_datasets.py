@@ -77,7 +77,7 @@ class TestImageFolderDataset(unittest.TestCase):
                 color_idx = self.classes.index(class_name)
                 color = np.zeros((128, 128, 3), dtype=np.uint8)
                 color[:, :, color_idx] = 255
-                img = Image.fromarray(color)
+                img = Image.fromarray(color)  # type: ignore
                 img.save(img_path, format=format_str)
 
     def tearDown(self) -> None:
@@ -203,7 +203,7 @@ class TestImageFolderDataset(unittest.TestCase):
         # Create a valid image
         color = np.zeros((128, 128, 3), dtype=np.uint8)
         color[:, :, 0] = 255  # Red color
-        img = Image.fromarray(color)
+        img = Image.fromarray(color)  # type: ignore
         img.save(os.path.join(class_dir, 'extra_valid.jpg'))
 
         # Create an invalid image

@@ -44,7 +44,6 @@ test-pytest:
 
 test-pytest-all:
     # runs all tests including ones marked @pytest.mark.slow (see conftest.py)
-    # this is typically triggered via the nightly builds on rio
 	@echo "Running pytest (all)."
 	@pytest --runslow --durations=10
 

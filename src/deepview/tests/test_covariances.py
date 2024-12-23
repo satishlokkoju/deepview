@@ -65,15 +65,15 @@ def test_covariances_result_shapes(producer: Producer) -> None:
 
     cov_results = oncov._prepare_covariances(7, producer)
 
-    assert(set(cov_results.keys()) == set(STUB_DATA.keys()))
+    assert (set(cov_results.keys()) == set(STUB_DATA.keys()))
 
     for resp_name in STUB_DATA.keys():
         n_channels = STUB_DATA[resp_name].shape[-1]
 
         cov = cov_results[resp_name].get_centered_covariances()
 
-        assert(isinstance(cov, np.ndarray))
-        assert(cov.shape == (n_channels, n_channels))
+        assert (isinstance(cov, np.ndarray))
+        assert (cov.shape == (n_channels, n_channels))
 
 
 def test_covariances_results(producer: Producer) -> None:
@@ -91,7 +91,7 @@ def test_covariances_results(producer: Producer) -> None:
         reference_covariance = np.cov(stub_array_2d, rowvar=False, bias=False)
         computed_covariance = cov_results[resp_name].get_centered_covariances()
 
-        assert(np.allclose(computed_covariance, reference_covariance))
+        assert (np.allclose(computed_covariance, reference_covariance))
 
 
 def test_simple_online_test() -> None:

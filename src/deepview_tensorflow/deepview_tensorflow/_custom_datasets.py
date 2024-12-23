@@ -31,20 +31,16 @@
 # limitations under the License.
 #
 
-from typing import List, Tuple, Optional
 import cv2
 import numpy as np
 from tqdm import tqdm
 import os
 import glob
-import typing as t
-try:
-    from typing import Final
-except ImportError:
-    from typing_extensions import Final
+from typing import List, Optional, Tuple, Dict
 
 from deepview.base import TrainTestSplitProducer
 from deepview._logging import _Logged
+import deepview.typing._types as t
 
 
 @t.final
@@ -69,11 +65,11 @@ class ImageFolderDataset(TrainTestSplitProducer, _Logged):
         max_samples: Maximum number of samples to load (-1 for all, default: -1)
     """
 
-    root_folder: Final[str]
-    image_size: Final[Tuple[int, int]]
-    train_split: Final[float]
-    valid_extensions: Final[List[str]]
-    file_names: Final[np.ndarray]
+    root_folder: t.Final[str]
+    image_size: t.Final[Tuple[int, int]]
+    train_split: t.Final[float]
+    valid_extensions: t.Final[List[str]]
+    file_names: t.Final[np.ndarray]
 
     def __init__(self,
                  root_folder: str,
@@ -148,7 +144,7 @@ class ImageFolderDataset(TrainTestSplitProducer, _Logged):
                 samples_per_class = 1  # Ensure at least one sample per class
 
         # Load and process images for each class
-        image_datum_by_class: dict[str, list[tuple[np.ndarray, str]]] = {}
+        image_datum_by_class: Dict[str, List[Tuple[np.ndarray, str]]] = {}
         total_files = sum(len(files) for files in class_files.values())
 
         with tqdm(total=total_files, desc="Loading images", unit="img") as pbar:
@@ -214,10 +210,8 @@ class ImageFolderDataset(TrainTestSplitProducer, _Logged):
         return ((X[train_indices], y[train_indices]), (X[test_indices], y[test_indices])), filenames[indices]
 
 
-@t.final
 class TFCustomDatasets:
     """
     Custom TF Datasets, each bundled as a DeepView :class:`Producer <deepview.base.Producer>`.
     """
-
     ImageFolderDataset: t.Final = ImageFolderDataset

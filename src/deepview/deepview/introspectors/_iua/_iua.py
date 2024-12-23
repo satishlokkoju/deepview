@@ -259,9 +259,9 @@ class IUA(Introspector):
 
         for axis_id, response_name in enumerate(responses):
             if len(responses) == 1:
-                single_axis = axs
+                single_axis = axs  # type: ignore
             else:
-                single_axis = axs[axis_id]
+                single_axis = axs[axis_id]  # type: ignore
 
             # Double check that the data is valid
             if np.sum(iua_results[response_name].unit_inactive_count) == 0:
@@ -270,19 +270,19 @@ class IUA(Introspector):
                     len(iua_results[response_name].unit_inactive_count),
                     len(iua_results[response_name].unit_inactive_count)
                 )
-                single_axis.imshow(np.zeros(shape))
+                single_axis.imshow(np.zeros(shape))  # type: ignore
                 added_text = "- no inactive units"
             else:
                 # Else create heatmap
-                single_axis.imshow(
+                single_axis.imshow(  # type: ignore
                     np.sum(iua_results[response_name].unit_inactive_count, axis=0),
                     cmap='hot',
                     interpolation='nearest'
                 )
                 added_text = ""
-            single_axis.set_title(f"{response_name} Inactive Unit Proportions {added_text}")
+            single_axis.set_title(f"{response_name} Inactive Unit Proportions {added_text}")  # type: ignore
 
-        return axs
+        return axs  # type: ignore
 
     @staticmethod
     def show(iua: "IUA", *, vis_type: str = VisType.TABLE,

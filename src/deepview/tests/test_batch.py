@@ -69,7 +69,7 @@ def _make_metadata(batch_size: int) -> t.List[_TestMetadata]:
 
 
 def _same_data(a: t.Mapping[str, np.ndarray], b: t.Mapping[str, np.ndarray]) -> bool:
-    return(
+    return (
         set(a.keys()) == set(b.keys())
         and all(np.allclose(a[field], b[field]) for field in a)
     )

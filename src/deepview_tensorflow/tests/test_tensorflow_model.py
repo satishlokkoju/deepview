@@ -77,7 +77,7 @@ def model_path(tmp_path_factory: pytest.TempPathFactory) -> pathlib.Path:
 
 def test_instantiation(model_path: pathlib.Path) -> None:
     model = load_tf_model_from_path(model_path)
-    assert(model is not None)
+    assert (model is not None)
 
 
 def _check_tf1_names(conv2d_operations: t.Sequence[ResponseInfo], model: Model) -> None:
@@ -105,7 +105,7 @@ def test_response_meta(model_path: pathlib.Path) -> None:
     ]
 
     # there should be at least one conv2d operation
-    assert(len(conv2d_operations) > 0)
+    assert (len(conv2d_operations) > 0)
 
     if running_tf_1():
         _check_tf1_names(conv2d_operations, model)
@@ -140,7 +140,7 @@ def test_response_generation(model_path: pathlib.Path) -> None:
     for response_batch in response_producer(batch_size=10):
         total_response_data_points += response_batch.batch_size
 
-    assert(total_response_data_points == dataset_size)
+    assert (total_response_data_points == dataset_size)
 
 
 def test_auto_field_renamer(model_path: pathlib.Path) -> None:

@@ -78,7 +78,7 @@ def _load_image(image_path: pathlib.Path) -> np.ndarray:
     color_alpha = len(image.shape) == 3 and image.shape[-1] == 4
     # Transform to follow more common expectations
     if grayscale:
-        image = np.expand_dims(image, axis=-1)
+        image = np.expand_dims(image, axis=-1)  # type: ignore
     elif color:
         cv2.cvtColor(image, cv2.COLOR_BGR2RGB, dst=image)
     elif color_alpha:

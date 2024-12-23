@@ -15,10 +15,10 @@ classifiers = [
     'Topic :: Scientific/Engineering :: Artificial Intelligence',
     'Topic :: Scientific/Engineering :: Information Analysis',
     'Development Status :: 5 - Production/Stable',
-    'Programming Language :: Python :: 3.7',
     'Programming Language :: Python :: 3.8',
     'Programming Language :: Python :: 3.9',
     'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
     'Operating System :: MacOS',
     'Operating System :: POSIX :: Linux',
     'Intended Audience :: Developers',
@@ -26,12 +26,11 @@ classifiers = [
     'Intended Audience :: Science/Research',
 ]
 
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 requires = [
     "annoy",  # duplicates -- approximate nearest neighbor oh yeah
     "numpy",
-    "scikit-learn",
-    "typing_extensions; python_version < '3.8'",
+    "scikit-learn"
 ]
 
 [tool.flit.metadata.requires-extra]
@@ -58,11 +57,8 @@ torch = ["deepview_torch==3.0.0"]
 
 # DEV EXTENSIONS
 test = [
-    # An issue between pytest-flake8 and flake8 (ConfigFileFinder not found)
-    "flake8 < 5.0.0",
-    # flake8 now has this requirement because importlib-metadata's update is API breaking
-    "importlib-metadata < 4.3; python_version < '3.8'",
-
+    "flake8",
+    "importlib-metadata",
     "mypy",
     "pytest",
     "pytest-cov",

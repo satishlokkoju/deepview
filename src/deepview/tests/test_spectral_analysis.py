@@ -74,7 +74,7 @@ def test_spectral_analysis_result_shapes() -> None:
     response_generator = StubProducer(stub_data)
     spectral_analysis_results = PFA.introspect(response_generator, batch_size=7)._internal_result
 
-    assert(set(spectral_analysis_results.keys())
+    assert (set(spectral_analysis_results.keys())
            == set(stub_data.keys()))
 
     for response_name in stub_data.keys():
@@ -109,7 +109,7 @@ def ensure_equal_covariance_rank(stub_data: t.Mapping[str, np.ndarray]) -> None:
         non_zero_eigenvalues_by_response[response_name]
         for response_name in non_zero_eigenvalues_by_response
     )
-    assert(len(non_zero_eigenvalues_set) == 1)
+    assert (len(non_zero_eigenvalues_set) == 1)
 
 
 def test_data_rank_conservation_wrt_feature_repetition() -> None:

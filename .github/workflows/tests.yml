@@ -35,7 +35,7 @@ jobs:
     
     - name: Run tests
       run: |
-        python -m pytest --junit-xml=test-results.xml
+        python -m pytest --junit-xml=test-results.xml --runslow --durations=10
     
     - name: Upload test results
       uses: actions/upload-artifact@v3
