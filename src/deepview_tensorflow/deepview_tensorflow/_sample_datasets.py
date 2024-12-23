@@ -100,7 +100,7 @@ class _KerasDatasetWithStrLabels(_KerasDatasetLoader):
         # Overrides subset to allow labels to be a list of class names "automobile", "truck," etc
         def convert_label(lbl: t.Hashable) -> t.Hashable:
             # Cast string labels into ints representing the label idx (leave others untouched)
-            if type(lbl) == str:
+            if isinstance(lbl, str):
                 return self._label_idx_for_name(lbl)  # type: ignore
             return lbl
 
