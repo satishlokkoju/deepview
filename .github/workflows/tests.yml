@@ -31,7 +31,7 @@ jobs:
         python -m pip install .[tf2]
         # Install torch extension
         cd ../deepview_torch
-        python -m pip install .
+        python -m pip install .[test]
     
     - name: Run tests
       run: |

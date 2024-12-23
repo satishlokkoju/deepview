@@ -33,6 +33,7 @@ requires = [
     
     # External
     "tqdm>=4.65.0",
+    "opencv-python-headless>=4.0.0",
 ]
 
 [tool.flit.metadata.requires-extra]
