@@ -7,7 +7,7 @@ build-backend = "flit_core.buildapi"
 module = "deepview"
 home-page = "https://github.com/satishlokkoju/deepview"
 license = "Apache-2.0"
-description-file="README.md"
+description-file="READMEBASE.md"
 
 author = "Satish Lokkoju"
 author-email = "satish.lokkoju@gmail.com"
