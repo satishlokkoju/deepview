@@ -42,7 +42,7 @@ jobs:
         # Install torch extension
         cd ../deepview_torch
         python -m pip install .[test]
-        cd ../deepview_datasets
+        cd ../deepview_data
         python -m pip install .[dev]
     
     - name: Run tests
