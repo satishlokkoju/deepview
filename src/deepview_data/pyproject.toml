@@ -4,7 +4,7 @@ requires = ["flit_core >=2,<4"]
 build-backend = "flit_core.buildapi"
 
 [tool.flit.metadata]
-module = "deepview_datasets"
+module = "deepview_data"
 home-page = "https://github.com/satishlokkoju/deepview"
 license = "Apache-2.0"
 description-file="README.md"

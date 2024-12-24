@@ -45,6 +45,6 @@ __all__ = [
 
 # Raise error if deepview and deepview_tensorflow versions are out of sync
 assert __version__ == deepview.__version__, (
-    f'deepview_datasets v{__version__} and '
+    f'deepview_data v{__version__} and '
     f'deepview v{deepview.__version__} should be the same versions.'
 )

@@ -16,54 +16,150 @@ permissions:
   contents: read
 
 jobs:
-  release-build:
+  build-deepview:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: "3.x"
-
-      - name: Build release distributions
+      - name: Build deepview
         run: |
-          # NOTE: put your own distribution build steps here.
           python -m pip install build
+          cd src/deepview
           python -m build
-
       - name: Upload distributions
         uses: actions/upload-artifact@v4
         with:
-          name: release-dists
-          path: dist/
+          name: deepview-dist
+          path: src/deepview/dist/
 
-  pypi-publish:
+  build-data:
     runs-on: ubuntu-latest
-    needs:
-      - release-build
-    permissions:
-      # IMPORTANT: this permission is mandatory for trusted publishing
-      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Build deepview_data
+        run: |
+          python -m pip install build
+          cd src/deepview_data
+          python -m build
+      - name: Upload distributions
+        uses: actions/upload-artifact@v4
+        with:
+          name: deepview-data-dist
+          path: src/deepview_data/dist/
 
-    # Dedicated environments with protections for publishing are strongly recommended.
-    # For more information, see: https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#deployment-protection-rules
+  build-tensorflow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Build deepview_tensorflow
+        run: |
+          python -m pip install build
+          cd src/deepview_tensorflow
+          python -m build
+      - name: Upload distributions
+        uses: actions/upload-artifact@v4
+        with:
+          name: deepview-tensorflow-dist
+          path: src/deepview_tensorflow/dist/
+
+  build-torch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Build deepview_torch
+        run: |
+          python -m pip install build
+          cd src/deepview_torch
+          python -m build
+      - name: Upload distributions
+        uses: actions/upload-artifact@v4
+        with:
+          name: deepview-torch-dist
+          path: src/deepview_torch/dist/
+
+  publish-deepview:
+    runs-on: ubuntu-latest
+    needs: build-deepview
+    permissions:
+      id-token: write
     environment:
       name: pypi
       url: https://pypi.org/p/deepview
-      #
-      # ALTERNATIVE: if your GitHub Release name is the PyPI project version string
-      # ALTERNATIVE: exactly, uncomment the following line instead:
-      # url: https://pypi.org/project/YOURPROJECT/${{ github.event.release.name }}
-
     steps:
-      - name: Retrieve release distributions
+      - name: Retrieve distributions
         uses: actions/download-artifact@v4
         with:
-          name: release-dists
+          name: deepview-dist
           path: dist/
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist/
 
-      - name: Publish release distributions to PyPI
+  publish-data:
+    runs-on: ubuntu-latest
+    needs: build-data
+    permissions:
+      id-token: write
+    environment:
+      name: pypi
+      url: https://pypi.org/p/deepview-data
+    steps:
+      - name: Retrieve distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: deepview-data-dist
+          path: dist/
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist/
+
+  publish-tensorflow:
+    runs-on: ubuntu-latest
+    needs: build-tensorflow
+    permissions:
+      id-token: write
+    environment:
+      name: pypi
+      url: https://pypi.org/p/deepview-tensorflow
+    steps:
+      - name: Retrieve distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: deepview-tensorflow-dist
+          path: dist/
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist/
+
+  publish-torch:
+    runs-on: ubuntu-latest
+    needs: build-torch
+    permissions:
+      id-token: write
+    environment:
+      name: pypi
+      url: https://pypi.org/p/deepview-torch
+    steps:
+      - name: Retrieve distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: deepview-torch-dist
+          path: dist/
+      - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           packages-dir: dist/

@@ -1,7 +1,13 @@
 # DeepView: Advanced Machine Learning Model and Dataset Introspection Toolkit
 
+<div align="center">
+
 [![Tests](https://github.com/satishlokkoju/deepview/actions/workflows/tests.yml/badge.svg)](https://github.com/satishlokkoju/deepview/actions/workflows/tests.yml)
 [![codecov](https://codecov.io/gh/satishlokkoju/deepview/branch/main/graph/badge.svg)](https://codecov.io/gh/satishlokkoju/deepview)
+[![Python Versions](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10%20%7C%203.11-blue)](https://github.com/satishlokkoju/deepview)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
+</div>
 
 DeepView is a powerful Python toolkit designed for comprehensive introspection and analysis of machine learning models and datasets. It provides a rich set of tools for understanding, visualizing, and debugging deep learning models and their training data.
 
@@ -13,7 +19,7 @@ DeepView is a powerful Python toolkit designed for comprehensive introspection a
 - **Framework Support**: Compatible with major deep learning frameworks:
   - PyTorch integration via `deepview_torch`
   - TensorFlow support through `deepview_tensorflow`
-  - Custom dataset adapters through `deepview_datasets`
+  - Custom dataset adapters through `deepview_data`
 - **Model Introspection**: 
   - Analyze model architectures and layer hierarchies
   - Visualize internal representations and feature maps
@@ -100,7 +106,7 @@ Comprehensive documentation is available at our [documentation site](https://bet
 
 dataset_path = '<Sample Dataset Path>'
 
-from deepview_datasets import CustomDatasets
+from deepview_data import CustomDatasets
 dataset_producer = CustomDatasets.ImageFolderDataset(root_folder=dataset_path,image_size=(224, 224))
 
 # Chain together all operations around running the data through the model

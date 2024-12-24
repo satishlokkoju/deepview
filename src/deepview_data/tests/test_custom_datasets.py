@@ -25,7 +25,7 @@ from PIL import Image
 from pathlib import Path
 
 from deepview.base import Batch
-from deepview_datasets import CustomDatasets
+from deepview_data import CustomDatasets
 from deepview._logging import _Logged
 
 
