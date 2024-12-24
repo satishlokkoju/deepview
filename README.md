@@ -1,5 +1,8 @@
 # DeepView: Advanced Machine Learning Model and Dataset Introspection Toolkit
 
+[![Tests](https://github.com/satishlokkoju/deepview/actions/workflows/tests.yml/badge.svg)](https://github.com/satishlokkoju/deepview/actions/workflows/tests.yml)
+[![codecov](https://codecov.io/gh/satishlokkoju/deepview/branch/main/graph/badge.svg)](https://codecov.io/gh/satishlokkoju/deepview)
+
 DeepView is a powerful Python toolkit designed for comprehensive introspection and analysis of machine learning models and datasets. It provides a rich set of tools for understanding, visualizing, and debugging deep learning models and their training data.
 
 > **Note**: This project is a fork of [Apple's DNIKit](https://github.com/apple/dnikit) (Data and Network Introspection Kit) under the Apache 2.0 License. While maintaining the core functionality, we've made significant modifications and improvements to better suit our specific needs.
@@ -145,6 +148,35 @@ report = DatasetReport.introspect(
 print(report.data.head())
 
 ```
+
+## 🧪 Testing and Development
+
+### Running Tests
+To run the test suite:
+```bash
+# Run all tests including slow tests
+pytest --runslow
+
+# Run tests with coverage report
+pytest --cov=deepview --cov-report=xml
+
+# Show duration of 10 slowest tests
+pytest --durations=10
+```
+
+### Test Configuration
+- `--runslow`: Include slow-running tests (required for complete test coverage)
+- `--cov=deepview`: Generate coverage report for the deepview package
+- `--cov-report=xml`: Output coverage report in XML format (used by Codecov)
+- `--junit-xml=test-results.xml`: Generate test results in JUnit XML format
+- `--durations=N`: Show N slowest test durations
+
+### Continuous Integration
+Our GitHub Actions workflow:
+- Tests against Python 3.8, 3.9, 3.10, and 3.11
+- Runs on Ubuntu 22.04
+- Includes comprehensive test coverage reporting
+- Automatically uploads results to Codecov
 
 ## 🤝 Contributing
 We welcome contributions!
