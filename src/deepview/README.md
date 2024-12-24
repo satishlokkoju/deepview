@@ -5,23 +5,18 @@ DeepView is a Python package for deep learning model visualization and analysis.
 ## Features
 
 - Model visualization
-- Performance analysis
-- Deep learning insights
+- Performance analysis of Deep Learning models including inactive unit analysis
+- Dataset insights and visual data analysis
 
 ## Installation
 
-```bash
+```
 pip install deepview
 ```
 
 ## Usage
 
-```python
+```
 import deepview
 
-# Your code here
 ```
-
-## License
-
-Apache-2.0
