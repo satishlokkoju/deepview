@@ -53,6 +53,7 @@ dataset-report = [
 tensorflow = ["deepview_tensorflow[tf2]==3.0.0"]
 tensorflow1 = ["deepview_tensorflow[tf1]==3.0.0"]
 tensorflow1-gpu = ["deepview_tensorflow[tf1-gpu]==3.0.0"]
+datasets = ["deepview_datasets==3.0.0"]
 torch = ["deepview_torch==3.0.0"]
 
 # DEV EXTENSIONS
@@ -96,6 +97,8 @@ complete = [
     "deepview[duplicates]==3.0.0",
     "deepview[dataset-report]==3.0.0",
     "deepview[tensorflow]==3.0.0",
+    "deepview[torch]==3.0.0",
+    "deepview[datasets]==3.0.0",
     "deepview[notebook]==3.0.0",
 ]
 

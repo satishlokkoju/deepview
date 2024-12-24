@@ -381,7 +381,7 @@ def _stage_3_runner(producer: Producer, batch_size: int, config: ReportConfig,
     overall_familiarity_result = results[1]
     split_results = results[2:]
 
-    # Combine split-familiarity results into the format required by Symphony
+    # Combine split-familiarity results into the format required by Canvas
     if stage2.split_familiarity:
         # Filtered labels should exist if split familiarity was run
         assert stage2.filtered_labels

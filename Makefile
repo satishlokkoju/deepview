@@ -1,4 +1,4 @@
-components := deepview deepview_tensorflow deepview_torch
+components := deepview deepview_datasets deepview_tensorflow deepview_torch
 
 clean_dirs := src/deepview*/dist junit*.xml coverage .coverage* .env* docs/_build
 clean_dirs += */.pytest_cache src/deepview*/.pytest_cache .pytest_cache .mypy_cache

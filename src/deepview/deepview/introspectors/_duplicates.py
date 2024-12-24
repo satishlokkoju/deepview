@@ -316,7 +316,7 @@ class Duplicates(Introspector):
             iterator = tqdm(enumerate(responses), total=len(responses),
                             desc="Building Annoy index", unit="vectors")
         else:
-            iterator = enumerate(responses)
+            iterator = enumerate(responses)  # type: ignore
 
         for i, v in iterator:
             index.add_item(i, v)

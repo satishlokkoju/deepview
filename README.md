@@ -10,6 +10,7 @@ DeepView is a powerful Python toolkit designed for comprehensive introspection a
 - **Framework Support**: Compatible with major deep learning frameworks:
   - PyTorch integration via `deepview_torch`
   - TensorFlow support through `deepview_tensorflow`
+  - Custom dataset adapters through `deepview_datasets`
 - **Model Introspection**: 
   - Analyze model architectures and layer hierarchies
   - Visualize internal representations and feature maps
@@ -27,7 +28,7 @@ DeepView is a powerful Python toolkit designed for comprehensive introspection a
   - Outlier detection and analysis
   - Class balance visualization
 - **Interactive Visualization**: 
-  - Rich interactive canvas for data exploration
+  - Rich interactive utility for data exploration through Canvas Jupyter widget (Coming soon!)
   - Real-time data filtering and selection
   - Custom visualization widgets
 - **Batch Processing**: 
@@ -39,7 +40,7 @@ DeepView is a powerful Python toolkit designed for comprehensive introspection a
   - Custom dataset adapters
   - Extensible data pipeline architecture
 
-### Visualization Tools
+### Visualization Tools (Coming soon!)
 - **Interactive Canvas**: 
   - Modern web-based visualization interface
   - Scatter plots with dimensionality reduction (t-SNE, UMAP)
@@ -70,9 +71,9 @@ pip install "deepview[notebook]"
 ### Development Installation
 For contributors and developers:
 ```bash
-git clone https://github.com/betterwithdata/dnikit.git
-cd dnikit
-pip install -e ".[dev]"
+git clone https://github.com/satishlokkoju/deepview.git
+cd src/deepview
+pip install -e '.[complete]' 
 ```
 
 ## 📚 Documentation
@@ -82,48 +83,72 @@ Comprehensive documentation is available at our [documentation site](https://bet
 
 ### Basic Model Analysis
 ```python
-import deepview
-from deepview_torch import TorchModel
+'''
+    Example directory structure:
+    root_folder/
+        class1/
+            image1.jpg
+            image2.jpg
+        class2/
+            image3.jpg
+            image4.jpg
 
-# Load and analyze a PyTorch model
-model_analysis = deepview.analyze(TorchModel(your_model))
+'''
 
-# Visualize layer activations
-model_analysis.visualize_activations()
-```
+dataset_path = '<Sample Dataset Path>'
 
-### Interactive Data Visualization
-```python
-from deepview_canvas import Canvas
-from deepview.transforms import UMAP
+from deepview_datasets import CustomDatasets
+dataset_producer = CustomDatasets.ImageFolderDataset(root_folder=dataset_path,image_size=(224, 224))
 
-# Create an interactive visualization with dimensionality reduction
-canvas = Canvas(your_dataset)
-canvas.add_transform(UMAP())
-canvas.add_widget('scatter')
-canvas.show()
-```
+# Chain together all operations around running the data through the model
+model_stages = (
+    mobilenet_preprocessor,
+    
+    ImageResizer(pixel_format=ImageFormat.HWC, size=(224, 224)),
+    
+    # Run inference with MobileNet and extract intermediate embeddings
+    # (this time, just `conv_pw_130`, but other layers can be added)
+    # :: Note: This auto-detects the input layer and connects up 'images' to it:
+    mobilenet.model(requested_responses=['conv_pw_13']),
+    
+    Pooler(dim=(1, 2), method=Pooler.Method.MAX)
+)
 
-### Custom Widget Creation
-```python
-from deepview_canvas import Widget
+# Finally put it all together!
+custom_producer = pipeline(
+    # Original data producer that will yield batches
+    dataset_producer,
 
-class CustomWidget(Widget):
-    def __init__(self):
-        super().__init__()
-        self.name = "custom-viz"
-        
-    def render(self, data):
-        # Custom visualization logic
-        pass
+    # unwrap the tuple of pipeline stages that contain model inference, and pre/post-processing
+    *model_stages,
 
-canvas.add_widget(CustomWidget())
+    # Cache responses to play around with data in future cells
+    Cacher()
+)
+
+# The most time consuming, since all compute is done here
+# Data passed through DeepView in batches to produce the backend data table that will be displayed by Canvas
+
+no_familiarity_config = ReportConfig(
+    familiarity=None,
+)
+
+# report = DatasetReport.introspect(
+#    producer,
+#    config=no_familiarity_config  # Comment this out to run the whole Dataset Report
+#)
+
+report = DatasetReport.introspect(
+    custom_producer
+)
+
+print(report.data.head())
+
 ```
 
 ## 🤝 Contributing
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details on:
+We welcome contributions!
 - Setting up the development environment
-- Creating custom widgets
 - Adding new features
 - Submitting pull requests
 
@@ -140,8 +165,6 @@ The full license text can be found in the [LICENSE](LICENSE) file in the root di
 ## 🔗 Related Resources
 - [Complete Documentation](https://betterwithdata.github.io/deepview/index.html)
 - [Installation Guide](https://betterwithdata.github.io/deepview/general/installation.html)
-- [Contributor's Guide](https://betterwithdata.github.io/deepview/dev/contributing.html)
-- [Code of Conduct](CODE_OF_CONDUCT.md)
 
 ## 📊 Project Status
 This project is actively maintained and regularly updated. For the latest changes, see our [CHANGELOG](CHANGELOG.md).
@@ -150,4 +173,3 @@ This project is actively maintained and regularly updated. For the latest change
 For questions, bug reports, or feature requests:
 1. Check the [documentation](https://betterwithdata.github.io/deepview/index.html)
 2. Open an issue on GitHub
-3. Join our community discussions

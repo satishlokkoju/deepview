@@ -13,28 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# This file contains code that is part of Apple's DNIKit project, licensed
-# under the Apache License, Version 2.0:
-#
-# Copyright 2024 Apple Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     https://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
 
+import os
 import cv2
 import numpy as np
 from tqdm import tqdm
-import os
 import glob
 from typing import List, Optional, Tuple, Dict
 
@@ -69,7 +52,6 @@ class ImageFolderDataset(TrainTestSplitProducer, _Logged):
     image_size: t.Final[Tuple[int, int]]
     train_split: t.Final[float]
     valid_extensions: t.Final[List[str]]
-    file_names: t.Final[np.ndarray]
 
     def __init__(self,
                  root_folder: str,
@@ -84,21 +66,21 @@ class ImageFolderDataset(TrainTestSplitProducer, _Logged):
         self.train_split = train_split
         self.valid_extensions = valid_extensions or ['.jpg', '.jpeg', '.png']
         self.max_samples = max_samples
-        split_data, self.file_names = self._load_data_from_folder()
-        self.split_dataset = split_data
+        self.split_dataset, self.file_names = self._load_data_from_folder()
 
         # Initialize parent class with loaded dataset
         super().__init__(
             split_dataset=self.split_dataset,
             attach_metadata=True,
             max_samples=self.max_samples,
-            write_to_folder='processed_' + os.path.basename(os.path.normpath(self.root_folder))
+            write_to_folder='processed_' + os.path.basename(os.path.normpath(self.root_folder)),
+            file_names=self.file_names
         )
 
     def _load_data_from_folder(self) -> Tuple[Tuple[
         Tuple[np.ndarray, np.ndarray],
         Tuple[np.ndarray, np.ndarray]],
-        np.ndarray
+        List[str]
     ]:
         """
         Load images and labels from the directory structure.
@@ -107,7 +89,7 @@ class ImageFolderDataset(TrainTestSplitProducer, _Logged):
             A tuple ((x_train, y_train), (x_test, y_test), filenames) where:
                 x_train, x_test: numpy arrays of images
                 y_train, y_test: numpy arrays of labels
-                filenames: numpy array of filenames
+                filenames: list of filenames
         """
 
         # Get all class folders
@@ -168,7 +150,7 @@ class ImageFolderDataset(TrainTestSplitProducer, _Logged):
                         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
                         # Resize
                         img = cv2.resize(img, (self.image_size[1], self.image_size[0]))
-                        image_datum_by_class[class_name].append((img, img_path))
+                        image_datum_by_class[class_name].append((img, os.path.basename(img_path)))
                     except Exception:
                         pass
                     finally:
@@ -190,7 +172,7 @@ class ImageFolderDataset(TrainTestSplitProducer, _Logged):
         # Convert to numpy arrays
         X = np.array(all_images)
         y = np.array(all_labels)
-        filenames = np.array(all_samples_filenames)
+        filenames = np.array(all_samples_filenames)  # Convert to numpy array for indexing
 
         # Log dataset summary using the custom logger
         self.logger.info("Dataset Summary:")
@@ -201,17 +183,17 @@ class ImageFolderDataset(TrainTestSplitProducer, _Logged):
         self.logger.info(f"Image dimensions: {self.image_size}")
         self.logger.info(f"Train split ratio: {self.train_split}")
 
-        # Create train/test split
-        n_train = int(len(X) * self.train_split)
+        # Randomly permute the data
         indices = np.random.permutation(len(X))
+        n_train = int(len(X) * self.train_split)
         train_indices = indices[:n_train]
         test_indices = indices[n_train:]
 
-        return ((X[train_indices], y[train_indices]), (X[test_indices], y[test_indices])), filenames[indices]
+        return ((X[train_indices], y[train_indices]), (X[test_indices], y[test_indices])), filenames[indices].tolist()
 
 
-class TFCustomDatasets:
+class CustomDatasets:
     """
-    Custom TF Datasets, each bundled as a DeepView :class:`Producer <deepview.base.Producer>`.
+    Custom Datasets, each bundled as a DeepView :class:`Producer <deepview.base.Producer>`.
     """
     ImageFolderDataset: t.Final = ImageFolderDataset

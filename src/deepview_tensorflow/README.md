@@ -1,8 +1,8 @@
 # Data and Network Introspection Kit (DeepView) - TensorFlow
 
-This package contains the TensorFlow extensions of [DeepView](https://github.com/apple/deepview).
+This package contains the TensorFlow extensions of [DeepView](https://github.com/satishlokkoju/deepview).
 
-To learn more about DeepView, please see the [docs](https://apple.github.io/deepview).
+To learn more about DeepView, please see the [docs](https://betterwithdata.github.io/deepview).
 
 ## Installation
 

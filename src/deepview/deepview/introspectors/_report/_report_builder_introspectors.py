@@ -301,8 +301,7 @@ class _FamiliarityBuilder(Introspector):
         DataFrame of the scores for each response. See :field:`data`.
 
         Prefix, suffix, and label are combined into single title with response for the builder
-        output. These match Symphony formatting standards: https://apple.github.io/ml-symphony/
-
+        output.
         Default (prefix, suffix, label) args are for scoring overall :class:`Familiarity`.
 
         The input familiarity model scores data from the producer for all responses present in the

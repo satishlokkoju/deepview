@@ -95,6 +95,9 @@ class TrainTestSplitProducer(Producer):
     write_to_folder: t.Optional[str] = None
     """Path to write the data to. If None, does not write anything."""
 
+    file_names: t.Optional[t.Sequence[str]] = None
+    """File names of the samples."""
+
     _samples: np.ndarray = dataclasses.field(init=False)
     _labels: np.ndarray = dataclasses.field(init=False)
     _dataset_ids: np.ndarray = dataclasses.field(init=False)
@@ -149,6 +152,9 @@ class TrainTestSplitProducer(Producer):
             # If max_samples is less than 0 or greater than the dataset, sample the whole dataset
             self.max_samples = len(self._samples)
 
+        if self.file_names is not None and len(self.file_names) != len(self._samples):
+            raise DeepViewException("file_names must be of the same length as samples.")
+
         self._permutation = None
 
     def shuffle(self) -> None:
@@ -199,8 +205,12 @@ class TrainTestSplitProducer(Producer):
                 y_test = np.empty((0,))
 
         if labels is not None:
-            train_filter = [y in labels for y in np.squeeze(y_train)]
-            test_filter = [y in labels for y in np.squeeze(y_test)]
+            # Convert labels to numpy array for faster comparison
+            labels_array = np.array(list(labels))
+            # Create boolean masks using numpy's in1d
+            train_filter = np.in1d(np.squeeze(y_train), labels_array)
+            test_filter = np.in1d(np.squeeze(y_test), labels_array)
+            # Apply filters
             x_train = x_train[train_filter]
             y_train = y_train[train_filter]
             x_test = x_test[test_filter]
@@ -224,7 +234,7 @@ class TrainTestSplitProducer(Producer):
             filename = os.path.join(base_path, f"image{idx}.png")
             # Write to disk after converting to BGR format, used by opencv
             cv2.imwrite(filename, cv2.cvtColor(self._samples[idx, ...], cv2.COLOR_RGB2BGR))
-            file_paths.append(os.path.join(self._class_path(idx), f"image{idx}.png"))
+            file_paths.append(filename)
 
         return file_paths
 
@@ -267,9 +277,12 @@ class TrainTestSplitProducer(Producer):
                     builder.metadata[Batch.StdKeys.IDENTIFIER] = indices
 
                 # Add class and dataset labels
-                builder.metadata[Batch.StdKeys.LABELS] = {
+                labels_dict = {
                     "label": np.take(self._labels, indices),
                     "dataset": np.take(self._dataset_labels, indices)
                 }
+                if self.file_names is not None:
+                    labels_dict["filename"] = np.take(self.file_names, indices)
+                builder.metadata[Batch.StdKeys.LABELS] = labels_dict
 
             yield builder.make_batch()

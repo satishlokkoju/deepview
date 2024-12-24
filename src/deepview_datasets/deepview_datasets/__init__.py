@@ -37,20 +37,14 @@
 __version__ = "3.0.0"
 
 import deepview
-from ._tensorflow._tensorflow_loading import load_tf_model_from_path, load_tf_model_from_memory
-from ._sample_models import TFModelExamples, TFModelWrapper
-from ._sample_datasets import TFDatasetExamples
+from ._custom_datasets import CustomDatasets
 
 __all__ = [
-    "load_tf_model_from_path",
-    "load_tf_model_from_memory",
-    "TFModelExamples",
-    "TFModelWrapper",
-    "TFDatasetExamples",
+    "CustomDatasets"
 ]
 
 # Raise error if deepview and deepview_tensorflow versions are out of sync
 assert __version__ == deepview.__version__, (
-    f'deepview_tensorflow v{__version__} and '
+    f'deepview_datasets v{__version__} and '
     f'deepview v{deepview.__version__} should be the same versions.'
 )

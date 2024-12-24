@@ -1,0 +1,47 @@
+# Tell pip to use flit to build this package
+[build-system]
+requires = ["flit_core >=2,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.metadata]
+module = "deepview_datasets"
+home-page = "https://github.com/satishlokkoju/deepview"
+license = "Apache-2.0"
+description-file="README.md"
+
+author = "Satish Lokkoju"
+author-email = "satish.lokkoju@gmail.com"
+classifiers = [
+    'Topic :: Scientific/Engineering :: Artificial Intelligence',
+    'Topic :: Scientific/Engineering :: Information Analysis',
+    'Development Status :: 5 - Production/Stable',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Operating System :: MacOS',
+    'Operating System :: POSIX :: Linux',
+    'Intended Audience :: Developers',
+    'Intended Audience :: Education',
+    'Intended Audience :: Science/Research'
+]
+
+requires-python = ">=3.8"
+requires = [
+    # Internal
+    "deepview==3.0.0",
+    
+    # External
+    "tqdm>=4.65.0",
+    "opencv-python-headless>=4.0.0",
+    "typing-extensions>=4.0.0; python_version < '3.8'",
+]
+
+[tool.flit.metadata.requires-extra]
+dev = [
+    "types-tqdm>=4.65.0"
+]
+
+[tool.flit.metadata.urls]
+Documentation = "https://satishlokkoju.github.io/deepview"
+Changelog = "https://github.com/satishlokkoju/deepview/blob/main/CHANGELOG.md"

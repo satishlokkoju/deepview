@@ -109,23 +109,19 @@ class DatasetReport(Introspector):
         For the moment, the :class:`Batch.StdKeys.IDENTIFIER <deepview.base.Batch.StdKeys.IDENTIFIER>`
         should be a path to the image data.
 
-    This class creates a :class:`pandas.DataFrame` full of the data needed to build the
-    `Symphony <https://github.com/apple/ml-symphony>`_
-    UI for the ``DatasetReport``, which can then be exported into a standalone static site
-    to explore. The different components built in the UI interact with each other. See
-    `Symphony's documentation <https://apple.github.io/ml-symphony/>`_ to learn more
-    about the UI and how to use it with the output of the ``DatasetReport``:
-
+    This class creates a :class:`pandas.DataFrame` full of the data needed to build the UI for the ``DatasetReport``,
+    which can then be exported into a standalone static site
+    to explore. The different components built in the UI interact with each other.
 
     .. highlight:: python
     .. code-block:: python
 
         # Build all components of the dataset report using default configuration.
-        #    This output can then be used to visualize the results with Symphony:
+        #    This output can then be used to visualize the results with Canvas:
         #        (1) as a standalone web dashboard to explore interactively
         #        (2) inline in a Jupyter notebook to explore interactively
-        #    Please see the Symphony documentation for an example:
-        #    https://apple.github.io/ml-symphony/
+        #    Please see the Canvas documentation for an example:
+        #    https://betterwithdata.github.io/canvas/
         report = DatasetReport.introspect(producer)
 
     Args:

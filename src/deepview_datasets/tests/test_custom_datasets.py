@@ -13,39 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# This file contains code that is part of Apple's DNIKit project, licensed
-# under the Apache License, Version 2.0:
-#
-# Copyright 2024 Apple Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     https://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
 
 import os
 import shutil
 import tempfile
 import unittest
-from typing import List, Tuple
+import typing
+from typing import List, Tuple, Sequence
 import numpy as np
 from PIL import Image
 from pathlib import Path
 
 from deepview.base import Batch
-from deepview_tensorflow import TFCustomDatasets
+from deepview_datasets import CustomDatasets
 from deepview._logging import _Logged
 
 
-class TestImageFolderDataset(unittest.TestCase):
+class TestImageFolderDataset(unittest.TestCase, _Logged):
     test_dir: str
     classes: List[str]
     images_per_class: int
@@ -90,7 +74,7 @@ class TestImageFolderDataset(unittest.TestCase):
                     print(f"Warning: Failed to remove directory {dir_path}: {e}")
 
     def test_initialization(self) -> None:
-        dataset = TFCustomDatasets.ImageFolderDataset(
+        dataset = CustomDatasets.ImageFolderDataset(
             root_folder=self.test_dir,
             image_size=self.image_size
         )
@@ -100,7 +84,7 @@ class TestImageFolderDataset(unittest.TestCase):
 
     def test_load_from_folder(self) -> None:
         """Test loading images from folder."""
-        dataset = TFCustomDatasets.ImageFolderDataset(
+        dataset = CustomDatasets.ImageFolderDataset(
             root_folder=self.test_dir,
             image_size=self.image_size,
             train_split=0.8,
@@ -115,7 +99,7 @@ class TestImageFolderDataset(unittest.TestCase):
     def test_custom_train_split(self) -> None:
         """Test custom train-test split ratio."""
         custom_split = 0.6
-        dataset = TFCustomDatasets.ImageFolderDataset(
+        dataset = CustomDatasets.ImageFolderDataset(
             root_folder=self.test_dir,
             image_size=self.image_size,
             train_split=custom_split,
@@ -127,7 +111,7 @@ class TestImageFolderDataset(unittest.TestCase):
 
     def test_valid_extensions(self) -> None:
         """Test filtering by file extensions."""
-        dataset = TFCustomDatasets.ImageFolderDataset(
+        dataset = CustomDatasets.ImageFolderDataset(
             root_folder=self.test_dir,
             image_size=self.image_size,
             train_split=0.8,
@@ -141,7 +125,7 @@ class TestImageFolderDataset(unittest.TestCase):
     def test_max_samples(self) -> None:
         """Test limiting the total number of samples."""
         max_samples = 6
-        dataset = TFCustomDatasets.ImageFolderDataset(
+        dataset = CustomDatasets.ImageFolderDataset(
             root_folder=self.test_dir,
             image_size=self.image_size,
             train_split=0.8,
@@ -155,7 +139,7 @@ class TestImageFolderDataset(unittest.TestCase):
     def test_max_samples_balanced(self) -> None:
         """Test that samples are balanced across classes when using max_samples."""
         max_samples = 6
-        dataset = TFCustomDatasets.ImageFolderDataset(
+        dataset = CustomDatasets.ImageFolderDataset(
             root_folder=self.test_dir,
             image_size=self.image_size,
             train_split=0.8,
@@ -169,7 +153,7 @@ class TestImageFolderDataset(unittest.TestCase):
     def test_max_samples_minimum_representation(self) -> None:
         """Test minimum class representation with very small max_samples."""
         max_samples = 2
-        dataset = TFCustomDatasets.ImageFolderDataset(
+        dataset = CustomDatasets.ImageFolderDataset(
             root_folder=self.test_dir,
             image_size=self.image_size,
             train_split=0.8,
@@ -185,7 +169,7 @@ class TestImageFolderDataset(unittest.TestCase):
         empty_dir = os.path.join(self.test_dir, 'empty')
         os.makedirs(empty_dir)
         with self.assertRaises(ValueError) as cm:
-            dataset = TFCustomDatasets.ImageFolderDataset(
+            dataset = CustomDatasets.ImageFolderDataset(
                 root_folder=empty_dir,
                 image_size=self.image_size,
                 train_split=0.8,
@@ -212,7 +196,7 @@ class TestImageFolderDataset(unittest.TestCase):
             f.write('not an image')
 
         # Create dataset
-        dataset = TFCustomDatasets.ImageFolderDataset(
+        dataset = CustomDatasets.ImageFolderDataset(
             root_folder=self.test_dir,
             image_size=self.image_size,
             train_split=0.8,
@@ -232,7 +216,7 @@ class TestImageFolderDataset(unittest.TestCase):
 
     def test_image_format(self) -> None:
         """Test that images are in the correct format."""
-        dataset = TFCustomDatasets.ImageFolderDataset(
+        dataset = CustomDatasets.ImageFolderDataset(
             root_folder=self.test_dir,
             image_size=self.image_size,
             train_split=0.8,
@@ -250,7 +234,7 @@ class TestImageFolderDataset(unittest.TestCase):
 
     def test_array_writability(self) -> None:
         """Test that loaded images are writable."""
-        dataset = TFCustomDatasets.ImageFolderDataset(
+        dataset = CustomDatasets.ImageFolderDataset(
             root_folder=self.test_dir,
             image_size=self.image_size,
             train_split=0.8,
@@ -270,7 +254,7 @@ class TestImageFolderDataset(unittest.TestCase):
     def test_get_producer(self) -> None:
         """Test that get_producer returns a correctly configured TrainTestSplitProducer."""
         max_samples = 6
-        dataset = TFCustomDatasets.ImageFolderDataset(
+        dataset = CustomDatasets.ImageFolderDataset(
             root_folder=self.test_dir,
             image_size=self.image_size,
             max_samples=max_samples
@@ -313,14 +297,14 @@ class TestImageFolderDataset(unittest.TestCase):
 
     def test_metadata(self) -> None:
         """Test that metadata is set correctly after initialization."""
-        dataset = TFCustomDatasets.ImageFolderDataset(
+        dataset = CustomDatasets.ImageFolderDataset(
             root_folder=self.test_dir,
             image_size=self.image_size
         )
 
         # Verify file_names attribute is set
         self.assertIsNotNone(dataset.file_names)
-        self.assertEqual(len(dataset.file_names), self.num_images)
+        self.assertEqual(len(typing.cast(Sequence[str], dataset.file_names)), self.num_images)
 
         # Verify split_dataset is set
         self.assertIsNotNone(dataset.split_dataset)
@@ -334,7 +318,7 @@ class TestImageFolderDataset(unittest.TestCase):
         with open(invalid_file, "w") as f:
             f.write("invalid data")
 
-        dataset = TFCustomDatasets.ImageFolderDataset(
+        dataset = CustomDatasets.ImageFolderDataset(
             root_folder=self.test_dir,
             image_size=self.image_size
         )
@@ -348,7 +332,7 @@ class TestImageFolderDataset(unittest.TestCase):
         empty_class_dir = os.path.join(self.test_dir, "empty_class")
         os.makedirs(empty_class_dir)
 
-        dataset = TFCustomDatasets.ImageFolderDataset(
+        dataset = CustomDatasets.ImageFolderDataset(
             root_folder=self.test_dir,
             image_size=self.image_size
         )
@@ -364,7 +348,7 @@ class TestImageFolderDataset(unittest.TestCase):
         with open(corrupted_file, "wb") as f:
             f.write(b"corrupted data")
 
-        dataset = TFCustomDatasets.ImageFolderDataset(
+        dataset = CustomDatasets.ImageFolderDataset(
             root_folder=self.test_dir,
             image_size=self.image_size
         )
@@ -376,7 +360,7 @@ class TestImageFolderDataset(unittest.TestCase):
         """Test train split with invalid ratio."""
         # Test with train_split > 1
         with self.assertRaises(ValueError):
-            TFCustomDatasets.ImageFolderDataset(
+            CustomDatasets.ImageFolderDataset(
                 root_folder=self.test_dir,
                 image_size=self.image_size,
                 train_split=1.5
@@ -384,7 +368,7 @@ class TestImageFolderDataset(unittest.TestCase):
 
         # Test with train_split < 0
         with self.assertRaises(ValueError):
-            TFCustomDatasets.ImageFolderDataset(
+            CustomDatasets.ImageFolderDataset(
                 root_folder=self.test_dir,
                 image_size=self.image_size,
                 train_split=-0.1
@@ -395,7 +379,7 @@ class TestImageFolderDataset(unittest.TestCase):
         # Create a temporary directory with no subdirectories
         with tempfile.TemporaryDirectory() as temp_dir:
             with self.assertRaises(ValueError) as cm:
-                TFCustomDatasets.ImageFolderDataset(
+                CustomDatasets.ImageFolderDataset(
                     root_folder=temp_dir,
                     image_size=self.image_size
                 )
@@ -409,7 +393,7 @@ class TestImageFolderDataset(unittest.TestCase):
             os.makedirs(os.path.join(temp_dir, "class2"))
 
             with self.assertRaises(ValueError) as cm:
-                TFCustomDatasets.ImageFolderDataset(
+                CustomDatasets.ImageFolderDataset(
                     root_folder=temp_dir,
                     image_size=self.image_size
                 )
@@ -417,7 +401,7 @@ class TestImageFolderDataset(unittest.TestCase):
 
     def test_logging_functionality(self) -> None:
         """Test that logging functionality works correctly."""
-        dataset = TFCustomDatasets.ImageFolderDataset(
+        dataset = CustomDatasets.ImageFolderDataset(
             root_folder=self.test_dir,
             image_size=self.image_size
         )
@@ -431,7 +415,7 @@ class TestImageFolderDataset(unittest.TestCase):
         # Test logging with invalid directory to trigger error logs
         with tempfile.TemporaryDirectory() as temp_dir:
             with self.assertRaises(ValueError):
-                TFCustomDatasets.ImageFolderDataset(
+                CustomDatasets.ImageFolderDataset(
                     root_folder=temp_dir,
                     image_size=self.image_size
                 )
