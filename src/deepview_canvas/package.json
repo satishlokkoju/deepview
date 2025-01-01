@@ -1,0 +1,50 @@
+{
+  "name": "@betterwithdata/canvas-monorepo",
+  "version": "1.0.0",
+  "description": "canvas_ux, canvas_viz, and a collection of widgets.",
+  "keywords": [
+    "canvas",
+    "canvas_ux",
+    "canvas_viz",
+    "widgets"
+  ],
+  "author": "betterwithdata",
+  "private": true,
+  "license": "betterwithdata Sample Code",
+  "type": "module",
+  "scripts": {
+    "build": "yarn workspaces foreach exec run build",
+    "build:canvas": "yarn workspace canvas-ux build",
+    "build:lib": "yarn workspace @betterwithdata/canvas_viz build",
+    "build:docs": "yarn workspace @betterwithdata/canvas_viz build:storybook && cp -r canvas_viz/storybook-static docs/source/_static && make -C ./docs html",
+    "deploy:docs": "scripts/deploy-docs.sh",
+    "dev": "cd canvas_ux && yarn dev",
+    "watch:nbextension": "cd canvas_ux && yarn watch:nbextension",
+    "test": "pip3 install -r requirements.txt && scripts/dev-install.sh"
+  },
+  "browserslist": [
+    "last 3 chrome versions",
+    "last 3 firefox versions",
+    "last 3 safari versions",
+    "last 3 edge versions"
+  ],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "workspaces": {
+    "packages": [
+      "canvas_viz/",
+      "widgets/*",
+      "canvas_ux/"
+    ],
+    "nohoist": [
+      "**/@storybook/**"
+    ]
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
+  },
+  "packageManager": "yarn@4.5.3"
+}

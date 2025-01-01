@@ -1,0 +1,5 @@
+Component|Description|Package
+Data Map | .. mdinclude:: ../../widgets/canvas_data_map/README.md | `canvas_data_map <https://github.com/betterwithdata/ml-canvas/tree/main/widgets/canvas_data_map>`__
+List | .. mdinclude:: ../../widgets/canvas_list/README.md | `canvas_list <https://github.com/betterwithdata/ml-canvas/tree/main/widgets/canvas_list>`__ 
+Scatterplot | .. mdinclude:: ../../widgets/canvas_scatterplot/README.md | `canvas_scatterplot <https://github.com/betterwithdata/ml-canvas/tree/main/widgets/canvas_scatterplot>`__
+Summary | .. mdinclude:: ../../widgets/canvas_summary/README.md | `canvas_summary <https://github.com/betterwithdata/ml-canvas/tree/main/widgets/canvas_summary>`__
