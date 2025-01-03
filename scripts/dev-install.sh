@@ -4,6 +4,7 @@
 #yarn workspace canvas-ux build
 #pip3 install -e "canvas_ux[docs]"
 #jupyter labextension develop --overwrite canvas_ux
+pip install -y jupyterlab
 cd src/deepview_canvas/canvas_viz
 jlpm prebuild; jlpm ; jlpm install;jlpm build
 cd ../canvas_ux
