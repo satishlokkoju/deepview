@@ -7140,7 +7140,7 @@ __metadata:
     source-map-loader: "npm:^3.0.0"
     style-loader: "npm:^3.2.1"
     svelte: "npm:^3.42.5"
-    svelte-ace: "git+https://github.com/nateshmbhat/svelte-ace.git"
+    svelte-ace: "npm:^1.0.21"
     svelte-loader: "npm:^3.1.1"
     svelte-preprocess: "npm:^4.9.4"
     tailwindcss: "npm:^2.2.15"
@@ -19438,13 +19438,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svelte-ace@git+https://github.com/nateshmbhat/svelte-ace.git":
+"svelte-ace@npm:^1.0.21":
   version: 1.0.21
-  resolution: "svelte-ace@git+ssh://git@github.com/nateshmbhat/svelte-ace.git#commit=df57bcb2cf2587247238b0c1d7b623624cbd4840"
+  resolution: "svelte-ace@npm:1.0.21"
   dependencies:
     brace: "npm:^0.11.1"
     sirv-cli: "npm:^1.0.0"
-  checksum: 10c0/4836455203561d6b018a1b2b28abacc6b127a7445cf9d98a4d621048a3ae1963940846120f8a84ba9ccfe7648bf80de3885329d85b59cc71771d412d0fb88848
+  checksum: 10c0/cd42508c5ea21ec4d86f6df5d9276653e799c25a701ed40ab73fd3058ed16da85a205a72176a8e3367625816df9272c94a8da98ac7a348e980c6358bb391b873
   languageName: node
   linkType: hard
 
