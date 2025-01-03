@@ -33,17 +33,7 @@ jobs:
       timeout-minutes: 10
       run: |
         python -m pip install --upgrade pip
-        # Install base package and its dev dependencies
-        cd src/deepview
-        python -m pip install .[test,doc,dataset-report]
-        # Install tensorflow extension
-        cd ../deepview_tensorflow
-        python -m pip install .[tf2]
-        # Install torch extension
-        cd ../deepview_torch
-        python -m pip install .[test]
-        cd ../deepview_data
-        python -m pip install .[dev]
+        make install
     
     - name: Run tests
       timeout-minutes: 45
