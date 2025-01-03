@@ -1,7 +1,9 @@
-components := deepview deepview_data deepview_tensorflow deepview_torch
+components := deepview deepview_data deepview_tensorflow deepview_torch deepview_canvas
 
 clean_dirs := src/deepview*/dist junit*.xml coverage .coverage* .env* docs/_build
 clean_dirs += */.pytest_cache src/deepview*/.pytest_cache .pytest_cache .mypy_cache
+clean_dirs += src/deepview*/*/__pycache__ src/deepview*/.mypy_cache __pycache__ notebooks/.ipynb_checkpoints
+clean_dirs += src/deepview*/*/.pytest_cache src/deepview*/*/.mypy_cache src/deepview_canvas/node_modules src/deepview_canvas/*/node_modules
 
 export PIP_INDEX_URL := https://pypi.org/simple
 
@@ -23,11 +25,24 @@ install-tf1: $(components)
 	@echo "Done installing DeepView with TF 1."
 
 $(components):
-	@pip install -U flit$(FLIT_VER) flit_core$(FLIT_VER)
-	@flit -f src/$@/pyproject.toml $(cmd)
+	@if [ "$@" = "deepview_canvas" ]; then \
+		sh ./scripts/dev-install.sh; \
+	else \
+		pip install -U flit$(FLIT_VER) flit_core$(FLIT_VER) && \
+		flit -f src/$@/pyproject.toml $(cmd); \
+	fi
+
+uninstall-component:
+	@if [ "$(component)" = "deepview_canvas" ]; then \
+		sh ./scripts/dev-uninstall.sh; \
+	else \
+		pip uninstall -y $(component); \
+	fi
 
 uninstall:
-	@pip uninstall --yes $(components)
+	@for comp in $(components); do \
+		make uninstall-component component=$$comp; \
+	done
 
 ########
 # TEST #
@@ -69,4 +84,4 @@ clean:
 	@-rm -rf $(clean_dirs)
 
 
-.PHONY: all install install-tf1-gpu install-tf1 uninstall $(components) test test-all test-pytest test-pytest-all test-smoke test-notebooks doc clean
+.PHONY: all install install-tf1-gpu install-tf1 uninstall-component uninstall $(components) test test-all test-pytest test-pytest-all test-smoke test-notebooks doc clean

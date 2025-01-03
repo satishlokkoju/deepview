@@ -18,8 +18,8 @@ import deepview
 
 # Project information
 project = 'DeepView'
-copyright = '2023 Apple Inc. All rights reserved.'
-author = 'Apple, Inc.'
+copyright = '2024, BetterWithData Inc. All rights reserved.'
+author = 'Satish Lokkoju'
 version = deepview.__version__
 release = version
 
@@ -34,10 +34,14 @@ extensions = [
     'sphinx.ext.napoleon',
     'sphinx.ext.intersphinx',
     'nbsphinx',
+    'myst_parser'
 ]
 
 # The suffix(es) of source filenames, multiple as a list of strings:
-source_suffix = '.rst'
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown'
+}
 
 # Other high level settings
 master_doc = 'index'

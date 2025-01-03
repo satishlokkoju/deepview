@@ -4,17 +4,16 @@
 # For licensing see accompanying LICENSE file.
 # Copyright (C) 2023 betterwithdata Inc. All Rights Reserved.
 
-from ._version import __version__, version_info
-from .widget import CanvasScatterplot
+from ._version import __version__, version_info  # noqa: F401
+from .widget import CanvasScatterplot  # noqa: F401
 
 
-def _jupyter_labextension_paths():
+def _jupyter_labextension_paths() -> list:
     """Called by Jupyter Lab Server to detect if it is a valid labextension and
     to install the widget
     Returns
     =======
-    src: Source directory name to copy files from. Webpack outputs generated files
-        into this directory and Jupyter Lab copies from this directory during
+    src: Source directory name to copy files from. Webpack outputs
         widget installation
     dest: Destination directory name to install widget files to. Jupyter Lab copies
         from `src` directory into <jupyter path>/labextensions/<dest> directory
@@ -26,7 +25,7 @@ def _jupyter_labextension_paths():
     }]
 
 
-def _jupyter_nbextension_paths():
+def _jupyter_nbextension_paths() -> list:
     """Called by Jupyter Notebook Server to detect if it is a valid nbextension and
     to install the widget
     Returns

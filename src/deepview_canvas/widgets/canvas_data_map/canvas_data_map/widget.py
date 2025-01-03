@@ -31,7 +31,7 @@ class CanvasDataMap(canvas_ux.CanvasWidget):
                  feature: str = 'countries',
                  id_column: str = 'country',
                  map_url: str = 'https://raw.githubusercontent.com/vega/datalib/master/test/data/world-110m.json',
-                 ** kwargs
+                 ** kwargs: dict
                  ):
         """A Canvas component for visualizing data on a map
 
@@ -65,7 +65,7 @@ class CanvasDataMap(canvas_ux.CanvasWidget):
             map_url=map_url
         )
 
-    def js_path(self):
+    def js_path(self) -> tuple[Path, Path]:
         app_files_path = Path(
             (Path(__file__).parent), 'standalone', 'widgets')
         js_path = Path(app_files_path, 'CanvasDataMap.js')

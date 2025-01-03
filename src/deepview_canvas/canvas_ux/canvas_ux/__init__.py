@@ -4,13 +4,14 @@
 # For licensing see accompanying LICENSE file.
 # Copyright (C) 2023 betterwithdata Inc. All Rights Reserved.
 
-from ._version import __version__, version_info
-from .canvas import Canvas, CanvasWidget, ToolbarWidget
-from ._specs import CanvasSpec, WidgetSpec, ClassificationSpec, DataMapSpec, MarkdownSpec, CanvasDataType, CanvasSummarySpec, SummaryElement, VegaSpec
-from ._helpers import to_arrow_file
+from ._version import __version__, version_info  # noqa: F401
+from .canvas import Canvas, CanvasWidget, ToolbarWidget  # noqa: F401
+from ._specs import CanvasSpec, WidgetSpec, CanvasDataType  # noqa: F401
+from ._specs import ClassificationSpec, DataMapSpec, MarkdownSpec, CanvasSummarySpec, SummaryElement, VegaSpec  # noqa: F401
+from ._helpers import to_arrow_file  # noqa: F401
 
 
-def _jupyter_labextension_paths():
+def _jupyter_labextension_paths() -> list:
     """Called by Jupyter Lab Server to detect if it is a valid labextension and
     to install the widget
     Returns
@@ -28,7 +29,7 @@ def _jupyter_labextension_paths():
     }]
 
 
-def _jupyter_nbextension_paths():
+def _jupyter_nbextension_paths() -> list:
     """Called by Jupyter Notebook Server to detect if it is a valid nbextension and
     to install the widget
     Returns

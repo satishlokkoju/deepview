@@ -25,7 +25,7 @@ class CanvasScatterplot(canvas_ux.CanvasWidget):
                  width: str = 'XXL',
                  height: str = 'M',
                  page: str = 'Scatterplot',
-                 **kwargs
+                 **kwargs: dict
                  ):
         """A scatterplot Canvas component based on regl-scatterplot
 
@@ -54,7 +54,7 @@ class CanvasScatterplot(canvas_ux.CanvasWidget):
             description=self.description
         )
 
-    def js_path(self):
+    def js_path(self) -> tuple[Path, Path]:
         app_files_path = Path(
             (Path(__file__).parent), 'standalone', 'widgets')
         js_path = Path(app_files_path, 'CanvasScatterplot.js')

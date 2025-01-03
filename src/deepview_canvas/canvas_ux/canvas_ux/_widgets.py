@@ -4,7 +4,7 @@
 import json
 import shutil
 from pathlib import Path
-
+from typing import Union
 from ipywidgets import DOMWidget
 from traitlets import Dict, List, Unicode
 
@@ -18,11 +18,11 @@ class CanvasWidget(DOMWidget):
     canvas_spec = Dict().tag(sync=True)
     widget_spec = Dict().tag(sync=True)
     table = CByteMemoryView().tag(sync=True)
-    selected = List([]).tag(sync=True)
+    selected = List([]).tag(sync=True)  # type: ignore
     filter = Unicode('').tag(sync=True)
-    group_columns = List([]).tag(sync=True)
+    group_columns = List([]).tag(sync=True)  # type: ignore
 
-    def export(self, export_path):
+    def export(self, export_path: Union[str, Path]) -> dict:
         name = self.widget_spec['name']
         data_path = Path(export_path, 'data')
         result_path = Path(data_path, f'{name}.json')
@@ -35,7 +35,7 @@ class CanvasWidget(DOMWidget):
             pass
         try:
             shutil.copy(map_path, Path(export_path, 'widgets'))
-        except (shutil.SameFileError, FileNotFoundError) as _:
+        except (shutil.SameFileError, FileNotFoundError):
             pass
 
         return {
@@ -46,7 +46,7 @@ class CanvasWidget(DOMWidget):
             "page": self.widget_spec['page'],
         }
 
-    def js_path(self):
+    def js_path(self) -> tuple[Path, Path]:  # type: ignore
         pass
 
 

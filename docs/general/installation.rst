@@ -71,7 +71,7 @@ Here are the options currently available:
 +---------------------------+----------------------------------------------------------------------+
 | Module                    | Description                                                          |
 +===========================+======================================================================+
-| deepview                    | Always installed, base DeepView, with                                  |
+| deepview                  | Always installed, base DeepView, with                                |
 |                           | :ref:`Familiarity <familiarity>`, :ref:`PFA <network_compression>`,  |
 |                           | :ref:`INA <inactive_units>`, and                                     |
 |                           | :ref:`DimensionReduction <dimension_reduction>`.                     |
@@ -95,8 +95,8 @@ Here are the options currently available:
 | -> [tensorflow1-gpu]      | Same as preceding row, but with TensorFlow GPU. Must have            |
 |                           | Python <=3.7 due to TF 1 constraints.                                |
 +---------------------------+----------------------------------------------------------------------+
-| -> [torch]                | Installs ``deepview_pytorch``: convert between PyTorch Dataset and     |
-|                           | DeepView Producer.                                                     |
+| -> [torch]                | Installs ``deepview_pytorch``: convert between PyTorch Dataset and   |
+|                           | DeepView Producer.                                                   |
 +---------------------------+----------------------------------------------------------------------+
 | -> [complete]             | Installs ``notebook``, ``image``, ``dimreduction``,                  |
 |                           | ``dataset-report``, ``tensorflow``, & ``torch`` options.             |

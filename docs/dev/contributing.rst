@@ -12,16 +12,16 @@ Development Installation
 Development Branch
 ##################
 
-The current development branch is `develop <https://github.com/apple/deepview/tree/develop>`_. *Direct pushes to
+The current development branch is `develop <https://github.com/satishlokkoju/deepview/tree/develop>`_. *Direct pushes to
 this branch are not allowed.* For all contributions, branch from and send pull requests to this branch.
 
 
 Clone the Code
 ##############
 
-Clone the code from `the main repository <https://github.apple/deepview>`_::
+Clone the code from `the main repository <https://github.com/satishlokkoju/deepview>`_::
 
-    git clone git@github.com:apple/deepview.git
+    git clone git@github.com:satishlokkoju/deepview.git
 
 
 .. _standardinstallation:
@@ -245,7 +245,7 @@ Remove all generated files::
 
 Submitting a Pull Request
 -------------------------
-`Submit a new request <https://github.com/apple/deepview/pulls>`_.
+`Submit a new request <https://github.com/satishlokkoju/deepview/pulls>`_.
 
 A new pull request requires checking off the following list:
 

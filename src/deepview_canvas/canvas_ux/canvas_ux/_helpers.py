@@ -4,22 +4,19 @@
 """Helper functions for creating Canvas widgets"""
 from __future__ import absolute_import
 
-import http.server
-import os
 import re
-import socketserver
 from dataclasses import asdict
 from pathlib import Path
 
 import pandas as pd
 import pyarrow as pa
 from traitlets import TraitType
-from typing import Union
+from typing import Optional, Union
 
-from ._specs import CanvasDataType
+from ._specs import CanvasDataType, CanvasSpec
 
 
-def to_arrow_file(table: Union[pa.Table, pd.DataFrame], export_path: Union[str, Path]):
+def to_arrow_file(table: Union[pa.Table, pd.DataFrame], export_path: Union[str, Path]) -> None:
     """Save a PyArrow or Pandas table as a .arrow file.
     Parameters
     ----------
@@ -34,14 +31,14 @@ def to_arrow_file(table: Union[pa.Table, pd.DataFrame], export_path: Union[str, 
     table_to_file(table, Path(export_path, 'table.arrow'))
 
 
-def table_to_file(table, path):
+def table_to_file(table: pa.Table, path: Union[str, Path]) -> None:
     sink = path
     writer = pa.ipc.new_file(sink, table.schema)
     writer.write(table)
     writer.close()
 
 
-def serialize_table(table: pa.Table):
+def serialize_table(table: pa.Table) -> bytes:
     sink = pa.BufferOutputStream()
     writer = pa.RecordBatchStreamWriter(sink, table.schema)
     writer.write_table(table)
@@ -49,13 +46,13 @@ def serialize_table(table: pa.Table):
     return sink.getvalue().to_pybytes()
 
 
-def deserialize_table(data):
+def deserialize_table(data: bytes) -> pa.Table:
     reader = pa.RecordBatchStreamReader(data)
     table = reader.read_all()
     return table
 
 
-def get_data_type(type: CanvasDataType, id: str):
+def get_data_type(type: Optional[CanvasDataType], id: str) -> CanvasDataType:
     if type:
         return type
 
@@ -67,7 +64,7 @@ def get_data_type(type: CanvasDataType, id: str):
         return CanvasDataType.TABULAR
 
 
-def get_num_instances_by_data_type(instancesPerPage: int, type: CanvasDataType):
+def get_num_instances_by_data_type(instancesPerPage: Optional[int], type: CanvasDataType) -> int:
     if instancesPerPage:
         return instancesPerPage
 
@@ -79,7 +76,7 @@ def get_num_instances_by_data_type(instancesPerPage: int, type: CanvasDataType):
         return 150
 
 
-def dataclass_to_camel_dict(spec):
+def dataclass_to_camel_dict(spec: CanvasSpec) -> dict:
     """Convert dataclass to """
     spec_dict = asdict(spec)
     new_dict = {}
@@ -87,11 +84,11 @@ def dataclass_to_camel_dict(spec):
         new_key = ''.join([word.title() for word in key.split('_')])
         new_key = new_key[0].lower() + new_key[1:]
         new_dict[new_key] = spec_dict[key]
-    print("Canvas spec dict value is {}".format(new_dict))
+    print("DeepView302: Canvas spec dict value is {}".format(new_dict))
     return new_dict
 
 
-def camel_dict_to_snake_case_dict(spec_dict: dict):
+def camel_dict_to_snake_case_dict(spec_dict: dict) -> dict:
     new_dict = {}
     for key in spec_dict:
         new_key = re.sub(r'(?<!^)(?=[A-Z])', '_', key).lower()
@@ -105,19 +102,19 @@ class ByteMemoryView(TraitType):
     default_value = memoryview(b'')
     info_text = 'a memory view object'
 
-    def validate(self, obj, value):
+    def validate(self, obj, value: memoryview) -> memoryview:  # type: ignore
         if isinstance(value, memoryview) and value.format == 'B':
             return value
         self.error(obj, value)
 
-    def default_value_repr(self):
+    def default_value_repr(self) -> str:
         return repr(self.default_value.tobytes())
 
 
 class CByteMemoryView(ByteMemoryView):
     """A casting version of the byte memory view trait."""
 
-    def validate(self, obj, value):
+    def validate(self, obj, value: memoryview) -> memoryview:  # type: ignore
         if isinstance(value, memoryview) and value.format == 'B':
             return value
 

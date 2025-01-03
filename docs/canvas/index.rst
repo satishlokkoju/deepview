@@ -1,9 +1,10 @@
 .. For licensing see accompanying LICENSE file.
 .. Copyright (C) 2023 betterwithdata Inc. All Rights Reserved.
+.. _canvas_framework:
 
-#########
-Canvas
-#########
+#################
+Canvas Framework
+#################
 
 **Reusable, explorable, and sharable data science components**
 

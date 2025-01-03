@@ -13,9 +13,7 @@ from setuptools import setup, find_packages
 
 from jupyter_packaging import (
     create_cmdclass,
-    install_npm,
     ensure_targets,
-    combine_commands,
     get_version,
     skip_if_exists
 )

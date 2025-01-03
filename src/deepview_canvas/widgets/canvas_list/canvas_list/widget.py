@@ -25,7 +25,7 @@ class CanvasList(canvas_ux.CanvasWidget):
                  width: str = 'XXL',
                  height: str = 'M',
                  page: str = 'List',
-                 **kwargs
+                 **kwargs: dict
                  ):
         """A Canvas component that displays a view of data instances
 
@@ -55,7 +55,7 @@ class CanvasList(canvas_ux.CanvasWidget):
             description=self.description
         )
 
-    def js_path(self):
+    def js_path(self) -> tuple[Path, Path]:
         app_files_path = Path(
             (Path(__file__).parent), 'standalone', 'widgets')
         js_path = Path(app_files_path, 'CanvasList.js')

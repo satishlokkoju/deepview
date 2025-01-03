@@ -8,22 +8,22 @@ The general general DeepView publication can be cited as:
 
 - Welsh, Megan Maher; Koski, David; Sarabia, Miguel; Sivakumar, Niv; Arawjo, Ian; Joshi, Aparna;
   Doumbouya, Moussa; Suau, Xavier; Zappella, Luca; Apostoloff, Nicholas (2023).
-  `"Data and Network Introspection Kit" <https://github.com/apple/deepview>`_;
-  *https://github.com/apple/deepview.*
+  `"Data and Network Introspection Kit" <https://github.com/apple/dnikit>`_;
+  *https://github.com/apple/dnikit.*
 
 .. code-block::
 
-   @online{DeepView,
+   @online{dnikit,
         author = {Welsh, Megan Maher; Koski, David; Sarabia, Miguel; Sivakumar, Niv; Arawjo, Ian; Joshi, Aparna; Doumbouya, Moussa; Suau, Xavier; Zappella, Luca; Apostoloff, Nicholas},
         title = {Data and Network Introspection Kit},
         year = 2023,
-        url = {https://github.com/apple/deepview},
+        url = {https://github.com/apple/dnikit},
    }
 
 In addition, there are possible additional citations to include for each specific introspector
 (algorithm) that was used. These citations are listed below.
 
-Visualizing the Dataset Report, Familiarity, Duplicates, or Projection (Dimension Reduction) with `Symphony UI <https://github.com/apple/ml-symphony>`_:
+Visualizing the Dataset Report, Familiarity, Duplicates, or Projection (Dimension Reduction) with `Canvas UI <https://github.com/satishlokkoju/deepview>`_:
  - Bäuerle, Alex, Ángel Alexander Cabrera, Fred Hohman, Megan Maher, David Koski, Xavier Suau, Titus Barik, and Dominik Moritz.
    `"Symphony: Composing Interactive Interfaces for Machine Learning." <https://dl.acm.org/doi/abs/10.1145/3491102.3502102>`_
    In *CHI Conference on Human Factors in Computing Systems,* pp. 1-14. 2022.

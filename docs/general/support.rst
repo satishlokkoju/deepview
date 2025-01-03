@@ -10,7 +10,7 @@ Please see the :ref:`Contributor's Guide <contributing>`.
 
 Submit Feedback
 ---------------
-- Find a bug? Have a feature suggestion? Submit an Issue on the DeepView `GitHub Page <https://github.com/apple/deepview>`_.
+- Find a bug? Have a feature suggestion? Submit an Issue on the DeepView `GitHub Page <https://github.com/satishlokkoju/deepview>`_.
 
 .. _debugging_assistance:
 
@@ -19,7 +19,7 @@ Debugging
 =========
 
 Here are some tips and common issues. Further issues or suggestions for additional tips can be filed as issues
-in the `DeepView repository page <https://github.com/apple/deepview>`_.
+in the `DeepView repository page <https://github.com/satishlokkoju/deepview>`_.
 
 
 peek_first_batch

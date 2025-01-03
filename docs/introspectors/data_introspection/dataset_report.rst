@@ -66,17 +66,17 @@ MobileNet model to run the analysis:
 Visualization
 -------------
 
-Exploring with Symphony
+Exploring with Canvas
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-DeepView's DatasetReport can also connect with the Symphony UI framework
-to explore a dataset in a web browser or in a jupyter notebook. Please see Symphony's
-`documentation <https://github.com/apple/ml-symphony>`_ for an example of how to feed the
-output of ``DatasetReport.introspect`` directly into Symphony.
-These reports created with Symphony are interactive and shareable.
+DeepView's DatasetReport can also connect with the Canvas UI framework
+to explore a dataset in a web browser or in a jupyter notebook. Please see Canvas's
+`documentation <https://github.com/satishlokkoju/deepview>`_ for an example of how to feed the
+output of ``DatasetReport.introspect`` directly into Canvas.
+These reports created with Canvas are interactive and shareable.
 
 .. warning::
-    The current release of `Symphony <https://github.com/apple/ml-symphony>`_ operates only on images, audio, and tabular data.
+    The current release of `Canvas <https://github.com/satishlokkoju/deepview>`_ operates only on images, audio, and tabular data.
     To visualize other data types, it's possible to run the DeepView side of the
     `DatasetReport` on any dataset type and visualize in a custom manner.
 
@@ -97,7 +97,7 @@ e.g., duplicate set.
    report.data
 
 These results can be visualized in a custom manner, but it's recommended to try
-:ref:`Symphony <Exploring with Symphony>` for image, audio, or tabular data.
+:ref:`Canvas <Exploring with Canvas>` for image, audio, or tabular data.
 
 Saving and Loading
 ------------------
@@ -143,9 +143,9 @@ diversity analysis is skipped altogether.
 
 The *Dataset Report* aims to automate and simplify the process of analyzing datasets for both inter
 and intra-class diversity, in a manner that enables sharing and exploration. With the
-`Symphony <https://github.com/apple/ml-symphony>`_ framework, it's possible to build a standalone
+`Canvas <https://github.com/satishlokkoju/deepview>`_ framework, it's possible to build a standalone
 static report or explore results live in a Jupyter notebook.
-Symphony also contains a centralized filtering, grouping, highlighting, and selection
+Canvas also contains a centralized filtering, grouping, highlighting, and selection
 across all widgets, to form a cohesive workspace for dataset exploration.
 
 

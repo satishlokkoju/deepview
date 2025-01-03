@@ -1,6 +1,6 @@
 yarn
 yarn workspace @betterwithdata/canvas_viz build
-yarn workspace @betterwithdata/canvas-ui build
+yarn workspace @betterwithdata/canvas-ux build
 
 for d in widgets/* ; do
 	cd $d

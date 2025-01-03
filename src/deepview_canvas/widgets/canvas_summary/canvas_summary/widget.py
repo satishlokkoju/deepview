@@ -24,7 +24,7 @@ class CanvasSummary(canvas_ux.CanvasWidget):
                  height: str = 'M',
                  page: str = 'Summary',
                  summary_elements: List[canvas_ux.SummaryElement] = [],
-                 **kwargs):
+                 **kwargs: dict):
         """A Canvas component that visualizes an overview of a dataset
 
         Parameters
@@ -56,7 +56,7 @@ class CanvasSummary(canvas_ux.CanvasWidget):
             summary_elements=summary_elements,
         )
 
-    def js_path(self):
+    def js_path(self) -> tuple[Path, Path]:
         app_files_path = Path(
             (Path(__file__).parent), 'standalone', 'widgets')
         js_path = Path(app_files_path, 'CanvasSummary.js')

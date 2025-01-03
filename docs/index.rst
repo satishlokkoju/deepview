@@ -205,6 +205,13 @@ for more information about the experiments.
 .. toctree::
    :hidden:
    :maxdepth: 1
+   :caption: Visualization
+
+   Canvas Framework <canvas/index>
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
    :caption: Reference
 
    api/index

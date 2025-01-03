@@ -22,7 +22,7 @@ Copyright (C) 2023 betterwithdata Inc. All Rights Reserved. -->
   async function loadImage(filesPath: string, imageId: string): Promise<string> {
     // console.log("Loading image:", imageId);
     if (storybook) {
-      console.log("Loading image from storybook:", join(filesPath, imageId));
+      // console.log("Loading image from storybook:", join(filesPath, imageId));
       return join(filesPath, imageId);
     } else {
       try {

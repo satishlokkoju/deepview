@@ -12,7 +12,8 @@ import os
 import ipykernel
 import pathlib
 
-def get_current_dir():
+
+def get_current_dir() -> str:
     """Returns the current working directory in jupyter server
     NOTE: works only when the security is token-based or there is also no password
     """
@@ -20,13 +21,13 @@ def get_current_dir():
         connection_file = os.path.basename(ipykernel.get_connection_file())
         if not connection_file:
             return os.getcwd()
-            
+
         kernel_id = connection_file.split('-', 1)[1].split('.')[0]
-        
+
         # Try server_app first (Jupyter Server)
         for srv in server_app.list_running_servers():
             try:
-                if srv['token']=='' and not srv['password']:  # No token and no password
+                if srv['token'] == '' and not srv['password']:  # No token and no password
                     req = urllib.request.urlopen(srv['url']+'api/sessions')
                 else:
                     req = urllib.request.urlopen(srv['url']+'api/sessions?token='+srv['token'])
@@ -42,7 +43,7 @@ def get_current_dir():
         # Fall back to notebook_app (Jupyter Notebook)
         for srv in notebook_app.list_running_servers():
             try:
-                if srv['token']=='' and not srv['password']:  # No token and no password
+                if srv['token'] == '' and not srv['password']:  # No token and no password
                     req = urllib.request.urlopen(srv['url']+'api/sessions')
                 else:
                     req = urllib.request.urlopen(srv['url']+'api/sessions?token='+srv['token'])
@@ -54,8 +55,8 @@ def get_current_dir():
                         return str(notebook_path.parents[0])
             except Exception:
                 continue  # Try next server
-                
+
     except Exception:
         pass  # Fall through to returning current directory
-    
+
     return os.getcwd()

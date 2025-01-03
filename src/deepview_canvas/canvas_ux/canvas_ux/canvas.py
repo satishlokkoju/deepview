@@ -21,11 +21,9 @@ import json
 import os
 import shutil
 import uuid
-import webbrowser
-from multiprocessing import Process
 from pathlib import Path
 from string import Template
-from typing import Dict, List, Type, Union
+from typing import Dict, List, Type, Union, Optional
 
 import requests
 import pandas as pd
@@ -52,13 +50,14 @@ class Canvas:
     def __init__(self,
                  table: Union[pa.Table, pd.DataFrame, str],
                  id_column: str = "id",
-                 data_type: CanvasDataType = None,
-                 instances_per_page: int = None):
+                 data_type: Optional[CanvasDataType] = None,
+                 instances_per_page: Optional[int] = None):
         """
         Parameters
         ----------
         table : pa.Table or pd.DataFrame or str
-            A Pandas DataFrame, Apache Arrow table, or a link to a :code:`.arrow` file with metadata columns (a :code:`.arrow` file can be obtained using the :code:`to_arrow_file` function).
+            A Pandas DataFrame, Apache Arrow table, or a link to a :code:`.arrow`
+            file with metadata columns (a :code:`.arrow` file can be obtained using the :code:`to_arrow_file` function).
         id_column : str, optional
             Name of the identifier column, by default :code:`id`.
         data_type : str, optional
@@ -103,7 +102,7 @@ class Canvas:
         )
 
         # Dict of {'name': Widget} to cache widgets.
-        self._widgets = {}
+        self._widgets: Dict[str, CanvasWidget] = {}
 
         # ToolbarWidget is available for everyone and holds general functionality.
         self._toolbar_widget = ToolbarWidget(layout=TOOLBAR_LAYOUT)
@@ -113,14 +112,15 @@ class Canvas:
             self._canvas_spec)
         self._toolbar_widget.table = serialize_table(table)
 
-    def __del__(self):
+    def __del__(self) -> None:
         try:
             if self._application:
                 self._application.terminate()
-        except:
+        except Exception as e:
+            print(e)
             pass
 
-    def widget(self, widget: Type[CanvasWidget], **kwargs) -> HBox:
+    def widget(self, widget: Type[CanvasWidget], **kwargs: dict) -> HBox:
         """Render a CanvasWidget.
 
         Parameters
@@ -159,7 +159,7 @@ class Canvas:
 
     def export(self,
                export_path: Union[str, Path],
-               name: str = None):
+               name: Optional[str] = None) -> None:
         """
         Export the current widgets to a static page.
         Creates a directory with an :code:`index.html` file, data folder, and JavaScript files for each widget.
@@ -212,12 +212,14 @@ class Canvas:
         try:
             shutil.copy(Path(app_files_path, 'widgets',
                         'StandaloneApp.js'), Path(export_path, 'widgets'))
-        except shutil.SameFileError:
+        except shutil.SameFileError as ex:
+            print(ex)
             pass
         try:
             shutil.copy(Path(app_files_path, 'widgets',
                         'StandaloneApp.js.map'), Path(export_path, 'widgets'))
-        except (shutil.SameFileError, FileNotFoundError) as _:
+        except (shutil.SameFileError, FileNotFoundError) as ex:
+            print(ex)
             pass
 
         # Generate the JS file importing each widget.
@@ -235,7 +237,9 @@ class Canvas:
             "pages": {},
             "exportID": str(uuid.uuid1())
         }
-        pages = {}
+
+        pages: Dict[str, List[Dict]] = {}
+
         for widget_id in self._widgets:
             widget = self._widgets[widget_id]
             import_statements.append(import_template.substitute(
@@ -249,7 +253,7 @@ class Canvas:
 
         with open(Path(data_path, 'widget_info.json'), 'w') as info_file:
             json.dump(widget_info, info_file)
-        if self._table_link == None:
+        if self._table_link is None:
             table_to_file(deserialize_table(self._toolbar_widget.table),
                           Path(data_path, 'table.arrow'))
         else:
@@ -266,7 +270,7 @@ class Canvas:
                    widgets: List[Type[CanvasWidget]],
                    export_path: Union[str, Path],
                    widget_params: List[Dict] = [],
-                   name: str = None):
+                   name: Optional[str] = None) -> None:
         """
         Create a standalone app with the given widgets.
         Similar to the :code:`export()` function but does not require the widgets to have been passed to Canvas beforehand.
@@ -278,7 +282,7 @@ class Canvas:
         export_path: str or Path
             Where to export the standalone app to.
         widget_params: List[Dict]
-            List of named parameters to pass to each widget. 
+            List of named parameters to pass to each widget.
             Must be the same length as widgets, and be an empty dict :code:`{}` for no options.
             By default an empty list.
         name: str, optional
@@ -302,15 +306,15 @@ class Canvas:
         return CanvasSpec(**camel_dict_to_snake_case_dict(
             self._toolbar_widget.canvas_spec))
 
-    def get_layout(self) -> List[dict]:
+    def get_layout(self) -> Dict[str, List[Dict]]:
         """Get the current static app layout.
 
         Returns
         -------
-        List
+        Dict
             Set of pages with their corresponding layout settings.
         """
-        pages = {}
+        pages: Dict[str, List[Dict]] = {}
         for identifier in self._widgets:
             widget = self._widgets[identifier]
             current_widgets = pages.get(widget.widget_spec['page'], [])
@@ -364,7 +368,7 @@ class Canvas:
         """
         return deserialize_table(self._toolbar_widget.table)
 
-    def set_canvas_spec(self, spec: Union[CanvasSpec, dict]) -> Union[CanvasSpec, dict]:
+    def set_canvas_spec(self, spec: Union[CanvasSpec, dict]) -> None:
         """Set the Canvas spec for the current Canvas report.
 
         Parameters
@@ -376,13 +380,13 @@ class Canvas:
             spec = CanvasSpec(**spec)
         self._toolbar_widget.canvas_spec = dataclass_to_camel_dict(spec)
 
-    def set_layout(self, layout: List):
+    def set_layout(self, layout: Dict[str, List[Dict[str, str]]]) -> None:
         """Set the current static app layout.
 
         Parameters
         ----------
-        layout : List
-            List of pages describing each widget's layout settings.
+        layout : Dict
+            Set of pages with their corresponding layout settings.
         """
         new_widgets = {}
         for (key, value) in layout.items():
@@ -399,7 +403,7 @@ class Canvas:
                     new_widgets[identifier] = widget
         self._widgets = {**self._widgets,  **new_widgets}
 
-    def set_selected(self, selected: List[str]):
+    def set_selected(self, selected: List[str]) -> None:
         """Set the selected instances for Canvas.
 
         Parameters
@@ -409,7 +413,7 @@ class Canvas:
         """
         self._toolbar_widget.selected = selected
 
-    def set_filter(self, filter: str):
+    def set_filter(self, filter: str) -> None:
         """Set the filter string for Canvas.
 
         Parameters
@@ -419,7 +423,7 @@ class Canvas:
         """
         self._toolbar_widget.filter = filter
 
-    def set_group_columns(self, group_columns: List[str]):
+    def set_group_columns(self, group_columns: List[str]) -> None:
         """Set the columns of the table by which to apply grouping.
 
         Parameters
@@ -429,7 +433,7 @@ class Canvas:
         """
         self._toolbar_widget.group_columns = group_columns
 
-    def set_table(self, table: Union[pa.Table, pd.DataFrame]):
+    def set_table(self, table: Union[pa.Table, pd.DataFrame]) -> None:
         """Set the table based on which Canvas creates visualizations.
 
         Parameters
