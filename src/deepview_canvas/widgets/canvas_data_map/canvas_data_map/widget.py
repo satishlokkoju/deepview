@@ -5,22 +5,22 @@ from pathlib import Path
 
 import canvas_ux
 from traitlets import Unicode
-
+from typing import Tuple
 from ._frontend import module_name, module_version
 from ._default_codes import codes
 
 
 class CanvasDataMap(canvas_ux.CanvasWidget):
     _model_name = Unicode(
-        'CanvasDataMapModel').tag(sync=True)
+        'CanvasDataMapModel').tag(sync=True)  # type: ignore
     _view_name = Unicode(
-        'CanvasDataMapView').tag(sync=True)
-    _model_module = Unicode(module_name).tag(sync=True)
-    _model_module_version = Unicode(module_version).tag(sync=True)
-    _view_module = Unicode(module_name).tag(sync=True)
-    _view_module_version = Unicode(module_version).tag(sync=True)
+        'CanvasDataMapView').tag(sync=True)  # type: ignore
+    _model_module = Unicode(module_name).tag(sync=True)  # type: ignore
+    _model_module_version = Unicode(module_version).tag(sync=True)  # type: ignore
+    _view_module = Unicode(module_name).tag(sync=True)  # type: ignore
+    _view_module_version = Unicode(module_version).tag(sync=True)  # type: ignore
     name = 'CanvasDataMap'
-    description = "A Canvas component for visualizing data on a map"
+    description = "A Canvas component for visualizing data on a Global Map"
 
     def __init__(self,
                  width: str = 'XXL',
@@ -65,7 +65,7 @@ class CanvasDataMap(canvas_ux.CanvasWidget):
             map_url=map_url
         )
 
-    def js_path(self) -> tuple[Path, Path]:
+    def js_path(self) -> Tuple[Path, Path]:
         app_files_path = Path(
             (Path(__file__).parent), 'standalone', 'widgets')
         js_path = Path(app_files_path, 'CanvasDataMap.js')

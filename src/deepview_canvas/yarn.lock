@@ -2968,13 +2968,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@polka/url@npm:^1.0.0-next.20":
-  version: 1.0.0-next.28
-  resolution: "@polka/url@npm:1.0.0-next.28"
-  checksum: 10c0/acc5ea62597e4da2fb42dbee02749d07f102ae7d6d2c966bf7e423c79cd65d1621da305af567e6e7c232f3b565e242d1ec932cbb3dcc0db1508d02e9a2cafa2e
-  languageName: node
-  linkType: hard
-
 "@rjsf/core@npm:^5.13.4":
   version: 5.23.2
   resolution: "@rjsf/core@npm:5.23.2"
@@ -7140,7 +7133,6 @@ __metadata:
     source-map-loader: "npm:^3.0.0"
     style-loader: "npm:^3.2.1"
     svelte: "npm:^3.42.5"
-    svelte-ace: "npm:^1.0.21"
     svelte-loader: "npm:^3.1.1"
     svelte-preprocess: "npm:^4.9.4"
     tailwindcss: "npm:^2.2.15"
@@ -7754,13 +7746,6 @@ __metadata:
   version: 1.2.0
   resolution: "console-browserify@npm:1.2.0"
   checksum: 10c0/89b99a53b7d6cee54e1e64fa6b1f7ac24b844b4019c5d39db298637e55c1f4ffa5c165457ad984864de1379df2c8e1886cbbdac85d9dbb6876a9f26c3106f226
-  languageName: node
-  linkType: hard
-
-"console-clear@npm:^1.1.0":
-  version: 1.1.1
-  resolution: "console-clear@npm:1.1.1"
-  checksum: 10c0/96516c6175648ab5b8afa7cc455d3e4a47f714e7f6712d17fffb2f8d3c815eb0f9330d823c5d35c91b51aa5e66b20cebf7bd9ca29fed591bb1cfd165f08fd7d7
   languageName: node
   linkType: hard
 
@@ -10911,13 +10896,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"get-port@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "get-port@npm:3.2.0"
-  checksum: 10c0/1b6c3fe89074be3753d9ddf3d67126ea351ab9890537fe53fefebc2912d1d66fdc112451bbc76d33ae5ceb6ca70be2a91017944e3ee8fb0814ac9b295bf2a5b8
-  languageName: node
-  linkType: hard
-
 "get-stdin@npm:^4.0.1":
   version: 4.0.1
   resolution: "get-stdin@npm:4.0.1"
@@ -13293,7 +13271,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"kleur@npm:^3.0.0, kleur@npm:^3.0.3":
+"kleur@npm:^3.0.3":
   version: 3.0.3
   resolution: "kleur@npm:3.0.3"
   checksum: 10c0/cd3a0b8878e7d6d3799e54340efe3591ca787d9f95f109f28129bdd2915e37807bf8918bb295ab86afb8c82196beec5a1adcaf29042ce3f2bd932b038fe3aa4b
@@ -13433,13 +13411,6 @@ __metadata:
   version: 3.3.1
   resolution: "loader-utils@npm:3.3.1"
   checksum: 10c0/f2af4eb185ac5bf7e56e1337b666f90744e9f443861ac521b48f093fb9e8347f191c8960b4388a3365147d218913bc23421234e7788db69f385bacfefa0b4758
-  languageName: node
-  linkType: hard
-
-"local-access@npm:^1.0.1":
-  version: 1.1.0
-  resolution: "local-access@npm:1.1.0"
-  checksum: 10c0/ce39716d1cc6a270382369ce7210caa9f6b4ba129a2c6d4f3196cbcf01b6f777da954bd112b67cd9f100f05073f91f8687f3aba872bb914cff70200ef9aec79e
   languageName: node
   linkType: hard
 
@@ -14359,13 +14330,6 @@ __metadata:
   version: 1.2.0
   resolution: "mri@npm:1.2.0"
   checksum: 10c0/a3d32379c2554cf7351db6237ddc18dc9e54e4214953f3da105b97dc3babe0deb3ffe99cf409b38ea47cc29f9430561ba6b53b24ab8f9ce97a4b50409e4a50e7
-  languageName: node
-  linkType: hard
-
-"mrmime@npm:^1.0.0":
-  version: 1.0.1
-  resolution: "mrmime@npm:1.0.1"
-  checksum: 10c0/ab071441da76fd23b3b0d1823d77aacf8679d379a4a94cacd83e487d3d906763b277f3203a594c613602e31ab5209c26a8119b0477c4541ef8555b293a9db6d3
   languageName: node
   linkType: hard
 
@@ -17995,7 +17959,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sade@npm:^1.6.0, sade@npm:^1.7.4":
+"sade@npm:^1.7.4":
   version: 1.8.1
   resolution: "sade@npm:1.8.1"
   dependencies:
@@ -18206,13 +18170,6 @@ __metadata:
     "@types/node-forge": "npm:^1.3.0"
     node-forge: "npm:^1"
   checksum: 10c0/521829ec36ea042f7e9963bf1da2ed040a815cf774422544b112ec53b7edc0bc50a0f8cc2ae7aa6cc19afa967c641fd96a15de0fc650c68651e41277d2e1df09
-  languageName: node
-  linkType: hard
-
-"semiver@npm:^1.0.0":
-  version: 1.1.0
-  resolution: "semiver@npm:1.1.0"
-  checksum: 10c0/f208555fcdf8726d25a5d5acd5079b1f6a274a9be291da6981c70867cca9abd43721648b338bac914fbc7874e2594217a5943a2e91410ce24b5a80a641d4468b
   languageName: node
   linkType: hard
 
@@ -18525,35 +18482,6 @@ __metadata:
   dependencies:
     is-arrayish: "npm:^0.3.1"
   checksum: 10c0/df5e4662a8c750bdba69af4e8263c5d96fe4cd0f9fe4bdfa3cbdeb45d2e869dff640beaaeb1ef0e99db4d8d2ec92f85508c269f50c972174851bc1ae5bd64308
-  languageName: node
-  linkType: hard
-
-"sirv-cli@npm:^1.0.0":
-  version: 1.0.14
-  resolution: "sirv-cli@npm:1.0.14"
-  dependencies:
-    console-clear: "npm:^1.1.0"
-    get-port: "npm:^3.2.0"
-    kleur: "npm:^3.0.0"
-    local-access: "npm:^1.0.1"
-    sade: "npm:^1.6.0"
-    semiver: "npm:^1.0.0"
-    sirv: "npm:^1.0.13"
-    tinydate: "npm:^1.0.0"
-  bin:
-    sirv: bin.js
-  checksum: 10c0/6d935ddf78aa70e368ee2c61be52fe6fa7f8beeb859c5497306f79d7ba20e072ffd9960aa9ed242c0f4095ee10d6492587738fc39dc9a478599fb3ce2ab96a4a
-  languageName: node
-  linkType: hard
-
-"sirv@npm:^1.0.13":
-  version: 1.0.19
-  resolution: "sirv@npm:1.0.19"
-  dependencies:
-    "@polka/url": "npm:^1.0.0-next.20"
-    mrmime: "npm:^1.0.0"
-    totalist: "npm:^1.0.0"
-  checksum: 10c0/393cc0471e82d3e754a8c1b2b348a86249db1f686aeb11c17e4217326a8b1a96029d9f1b58362ebb3e511b7b98c47cd43c4305dde98322bb1259d07dec2d4908
   languageName: node
   linkType: hard
 
@@ -19438,16 +19366,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svelte-ace@npm:^1.0.21":
-  version: 1.0.21
-  resolution: "svelte-ace@npm:1.0.21"
-  dependencies:
-    brace: "npm:^0.11.1"
-    sirv-cli: "npm:^1.0.0"
-  checksum: 10c0/cd42508c5ea21ec4d86f6df5d9276653e799c25a701ed40ab73fd3058ed16da85a205a72176a8e3367625816df9272c94a8da98ac7a348e980c6358bb391b873
-  languageName: node
-  linkType: hard
-
 "svelte-check@npm:^2.2.6":
   version: 2.10.3
   resolution: "svelte-check@npm:2.10.3"
@@ -19978,13 +19896,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tinydate@npm:^1.0.0":
-  version: 1.3.0
-  resolution: "tinydate@npm:1.3.0"
-  checksum: 10c0/06e3f273f36d04f6195c8ff58ba3a69db27f5e077ca8b08b073a9b816669a54e477f0086f3af84d33d525cf8876fb0021be9d6fd928dc43bfe9ea3945927168e
-  languageName: node
-  linkType: hard
-
 "tmp@npm:^0.0.33":
   version: 0.0.33
   resolution: "tmp@npm:0.0.33"
@@ -20081,13 +19992,6 @@ __metadata:
     topomerge: bin/topomerge
     topoquantize: bin/topoquantize
   checksum: 10c0/da2acba268cbf4d002483d5d81452e0d797b2fff6041fafb1d420e58973fa780a6f42041ce4c2677376ab977e5e1732b89c42a2db3c334a34f6c47f4d94b3eaa
-  languageName: node
-  linkType: hard
-
-"totalist@npm:^1.0.0":
-  version: 1.1.0
-  resolution: "totalist@npm:1.1.0"
-  checksum: 10c0/2adbd4501c8290c2a96617a83dc67dfdd02bcbd360032017e27ccf27bbb09649bbe8dad1c45d97be6874281178aca5b3f62ed059d1eeda77c479cfb8eb3a9266
   languageName: node
   linkType: hard
 

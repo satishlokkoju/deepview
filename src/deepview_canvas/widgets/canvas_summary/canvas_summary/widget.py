@@ -4,18 +4,18 @@
 from pathlib import Path
 from typing import List
 from ._frontend import module_name, module_version
-
+from typing import Tuple
 import canvas_ux
 from traitlets import Unicode
 
 
 class CanvasSummary(canvas_ux.CanvasWidget):
-    _model_name = Unicode('CanvasSummaryModel').tag(sync=True)
-    _view_name = Unicode('CanvasSummaryView').tag(sync=True)
-    _model_module = Unicode(module_name).tag(sync=True)
-    _model_module_version = Unicode(module_version).tag(sync=True)
-    _view_module = Unicode(module_name).tag(sync=True)
-    _view_module_version = Unicode(module_version).tag(sync=True)
+    _model_name = Unicode('CanvasSummaryModel').tag(sync=True)  # type: ignore
+    _view_name = Unicode('CanvasSummaryView').tag(sync=True)  # type: ignore
+    _model_module = Unicode(module_name).tag(sync=True)  # type: ignore
+    _model_module_version = Unicode(module_version).tag(sync=True)  # type: ignore
+    _view_module = Unicode(module_name).tag(sync=True)  # type: ignore
+    _view_module_version = Unicode(module_version).tag(sync=True)  # type: ignore
     name = 'CanvasSummary'
     description = "A Canvas component that visualizes an overview of a dataset"
 
@@ -56,7 +56,7 @@ class CanvasSummary(canvas_ux.CanvasWidget):
             summary_elements=summary_elements,
         )
 
-    def js_path(self) -> tuple[Path, Path]:
+    def js_path(self) -> Tuple[Path, Path]:
         app_files_path = Path(
             (Path(__file__).parent), 'standalone', 'widgets')
         js_path = Path(app_files_path, 'CanvasSummary.js')

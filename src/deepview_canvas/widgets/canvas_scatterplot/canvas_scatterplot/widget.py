@@ -5,19 +5,19 @@ from pathlib import Path
 
 import canvas_ux
 from traitlets import Unicode
-
+from typing import Tuple
 from ._frontend import module_name, module_version
 
 
 class CanvasScatterplot(canvas_ux.CanvasWidget):
     _model_name = Unicode(
-        'CanvasScatterplotModel').tag(sync=True)
+        'CanvasScatterplotModel').tag(sync=True)  # type: ignore
     _view_name = Unicode(
-        'CanvasScatterplotView').tag(sync=True)
-    _model_module = Unicode(module_name).tag(sync=True)
-    _model_module_version = Unicode(module_version).tag(sync=True)
-    _view_module = Unicode(module_name).tag(sync=True)
-    _view_module_version = Unicode(module_version).tag(sync=True)
+        'CanvasScatterplotView').tag(sync=True)  # type: ignore
+    _model_module = Unicode(module_name).tag(sync=True)  # type: ignore
+    _model_module_version = Unicode(module_version).tag(sync=True)  # type: ignore
+    _view_module = Unicode(module_name).tag(sync=True)  # type: ignore
+    _view_module_version = Unicode(module_version).tag(sync=True)  # type: ignore
     name = 'CanvasScatterplot'
     description = "A scatterplot Canvas component based on regl-scatterplot"
 
@@ -54,7 +54,7 @@ class CanvasScatterplot(canvas_ux.CanvasWidget):
             description=self.description
         )
 
-    def js_path(self) -> tuple[Path, Path]:
+    def js_path(self) -> Tuple[Path, Path]:
         app_files_path = Path(
             (Path(__file__).parent), 'standalone', 'widgets')
         js_path = Path(app_files_path, 'CanvasScatterplot.js')

@@ -4,7 +4,7 @@
 import json
 import shutil
 from pathlib import Path
-from typing import Union
+from typing import Tuple, Union
 from ipywidgets import DOMWidget
 from traitlets import Dict, List, Unicode
 
@@ -15,11 +15,11 @@ from ._frontend import module_name, module_version
 
 class CanvasWidget(DOMWidget):
     """Generic CanvasWidget for all Canvas widgets."""
-    canvas_spec = Dict().tag(sync=True)
-    widget_spec = Dict().tag(sync=True)
-    table = CByteMemoryView().tag(sync=True)
+    canvas_spec = Dict().tag(sync=True)  # type: ignore
+    widget_spec = Dict().tag(sync=True)  # type: ignore
+    table = CByteMemoryView().tag(sync=True)  # type: ignore
     selected = List([]).tag(sync=True)  # type: ignore
-    filter = Unicode('').tag(sync=True)
+    filter = Unicode('').tag(sync=True)  # type: ignore
     group_columns = List([]).tag(sync=True)  # type: ignore
 
     def export(self, export_path: Union[str, Path]) -> dict:
@@ -46,14 +46,13 @@ class CanvasWidget(DOMWidget):
             "page": self.widget_spec['page'],
         }
 
-    def js_path(self) -> tuple[Path, Path]:  # type: ignore
+    def js_path(self) -> Tuple[Path, Path]:  # type: ignore
         pass
 
 
 class ToolbarWidget(CanvasWidget):
-    _model_name = Unicode('ToolbarModel').tag(sync=True)
-    _view_name = Unicode('ToolbarView').tag(sync=True)
-    _model_module = Unicode(module_name).tag(sync=True)
-    _model_module_version = Unicode(module_version).tag(sync=True)
-    _view_module = Unicode(module_name).tag(sync=True)
-    _view_module_version = Unicode(module_version).tag(sync=True)
+    _model_name = Unicode('ToolbarModel').tag(sync=True)  # type: ignore
+    _view_name = Unicode('ToolbarView').tag(sync=True)  # type: ignore
+    _model_module = Unicode(module_name).tag(sync=True)  # type: ignore
+    _model_module_version = Unicode(module_version).tag(sync=True)  # type: ignore
+    _view_module = Unicode(module_name).tag(sync=True)  # type: ignore

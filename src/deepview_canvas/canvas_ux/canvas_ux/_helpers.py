@@ -105,7 +105,7 @@ class ByteMemoryView(TraitType):
     def validate(self, obj, value: memoryview) -> memoryview:  # type: ignore
         if isinstance(value, memoryview) and value.format == 'B':
             return value
-        self.error(obj, value)
+        self.error(obj, value)  # type: ignore
 
     def default_value_repr(self) -> str:
         return repr(self.default_value.tobytes())
@@ -124,4 +124,4 @@ class CByteMemoryView(ByteMemoryView):
                 mv = mv.cast('B')
             return mv
         except Exception:
-            self.error(obj, value)
+            self.error(obj, value)  # type: ignore

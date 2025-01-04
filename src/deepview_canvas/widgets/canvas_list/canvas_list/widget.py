@@ -5,19 +5,19 @@ from pathlib import Path
 import os
 import canvas_ux
 from traitlets import Unicode
-
+from typing import Tuple
 from ._frontend import module_name, module_version
 
 
 class CanvasList(canvas_ux.CanvasWidget):
     _model_name = Unicode(
-        'CanvasListModel').tag(sync=True)
+        'CanvasListModel').tag(sync=True)  # type: ignore
     _view_name = Unicode(
-        'CanvasListView').tag(sync=True)
-    _model_module = Unicode(module_name).tag(sync=True)
-    _model_module_version = Unicode(module_version).tag(sync=True)
-    _view_module = Unicode(module_name).tag(sync=True)
-    _view_module_version = Unicode(module_version).tag(sync=True)
+        'CanvasListView').tag(sync=True)  # type: ignore
+    _model_module = Unicode(module_name).tag(sync=True)  # type: ignore
+    _model_module_version = Unicode(module_version).tag(sync=True)  # type: ignore
+    _view_module = Unicode(module_name).tag(sync=True)  # type: ignore
+    _view_module_version = Unicode(module_version).tag(sync=True)  # type: ignore
     name = 'CanvasList'
     description = "A Canvas component that displays a view of data instances"
 
@@ -55,7 +55,7 @@ class CanvasList(canvas_ux.CanvasWidget):
             description=self.description
         )
 
-    def js_path(self) -> tuple[Path, Path]:
+    def js_path(self) -> Tuple[Path, Path]:
         app_files_path = Path(
             (Path(__file__).parent), 'standalone', 'widgets')
         js_path = Path(app_files_path, 'CanvasList.js')

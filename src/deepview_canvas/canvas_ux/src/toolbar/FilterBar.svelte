@@ -7,7 +7,7 @@ Copyright (C) 2023 betterwithdata Inc. All Rights Reserved. -->
 
   import Fa from 'svelte-fa';
   import * as ace from 'brace';
-  import { AceEditor } from 'svelte-ace';
+  import AceEditor from './AceEditor.svelte';
   import { fade } from 'svelte/transition';
   import { faFilter } from '@fortawesome/free-solid-svg-icons/faFilter';
   import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
@@ -61,6 +61,13 @@ Copyright (C) 2023 betterwithdata Inc. All Rights Reserved. -->
 
   function initEditor(editor: CustomEvent) {
     langTools = ace.acequire('ace/ext/language_tools');
+    
+    // Add more comprehensive debugging
+    console.log('Editor initialization:', editor);
+    console.log('Editor container:', editor.detail.container);
+    console.log('Editor container ID:', editor.detail.container?.id);
+    console.log('Editor div:', document.getElementById('filter-ace-editor'));
+    
     editor.detail.commands.addCommand({
       name: 'enter',
       exec: function () {
@@ -80,6 +87,7 @@ Copyright (C) 2023 betterwithdata Inc. All Rights Reserved. -->
       class="flex flex-col p-2 w-full h-auto bg-white border border-midgrey rounded justify-center"
     >
       <AceEditor
+        id="filter-ace-editor"
         width="100%"
         height="auto"
         bind:value={filterString}
