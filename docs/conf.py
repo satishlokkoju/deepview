@@ -18,7 +18,7 @@ import deepview
 
 # Project information
 project = 'DeepView'
-copyright = '2024, BetterWithData Inc. All rights reserved.'
+copyright = '2024, BetterWithData Inc. All rights reserved'
 author = 'Satish Lokkoju'
 version = deepview.__version__
 release = version

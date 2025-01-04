@@ -16,14 +16,14 @@
   ],
   "main": "lib/index.js",
   "types": "./lib/index.d.ts",
-  "homepage": "https://github.com/betterwithdata/ml-Canvas",
+  "homepage": "https://github.com/satishlokkoju/deepview",
   "bugs": {
-    "url": "https://github.com/betterwithdata/ml-Canvas/issues"
+    "url": "https://github.com/satishlokkoju/deepview/issues"
   },
-  "author": "betterwithdata",
+  "author": "Satish Lokkoju",
   "repository": {
     "type": "git",
-    "url": "https://github.com/betterwithdata/ml-Canvas"
+    "url": "https://github.com/satishlokkoju/deepview"
   },
   "scripts": {
     "build": "webpack --mode=development --progress && jupyter labextension build --development=True .",

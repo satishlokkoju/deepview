@@ -1,8 +1,20 @@
 #!/usr/bin/env python
 # coding: utf-8
-
-# For licensing see accompanying LICENSE file.
-# Copyright (C) 2023 betterwithdata Inc. All Rights Reserved.
+#
+# Copyright 2024 BetterWithData
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 
 from __future__ import print_function
 from glob import glob
@@ -74,10 +86,10 @@ setup_args = dict(
     cmdclass=cmdclass,
     packages=find_packages(),
     include_package_data=True,
-    author='betterwithdata',
-    author_email='dnikit-canvas-oss@group.betterwithdata.com',
+    author='Satish Lokkoju',
+    author_email='satish.lokkoju@gmail.com',
     url='https://github.com/satishlokkoju/deepview',
-    license='betterwithdata Sample Code License',
+    license='Apache 2.0',
     platforms="Linux, Mac OS X, Windows",
     keywords=['Jupyter', 'Widgets', 'IPython'],
     classifiers=[
@@ -87,13 +99,13 @@ setup_args = dict(
         'Topic :: Scientific/Engineering :: Information Analysis',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
         'Framework :: Jupyter',
     ],
-    python_requires=">=3.6",
+    python_requires=">=3.8",
     install_requires=[
         'ipywidgets>=7.0.0',
         "pyarrow",
@@ -102,17 +114,10 @@ setup_args = dict(
     ],
     extras_require={
         'widgets': [
-            "canvas_binary_confusion_matrix",
             "canvas_data_map",
-            "canvas_duplicates",
-            "canvas_fairvis",
-            "canvas_familiarity",
-            "canvas_hierarchical_confusion_matrix",
             "canvas_list",
-            "canvas_markdown",
             "canvas_scatterplot",
-            "canvas_summary",
-            "canvas_vega",
+            "canvas_summary"
         ],
         'examples': [
             "tensorflow",

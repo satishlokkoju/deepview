@@ -8,9 +8,9 @@
     "canvas_viz",
     "widgets"
   ],
-  "author": "betterwithdata",
+  "author": "Satish Lokkoju",
   "private": true,
-  "license": "betterwithdata Sample Code",
+  "license": "Apache 2.0",
   "type": "module",
   "scripts": {
     "build": "yarn workspaces foreach exec run build",

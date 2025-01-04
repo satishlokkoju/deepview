@@ -1,5 +1,16 @@
-.. For licensing see accompanying LICENSE file.
-.. Copyright (C) 2023 betterwithdata Inc. All Rights Reserved.
+ .. Copyright 2024 BetterWithData
+ 
+ .. Licensed under the Apache License, Version 2.0 (the "License");
+ .. you may not use this file except in compliance with the License.
+ .. You may obtain a copy of the License at
+ .. 
+ ..     http://www.apache.org/licenses/LICENSE-2.0
+ .. 
+ .. Unless required by applicable law or agreed to in writing, software
+ .. distributed under the License is distributed on an "AS IS" BASIS,
+ .. WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ .. See the License for the specific language governing permissions and
+ .. limitations under the License. 
 
 ************
 Contributing
@@ -7,7 +18,7 @@ Contributing
 
 To add more functionality to :code:`canvas_ux`, :code:`canvas_viz`, or any component, first set up a dev environment.
 Then, packages can be updated and deployed.
-If your change could be useful to other users, please consider making a `pull request <https://github.com/betterwithdata/ml-canvas/pulls>`_.
+If your change could be useful to other users, please consider making a `pull request <https://github.com/satishlokkoju/deepview/pulls>`_.
 
 ========================
 Development Installation
@@ -23,7 +34,7 @@ With :code:`conda`, using :code:`canvas` as the environment name:
 
 .. code-block:: bash 
 
-    conda create -n canvas python=3.11
+    conda create -n canvas python=3.10
     conda activate canvas
 
 Or, instead using :code:`venv`:

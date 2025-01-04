@@ -1,5 +1,16 @@
-.. For licensing see accompanying LICENSE file.
-.. Copyright (C) 2023 betterwithdata Inc. All Rights Reserved.
+ .. Copyright 2024 BetterWithData
+ 
+ .. Licensed under the Apache License, Version 2.0 (the "License");
+ .. you may not use this file except in compliance with the License.
+ .. You may obtain a copy of the License at
+ .. 
+ ..     http://www.apache.org/licenses/LICENSE-2.0
+ .. 
+ .. Unless required by applicable law or agreed to in writing, software
+ .. distributed under the License is distributed on an "AS IS" BASIS,
+ .. WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ .. See the License for the specific language governing permissions and
+ .. limitations under the License. 
 
 ***************
 Getting Started
@@ -33,9 +44,9 @@ See :doc:`components` for a list of all the other component packages. If you wan
 
     pip install "canvas_ux[widgets]"
 
-Canvas works great with `DNIKit <https://github.com/betterwithdata/dnikit>`__.
-You can use DNIKit to generate analysis data for Canvas, for example for the Familiarity and Duplicates components.
-If you want to run the precomputed Canvas example that uses DNIKit, run:
+Canvas works great with `DeepView <https://github.com/satishlokkoju/deepview>`__.
+You can use `DeepView <https://github.com/satishlokkoju/deepview>`__ to generate analysis data for Canvas, for example for the Summary and scatterplot components.
+If you want to run the precomputed Canvas example that uses DeepView, run:
 
 .. code-block:: bash
 

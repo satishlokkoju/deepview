@@ -1,5 +1,16 @@
-.. For licensing see accompanying LICENSE file.
-.. Copyright (C) 2023 betterwithdata Inc. All Rights Reserved.
+ .. Copyright 2024 BetterWithData
+ 
+ .. Licensed under the Apache License, Version 2.0 (the "License");
+ .. you may not use this file except in compliance with the License.
+ .. You may obtain a copy of the License at
+ .. 
+ ..     http://www.apache.org/licenses/LICENSE-2.0
+ .. 
+ .. Unless required by applicable law or agreed to in writing, software
+ .. distributed under the License is distributed on an "AS IS" BASIS,
+ .. WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ .. See the License for the specific language governing permissions and
+ .. limitations under the License. 
 
 ********************
 Creating a Component
@@ -40,7 +51,7 @@ Background
 To customize a newly created component, the primary file to work in is :code:`src/[Your Provided Component Name].svelte`.
 
 Components are written in Svelte.
-See their `interactive tutorial <https://svelte.dev/tutorial/basics>`_ for a concise overview of the basics.
+See their `interactive tutorial <https://svelte.dev/tutorial/svelte/welcome-to-svelte>`_ for a concise overview of the basics.
 
 When customizing a component, you have access to all variables in the Canvas state.
 To learn more about what each state variable is, see the :doc:`state` documentation.

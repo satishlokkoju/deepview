@@ -8,7 +8,7 @@ Canvas is a framework for composing interactive machine learning interfaces with
 
 Canvas enables data scientists and machine learning practitioners to create interactive, reusable components for ML model exploration and analysis. It provides a flexible architecture that works seamlessly across different platforms, from Jupyter notebooks to web applications.
 
-This project is based on research presented in the paper ["Canvas: Composing Interactive Interfaces for Machine Learning"](https://arxiv.org/abs/2202.08946) at ACM CHI 2022.
+This project is based on research presented in the paper ["Symphony: Composing Interactive Interfaces for Machine Learning"](https://arxiv.org/abs/2202.08946) at ACM CHI 2022.
 
 ## Features
 
@@ -29,8 +29,8 @@ This project is based on research presented in the paper ["Canvas: Composing Int
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/ml-canvas-dev.git
-cd ml-canvas-dev
+git clone https://github.com/satishlokkoju/deepview.git
+cd deepview/src/deepview_canvas
 ```
 
 2. Install Python dependencies:
@@ -73,9 +73,6 @@ yarn build:docs
 - `canvas_ux/`: Core Canvas UX components and utilities
 - `canvas_viz/`: Canvas-based visualization components
 - `widgets/`: Collection of reusable Canvas widgets
-- `examples/`: Example notebooks and applications
-- `docs/`: Project documentation
-- `scripts/`: Development and deployment scripts
 
 ## Documentation
 
@@ -102,14 +99,10 @@ This project is licensed under the betterwithdata Sample Code License - see the 
 
 If you use Canvas in your research, please cite:
 ```bibtex
-@inproceedings{canvas2022,
-  title={Canvas: Composing Interactive Interfaces for Machine Learning},
+@inproceedings{symphony2022,
+  title={Symphony: Composing Interactive Interfaces for Machine Learning},
   author={Bäuerle, Alex and Cabrera, Ángel Alexander and Hohman, Fred and Maher, Megan and Koski, David and Suau, Xavier and Barik, Titus and Moritz, Dominik},
   booktitle={ACM Conference on Human Factors in Computing Systems (CHI)},
   year={2022}
 }
 ```
-
-## Acknowledgments
-
-Canvas is developed by the betterwithdata team with contributions from the research community. Special thanks to all our contributors and users who help make this project better.
