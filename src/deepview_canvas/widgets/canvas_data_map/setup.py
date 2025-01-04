@@ -111,7 +111,8 @@ setup_args = dict(
         "pandas",
         "pyarrow",
         "jupyter_packaging==0.7.9",
-        "jupyterlab==3.*"
+        "jupyterlab==3.*",
+        'canvas_ux'
     ],
     extras_require={
         'examples': [

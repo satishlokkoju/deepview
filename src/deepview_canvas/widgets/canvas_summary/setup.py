@@ -106,7 +106,8 @@ setup_args = dict(
     include_package_data=True,
     python_requires=">=3.8",
     install_requires=[
-        'ipywidgets>=7.0.0'
+        'ipywidgets>=7.0.0',
+        'canvas_ux'
     ],
     extras_require={
         'examples': [
