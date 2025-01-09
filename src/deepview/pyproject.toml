@@ -7,7 +7,7 @@ build-backend = "flit_core.buildapi"
 module = "deepview"
 home-page = "https://github.com/satishlokkoju/deepview"
 license = "Apache-2.0"
-description-file="READMEBASE.md"
+description-file="README.md"
 
 author = "Satish Lokkoju"
 author-email = "satish.lokkoju@gmail.com"
@@ -29,6 +29,7 @@ classifiers = [
 requires-python = ">=3.8"
 requires = [
     "annoy",  # duplicates -- approximate nearest neighbor oh yeah
+    "autofaiss",
     "numpy",
     "scikit-learn"
 ]
@@ -49,12 +50,22 @@ dataset-report = [
     "pacmap",
 ]
 
+canvas = [
+    "canvas_ux==3.5.0",
+    "canvas_summary==3.5.0",
+    "canvas_scatterplot==3.5.0",
+    "canvas_list==3.5.0",
+    "canvas_duplicates==3.5.0",
+    "canvas_data_map==3.5.0",
+    "canvas_familiarity==3.5.0"
+]
+
 # MODEL EXTENSIONS
-tensorflow = ["deepview_tensorflow[tf2]==3.0.0"]
-tensorflow1 = ["deepview_tensorflow[tf1]==3.0.0"]
-tensorflow1-gpu = ["deepview_tensorflow[tf1-gpu]==3.0.0"]
-data = ["deepview_data==3.0.0"]
-torch = ["deepview_torch==3.0.0"]
+tensorflow = ["deepview_tensorflow[tf2]==3.5.0"]
+tensorflow1 = ["deepview_tensorflow[tf1]==3.5.0"]
+tensorflow1-gpu = ["deepview_tensorflow[tf1-gpu]==3.5.0"]
+data = ["deepview_data==3.5.0"]
+torch = ["deepview_torch==3.5.0"]
 
 # DEV EXTENSIONS
 test = [
@@ -90,16 +101,19 @@ notebook = [
     "pandas",
     "jupyter-datatables",
     "plotly",
+    "kaggle",
+    "watermark"
 ]
 complete = [
-    "deepview[image]==3.0.0",
-    "deepview[dimreduction]==3.0.0",
-    "deepview[duplicates]==3.0.0",
-    "deepview[dataset-report]==3.0.0",
-    "deepview[tensorflow]==3.0.0",
-    "deepview[torch]==3.0.0",
-    "deepview[data]==3.0.0",
-    "deepview[notebook]==3.0.0",
+    "deepview[image]==3.5.0",
+    "deepview[dimreduction]==3.5.0",
+    "deepview[duplicates]==3.5.0",
+    "deepview[dataset-report]==3.5.0",
+    "deepview[tensorflow]==3.5.0",
+    "deepview[torch]==3.5.0",
+    "deepview[data]==3.5.0",
+    "deepview[notebook]==3.5.0",
+    "deepview[canvas]==3.5.0",
 ]
 
 [tool.flit.metadata.urls]

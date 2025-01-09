@@ -1,6 +1,13 @@
 DeepView Open Source Changelog
 ================================
 
+Version 3.5.0 (2025-01-08)
+--------------------------
+- Added support Visualization Framework for DeepView named Canvas. The visualization framework allows users to create interactive visualizations for DeepView components. The framework is built using Svelte and SvelteKit and is based on the [Symphony](https://github.com/apple/ml-symphony) framework. Support for JupyterLab and Jupyter Notebook has been added. And bugs have been fixed.
+- DeepView report can be now visualized using Canvas.
+- Bumped Canvas UI and Widgets versions to v3.5.0 to be conssistent with DeepView.
+- Support for FAISS using Autofaiss has been added to identify duplicate samples in the dataset.
+
 Version 3.0.0 (2024-12-25)
 --------------------------
 - Forked from [Apple's DNIKit](https://github.com/apple/dnikit) and released as an open-source with Apache 2.0 License. While maintaining the core functionality, we've made significant modifications and improvements to better suit our specific needs. 

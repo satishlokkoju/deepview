@@ -17,3 +17,7 @@ cd ../canvas_scatterplot
 jlpm clean;jlpm install;jlpm run build;pip install .
 cd ../canvas_data_map
 jlpm clean;jlpm install;jlpm run build;pip install .
+cd ../canvas_familiarity
+jlpm clean;jlpm install;jlpm run build;pip install .
+cd ../canvas_duplicates
+jlpm clean;jlpm install;jlpm run build;pip install .

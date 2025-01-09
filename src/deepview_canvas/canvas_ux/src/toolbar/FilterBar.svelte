@@ -72,13 +72,7 @@
 
   function initEditor(editor: CustomEvent) {
     langTools = ace.acequire('ace/ext/language_tools');
-    
-    // Add more comprehensive debugging
-    console.log('Editor initialization:', editor);
-    console.log('Editor container:', editor.detail.container);
-    console.log('Editor container ID:', editor.detail.container?.id);
-    console.log('Editor div:', document.getElementById('filter-ace-editor'));
-    
+
     editor.detail.commands.addCommand({
       name: 'enter',
       exec: function () {

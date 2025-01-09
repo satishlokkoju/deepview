@@ -37,6 +37,7 @@
     selected={args.selected}
     canvasSpec={args.specs[args.type]}
     tooltip={args.tooltips[args.type]}
+    storybook={true}
   />
 </Template>
 

@@ -29,14 +29,14 @@
   export let selected: Writable<string[]>;
   export let canvasSpec: Writable<CanvasSpec>;
   export let tooltip: Writable<TooltipSpec>;
-
+  export let storybook: boolean = false;
   let numberShown = defaultNumberShown;
 </script>
 
 <div class="flex flex-wrap items-center justify-between flex-1">
   <div class="flex flex-wrap">
     {#each dataPoints.slice(0, numberShown) as dataPoint}
-      <DataSample {dataPoint} {canvasSpec} {selected} {tooltip} />
+      <DataSample {dataPoint} {canvasSpec} {selected} {tooltip} {storybook} />
     {/each}
   </div>
   {#if dataPoints.length > numberShown}

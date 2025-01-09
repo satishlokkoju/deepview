@@ -37,7 +37,7 @@ DeepView is a powerful Python toolkit designed for comprehensive introspection a
   - Outlier detection and analysis
   - Class balance visualization
 - **Interactive Visualization**: 
-  - Rich interactive utility for data exploration through Canvas Jupyter widget (Coming soon!)
+  - Rich interactive utility for data exploration through Canvas Jupyter widgets
   - Real-time data filtering and selection
   - Custom visualization widgets
 - **Batch Processing**: 
@@ -49,7 +49,7 @@ DeepView is a powerful Python toolkit designed for comprehensive introspection a
   - Custom dataset adapters
   - Extensible data pipeline architecture
 
-### Visualization Tools (Coming soon!)
+### Visualization Tools
 - **Interactive Canvas**: 
   - Modern web-based visualization interface
   - Scatter plots with dimensionality reduction (t-SNE, UMAP)
@@ -72,6 +72,11 @@ DeepView is a powerful Python toolkit designed for comprehensive introspection a
 pip install deepview
 ```
 
+### Full Installation
+```bash
+pip install "deepview[complete]"
+```
+
 ### With Notebook Support
 ```bash
 pip install "deepview[notebook]"
@@ -86,7 +91,7 @@ pip install -e '.[complete]'
 ```
 
 ## 📚 Documentation
-Comprehensive documentation is available at our [documentation site](https://betterwithdata.github.io/deepview/index.html).
+Comprehensive documentation is available at our [documentation site](https://satishlokkoju.github.io/deepview/index.html).
 
 ## 🛠️ Usage Examples
 
@@ -201,13 +206,13 @@ The full license text can be found in the [LICENSE](LICENSE) file in the root di
 - Copyright Notice: Portions of this software were originally developed by Apple Inc.
 
 ## 🔗 Related Resources
-- [Complete Documentation](https://betterwithdata.github.io/deepview/index.html)
-- [Installation Guide](https://betterwithdata.github.io/deepview/general/installation.html)
+- [Complete Documentation](https://satishlokkoju.github.io/deepview/index.html)
+- [Installation Guide](https://satishlokkoju.github.io/deepview/general/installation.html)
 
 ## 📊 Project Status
 This project is actively maintained and regularly updated. For the latest changes, see our [CHANGELOG](CHANGELOG.md).
 
 ## 🙋‍♂️ Support
 For questions, bug reports, or feature requests:
-1. Check the [documentation](https://betterwithdata.github.io/deepview/index.html)
+1. Check the [documentation](https://satishlokkoju.github.io/deepview/index.html)
 2. Open an issue on GitHub

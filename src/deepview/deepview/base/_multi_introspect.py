@@ -41,7 +41,8 @@ from ._batch._batch import Batch
 from ._producer import Producer
 from deepview.exceptions import DeepViewException
 import deepview.typing._types as t
-
+import logging
+_logger = logging.getLogger("deepview.base.multi_introspect")
 
 # Typing variables and helpers
 _X = t.TypeVar("_X")
@@ -103,16 +104,16 @@ class _ProducerSplitter:
 
         # Make sure only one of these is created
         self._first = False
-        # Instantiate a new event for this producer
+        # Instantiate a new event for this first producer
         self._events.append(threading.Event())
 
         def _first_producer(batch_size: int) -> t.Iterable[Batch]:
             self._batch_size = batch_size
             for batch in self._producer(batch_size):
-                # yield the batch to the introspector
-                yield batch
                 # save batch for next producer
                 self._batch = batch
+                # yield the batch to the introspector
+                yield self._batch
                 # signal next producer and wait for turn
                 self._signal_next_producer(index=0)
                 self._wait_for_turn(index=0)
@@ -173,7 +174,8 @@ class _ProducerSplitter:
         event.clear()
 
     def _signal_next_producer(self, index: int) -> None:
-        self._events[index].set()
+        next_event = self._events[index]
+        next_event.set()
 
 
 # Overloads
@@ -333,11 +335,13 @@ def multi_introspect(in1: t.Optional[_Introspector[t.Any]] = None,
     # Instantiate a ProducerSplitter, and create a new producer for each introspector
     splitter = _ProducerSplitter(producer)
     producers = [splitter.make_producer() for _ in range(num_introspectors)]
+    _logger.debug(f"Created {num_introspectors} producers")
 
-    # Start thread pool (one thread per introspector, using threads to
-    # interrupt execution NOT for parallelism)
-    with concurrent.futures.ThreadPoolExecutor(max_workers=num_introspectors) as executor:
-        # Submit all the introspectors (and keep track of the order!)
+    with concurrent.futures.ThreadPoolExecutor(
+        max_workers=num_introspectors,
+        thread_name_prefix="multi_introspect_"
+    ) as executor:
+        # Submit introspectors
         futures = {
             executor.submit(introspector, producer): i
             for i, (introspector, producer) in enumerate(zip(introspectors, producers))

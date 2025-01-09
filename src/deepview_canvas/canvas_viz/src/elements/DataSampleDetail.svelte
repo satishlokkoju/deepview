@@ -23,6 +23,14 @@
 
   import { getComponentForType } from "../helpers/filetype";
 
+  const formatValue = (val: any): string => {
+    if (Array.isArray(val)) 
+      return val.toString();
+    if (typeof val === 'number') 
+      return val.toFixed(2);
+    return val;
+  };
+
   export let canvasSpec: Writable<CanvasSpec>;
   export let tooltip: Writable<TooltipSpec>;
   export let storybook: boolean = false;
@@ -73,13 +81,9 @@
       {#each Object.entries($tooltip.instance) as [key, val]}
         {#if key !== $canvasSpec.idColumn && !key.startsWith("familiarity_") && !key.startsWith("duplicates_") && !key.startsWith("projection_") && !key.startsWith("splitFamiliarity")}
           <div class="flex flex-nowrap">
-            <span class="text-bold">{key}:</span>
-            <span class="ml-2 ">
-              {Array.isArray(val)
-                ? val
-                : isNaN(Number.parseFloat(val))
-                ? val
-                : Number.parseFloat(val).toFixed(2)}
+            <span class="font-bold">{key}:</span>
+            <span class="ml-2">
+              {formatValue(val)}
             </span>
           </div>
         {/if}

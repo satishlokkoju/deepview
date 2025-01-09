@@ -34,7 +34,7 @@
 
 """TensorFlow extensions of DeepView."""
 
-__version__ = "3.0.0"
+__version__ = "3.5.0"
 
 import deepview
 from ._tensorflow._tensorflow_loading import load_tf_model_from_path, load_tf_model_from_memory

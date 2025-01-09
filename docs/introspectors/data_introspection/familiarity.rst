@@ -140,7 +140,7 @@ The scoring is a separate step from the initial `Familiarity` model creation bec
    to "automobiles" (it's likely trucks will come first, animal classes last).
 
 .. Note:: Familiarity may also be run as part of the
-   :ref:`Dataset Report <dataset_report>` and explored interactively with the `Symphony UI <https://github.com/apple/ml-symphony>`_.
+   :ref:`Dataset Report <dataset_report>` and explored interactively with the `Canvas UI <https://github.com/satishlokkoju/deepview>`_.
 
 Familiarity strategies
 ~~~~~~~~~~~~~~~~~~~~~~

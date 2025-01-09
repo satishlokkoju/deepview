@@ -38,6 +38,8 @@ import logging
 from tqdm import tqdm
 
 import annoy
+from autofaiss import build_index
+
 from sklearn.decomposition import PCA as SKLearnPCA
 
 from deepview.base import (
@@ -47,6 +49,8 @@ from deepview.base import (
 )
 from deepview.base._producer import _accumulate_batches
 import deepview.typing._types as t
+
+_logger = logging.getLogger("deepview.introspectors.duplicates")
 
 
 class DuplicatesThresholdStrategyType(t.Protocol):
@@ -64,6 +68,136 @@ class DuplicatesThresholdStrategyType(t.Protocol):
             distances: sorted distances
         """
         ...
+
+
+class DuplicatesStrategyType(t.Protocol):
+    """
+    Protocol for code that takes anarray of vectors (embeddings) and computes a
+    list of duplicates for each point.
+    """
+
+    def __call__(self, vectors: np.ndarray,
+                 threshold: DuplicatesThresholdStrategyType) -> t.Sequence[t.Sequence[int]]:
+        """
+        Given the sorted distances compute the list of duplicates for each point.
+
+        Args:
+            vectors: n-dimensional vectors
+            threshold: strategy for computing the threshold
+        """
+        ...
+
+
+@t.final
+@dataclass(frozen=True)
+class KNNAnnoy(DuplicatesStrategyType):
+    """
+    Strategy for computing duplicates using the Annoy library.
+    """
+
+    def __call__(self, responses: np.ndarray,
+                 threshold: DuplicatesThresholdStrategyType) -> t.Sequence[t.Sequence[int]]:
+        assert len(responses.shape) == 2, "Requires 1d vector per element"
+        count = len(responses)
+
+        _logger.info("Building duplicate clusters with %d samples", count)
+
+        # build the index
+        index = annoy.AnnoyIndex(responses.shape[1], "euclidean")
+        index.set_seed(0)
+        _logger.debug("Creating Annoy index with dimension %d ", responses.shape[1])
+
+        # Add items to index with progress bar if in debug mode
+        if _logger.isEnabledFor(logging.DEBUG):
+            for i, v in tqdm(enumerate(responses), total=len(responses),
+                             desc="Building Annoy index", unit="vectors"):
+                index.add_item(i, v)
+        else:
+            for i, v in enumerate(responses):  # type: ignore
+                index.add_item(i, v)
+
+        _logger.debug("Completed adding items to Annoy index %d ", index.get_n_items())
+
+        # the 30 is the number of trees to build -- the higher the number,
+        # the better the precision when querying (at the cost of time and memory).
+        index.build(30)
+        _logger.debug("Built Annoy index with 30 trees")
+
+        # n-closest distance matrix.  n can be anything > 2.  larger values will
+        # produce larger initial clusters and a value of 10 gives similar distance
+        # threshold results as the previous kCDTree implementation.  performance
+        # does not vary much for different n (2, 5, 10).
+        n = 10
+        distances = np.zeros((count, n))
+        indexes = np.zeros((count, n), "i")
+        _logger.debug("Finding %d nearest neighbors for each sample", n)
+
+        # build the n-closest distance matrix
+        for i in range(count):
+            indexes[i], distances[i] = index.get_nns_by_item(i, n, include_distances=True)
+
+        # find the distance threshold
+        all_values = np.trim_zeros(np.sort(distances.reshape((count * n, ))))
+        distance = threshold(all_values)
+        del all_values
+        _logger.debug("Computed distance threshold: %f", distance)
+
+        # build the clusters of length up to n
+        clusters = []
+        for i, count in enumerate(np.count_nonzero(distances <= distance, axis=1)):
+            if count > 1:
+                clusters.append(indexes[i][distances[i] <= distance])
+
+        _logger.info("Found %d duplicate clusters", len(clusters))
+        return clusters
+
+
+@t.final
+@dataclass(frozen=True)
+class KNNFaiss(DuplicatesStrategyType):
+    """
+    Strategy for computing duplicates using the FAISS library.
+    """
+
+    def __call__(self, responses: np.ndarray,
+                 threshold: DuplicatesThresholdStrategyType) -> t.Sequence[t.Sequence[int]]:
+        assert len(responses.shape) == 2, "Requires 1d vector per element"
+        count = len(responses)
+
+        _logger.info("Building duplicate clusters with %d samples using autofaiss ", count)
+        _logger.debug("Creating Faiss index with dimension %d ", responses.shape[1])
+
+        current_level = _logger.getEffectiveLevel()
+
+        # build the index
+        index, index_infos = build_index(embeddings=responses, metric_type="l2", verbose=current_level,
+                                         max_index_memory_usage="4G", current_memory_available="8G", save_on_disk=False)
+
+        # n-closest distance matrix.  n can be anything > 2.  larger values will
+        # produce larger initial clusters
+        n = 10
+        distances = np.zeros((count, n))
+        indexes = np.zeros((count, n), "i")
+        _logger.debug("Finding %d nearest neighbors for each sample", n)
+
+        # build the n-closest distance matrix
+        for i in range(count):
+            distances[i], indexes[i] = index.search(responses[i].reshape(1, -1), n)
+
+        # find the distance threshold
+        all_values = np.trim_zeros(np.sort(distances.reshape((count * n, ))))
+        distance = threshold(all_values)
+        del all_values
+        _logger.debug("Computed distance threshold: %f", distance)
+
+        # build the clusters of length up to n
+        clusters = []
+        for i, count in enumerate(np.count_nonzero(distances <= distance, axis=1)):
+            if count > 1:
+                clusters.append(indexes[i][distances[i] <= distance])
+
+        _logger.info("Found %d duplicate clusters", len(clusters))
+        return clusters
 
 
 @t.final
@@ -100,7 +234,7 @@ class Slope(DuplicatesThresholdStrategyType):
     size of the dataset) and is a good default. A sensitivity of 20 will use
     a window 1/20 the size of the distance array and is a reasonable large value.
 
-    The distance are likely a a sharp up-slope followed by a elbow and
+    The distance are likely a sharp up-slope followed by a elbow and
     finally a long, possibly rising, tail. The target delta will be
     computed from the difference between the 25th and 75h percentile
     values. A sliding window will be run over the data with a
@@ -129,6 +263,7 @@ class Slope(DuplicatesThresholdStrategyType):
             raise ValueError("`sensitivity` must be > 2")
 
     def __call__(self, distances: np.ndarray) -> float:
+        _logger.debug(distances)
         # how fast to step the probe point through the array
         stride = len(distances) // 1000 + 1
 
@@ -149,6 +284,11 @@ class Slope(DuplicatesThresholdStrategyType):
 
             probe -= stride
 
+        _logger.debug("Probe point at %d", probe)
+        _logger.debug("Computed distance threshold: %g", distances[probe])
+        _logger.debug("Target delta: %g", target_delta)
+        _logger.debug("Stride: %d", stride)
+        _logger.debug("Window size: %d", window_size)
         close = distances[probe]
 
         return close
@@ -173,12 +313,19 @@ class Duplicates(Introspector):
             :func:`Duplicates.introspect <introspect>`
     """
 
-    _static_logger = logging.getLogger(f"{__name__}.{__qualname__}")
-
     @t.final
     class ThresholdStrategy:
         Percentile: t.Final = Percentile
         Slope: t.Final = Slope
+
+    @t.final
+    class KNNStrategy:
+        """
+        Bundled K Nearest Neighbours computation strategies.  See :class:`FamiliarityStrategyType`
+        """
+
+        KNNFaiss: t.Final = KNNFaiss
+        KNNAnnoy: t.Final = KNNAnnoy
 
     @dataclass
     class DuplicateSetCandidate:
@@ -298,65 +445,6 @@ class Duplicates(Introspector):
         return [list(v) for v in cluster_mapping.values()]
 
     @staticmethod
-    def _build_duplicate_clusters(responses: np.ndarray, *,
-                                  threshold: DuplicatesThresholdStrategyType,
-                                  ) -> t.Sequence[t.Sequence[int]]:
-        assert len(responses.shape) == 2, "Requires 1d vector per element"
-        count = len(responses)
-
-        Duplicates._static_logger.info("Building duplicate clusters with %d samples", count)
-
-        # build the index
-        index = annoy.AnnoyIndex(responses.shape[1], "euclidean")
-        index.set_seed(0)
-        Duplicates._static_logger.debug("Creating Annoy index with dimension %d ", responses.shape[1])
-
-        # Add items to index with progress bar if in debug mode
-        if Duplicates._static_logger.isEnabledFor(logging.DEBUG):
-            iterator = tqdm(enumerate(responses), total=len(responses),
-                            desc="Building Annoy index", unit="vectors")
-        else:
-            iterator = enumerate(responses)  # type: ignore
-
-        for i, v in iterator:
-            index.add_item(i, v)
-
-        Duplicates._static_logger.debug("Completed adding items to Annoy index %d ", index.get_n_items())
-
-        # the 30 is the number of trees to build -- the higher the number,
-        # the better the precision when querying (at the cost of time and memory).
-        index.build(30)
-        Duplicates._static_logger.debug("Built Annoy index with 30 trees")
-
-        # n-closest distance matrix.  n can be anything > 2.  larger values will
-        # produce larger initial clusters and a value of 10 gives similar distance
-        # threshold results as the previous kCDTree implementation.  performance
-        # does not vary much for different n (2, 5, 10).
-        n = 10
-        distances = np.zeros((count, n))
-        indexes = np.zeros((count, n), "i")
-        Duplicates._static_logger.debug("Finding %d nearest neighbors for each sample", n)
-
-        # build the n-closest distance matrix
-        for i in range(count):
-            indexes[i], distances[i] = index.get_nns_by_item(i, n, include_distances=True)
-
-        # find the distance threshold
-        all_values = np.trim_zeros(np.sort(distances.reshape((count * n, ))))
-        distance = threshold(all_values)
-        del all_values
-        Duplicates._static_logger.debug("Computed distance threshold: %f", distance)
-
-        # build the clusters of length up to n
-        clusters = []
-        for i, count in enumerate(np.count_nonzero(distances <= distance, axis=1)):
-            if count > 1:
-                clusters.append(indexes[i][distances[i] <= distance])
-
-        Duplicates._static_logger.info("Found %d duplicate clusters", len(clusters))
-        return Duplicates._combine_clusters(clusters)
-
-    @staticmethod
     def _build_result(batch: Batch,
                       responses: np.ndarray,
                       indices: t.Sequence[int]) -> "Duplicates.DuplicateSetCandidate":
@@ -393,6 +481,7 @@ class Duplicates(Introspector):
     @staticmethod
     def introspect(producer: Producer, *,
                    batch_size: int = 32,
+                   strategy: t.Optional[DuplicatesStrategyType] = None,
                    threshold: t.Optional[DuplicatesThresholdStrategyType] = None,
                    ) -> "Duplicates":
         """
@@ -424,11 +513,14 @@ class Duplicates(Introspector):
 
         See Also:
             - `ANNOY - Approximate Nearest Neighbor Oh My! <https://github.com/spotify/annoy>`_
+            - `FAISS - Facebook AI Similarity Search <https://github.com/facebookresearch/faiss>`_
 
         Args:
             producer: producer of data
             batch_size: **[optional]** size of batch to read while collecting data from the
                 ``producer``
+            strategy: **[optional]** strategy to use for finding the nearest neighbors.
+                Default is :class:`KNNAnnoy <deepview.introspectors.Duplicates.KNNAnnoy>`
             threshold: **[optional]** strategy to use for finding the distance between points that
                 are considered duplicates. Default is
                 :class:`Slope <deepview.introspectors.Duplicates.ThresholdStrategy.Slope>` threshold.
@@ -438,6 +530,9 @@ class Duplicates(Introspector):
         """
         if threshold is None:
             threshold = Slope()
+
+        if strategy is None:
+            strategy = KNNAnnoy()
 
         # instantiate data structure mapping response name to list of duplicate set candidates
         duplicate_data: t.Dict[str, t.List[Duplicates.DuplicateSetCandidate]] = {}
@@ -454,14 +549,16 @@ class Duplicates(Introspector):
             normalized_responses = responses / l2
 
             # build the clusters (indexes in the responses of duplicate clusters)
-            clusters = Duplicates._build_duplicate_clusters(
+            clusters = strategy(
                 normalized_responses,
                 threshold=threshold,
             )
+            combined_clusters = Duplicates._combine_clusters(clusters)
 
+            # build the results
             duplicate_data[response_name] = [
                 Duplicates._build_result(accumulated_batches, normalized_responses, indices)
-                for indices in clusters
+                for indices in combined_clusters
             ]
 
         return Duplicates(duplicate_data, count=accumulated_batches.batch_size)

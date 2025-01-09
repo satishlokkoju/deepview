@@ -2,7 +2,7 @@
 
 This package contains the TensorFlow extensions of [DeepView](https://github.com/satishlokkoju/deepview).
 
-To learn more about DeepView, please see the [docs](https://betterwithdata.github.io/deepview).
+To learn more about DeepView, please see the [docs](https://satishlokkoju.github.io/deepview).
 
 ## Installation
 

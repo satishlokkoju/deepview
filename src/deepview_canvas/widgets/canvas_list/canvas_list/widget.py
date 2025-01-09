@@ -55,7 +55,6 @@ class CanvasList(canvas_ux.CanvasWidget):
         -------
         CanvasList
         """
-        print(os.getcwd())
         super().__init__(**kwargs)
         self.width: str = width
         self.height: str = height

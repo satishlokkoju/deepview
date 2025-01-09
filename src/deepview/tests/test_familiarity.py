@@ -118,6 +118,7 @@ def test_gmm_familiarity_scores(gaussian_count: int, number_new_samples: int,
         sklearn_gm[response_name] = GaussianMixture(n_components=gaussian_count,
                                                     max_iter=200,
                                                     tol=1e-3,
+                                                    init_params='k-means++',
                                                     covariance_type=cov_type.value,
                                                     random_state=random_state_instance)
         sklearn_gm[response_name].fit(response_data)

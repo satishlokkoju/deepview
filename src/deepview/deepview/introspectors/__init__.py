@@ -39,6 +39,7 @@ from ._dim_reduction._protocols import DimensionReductionStrategyType
 # Duplicates imports
 from ._duplicates import (
     DuplicatesThresholdStrategyType,
+    DuplicatesStrategyType,
     Duplicates,
 )
 
@@ -77,6 +78,7 @@ __all__ = [
     'OneOrManyDimStrategies',
     Duplicates.__name__,
     DuplicatesThresholdStrategyType.__name__,
+    DuplicatesStrategyType.__name__,
     IUA.__name__,
     FamiliarityDistribution.__name__,
     FamiliarityStrategyType.__name__,

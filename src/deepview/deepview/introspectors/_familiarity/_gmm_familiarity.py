@@ -34,7 +34,7 @@
 
 import enum
 from dataclasses import dataclass
-
+import logging
 import numpy as np
 from numpy.random.mtrand import RandomState
 from sklearn.mixture import GaussianMixture as SKGMM
@@ -52,6 +52,7 @@ from ._protocols import (
     FamiliarityResult,
     FamiliarityStrategyType,
 )
+_logger = logging.getLogger("deepview.introspectors.familiarity.gmm")
 
 
 @t.final
@@ -162,6 +163,7 @@ class GMM(FamiliarityStrategyType):
                 tol=self.convergence_threshold,
                 random_state=self._random_state,
                 covariance_type=self.covariance_type.value,
+                init_params='k-means++'
             )
 
             model.fit(accumulated_responses.fields[response_name])

@@ -55,7 +55,8 @@ from deepview.samples import StubProducer
 from deepview.introspectors import (
     DimensionReduction,
     DatasetReport,
-    ReportConfig
+    ReportConfig,
+    Duplicates
 )
 from deepview.introspectors._report._report_builder_introspectors import (
     _SummaryBuilder,
@@ -202,10 +203,27 @@ def test_nonstr_labels() -> None:
            tuple([str(e) for e in mixed_labels]))
 
 
-def test_duplicates_builder() -> None:
+def test_duplicates_builder_annoy() -> None:
     dataset_size = 20
     producer = MyProducer(dataset_size=dataset_size)
-    duplicates = _DuplicatesBuilder.introspect(producer, batch_size=5)
+    duplicates = _DuplicatesBuilder.introspect(producer, batch_size=5, strategy=Duplicates.KNNStrategy.KNNAnnoy())
+
+    assert duplicates.data.shape == (20, 1)
+    assert duplicates.data["duplicates_layer1"] is not None
+
+    # there is a cluster at the start and one at the end
+    match = np.full((20, ), -1)
+    match[0] = 0
+    match[1] = 0
+    match[18] = 1
+    match[19] = 1
+    assert np.all(duplicates.data["duplicates_layer1"] == match)
+
+
+def test_duplicates_builder_faiss() -> None:
+    dataset_size = 20
+    producer = MyProducer(dataset_size=dataset_size)
+    duplicates = _DuplicatesBuilder.introspect(producer, batch_size=5, strategy=Duplicates.KNNStrategy.KNNFaiss())
 
     assert duplicates.data.shape == (20, 1)
     assert duplicates.data["duplicates_layer1"] is not None

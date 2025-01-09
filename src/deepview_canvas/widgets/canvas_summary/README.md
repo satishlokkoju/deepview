@@ -26,10 +26,7 @@ export interface ChartData {
 pip install canvas_summary
 ```
 
+
 ## Usage
 
-To learn how to use Canvas, see the [documentation](https://betterwithdata.github.io/ml-Canvas/).
-
-## Development
-
-To learn about how to build Canvas from source and how to contribute to the framework, please look at [CONTRIBUTING.md](../CONTRIBUTING.md) and the [development documentation](https://betterwithdata.github.io/ml-Canvas/contributing.html).
+To learn how to use Canvas, see the [documentation](https://satishlokkoju.github.io/deepview/).

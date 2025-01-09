@@ -121,7 +121,7 @@ class DatasetReport(Introspector):
         #        (1) as a standalone web dashboard to explore interactively
         #        (2) inline in a Jupyter notebook to explore interactively
         #    Please see the Canvas documentation for an example:
-        #    https://betterwithdata.github.io/canvas/
+        #    https://satishlokkoju.github.io/deepview/
         report = DatasetReport.introspect(producer)
 
     Args:

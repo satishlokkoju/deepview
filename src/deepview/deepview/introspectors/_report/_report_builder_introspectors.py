@@ -55,7 +55,8 @@ from deepview.base import (
 from deepview.introspectors._dim_reduction._dimension_reduction import DimensionReduction
 from deepview.introspectors._duplicates import (
     Duplicates,
-    DuplicatesThresholdStrategyType
+    DuplicatesThresholdStrategyType,
+    DuplicatesStrategyType
 )
 from ._dataframe_formatting import (
     _DataframeColumnPrefixes,
@@ -164,6 +165,7 @@ class _DuplicatesBuilder(Introspector):
     @classmethod
     def introspect(cls, producer: Producer, *,
                    batch_size: int,
+                   strategy: t.Optional[DuplicatesStrategyType] = None,
                    threshold: t.Optional[DuplicatesThresholdStrategyType] = None
                    ) -> '_DuplicatesBuilder':
         """
@@ -173,6 +175,7 @@ class _DuplicatesBuilder(Introspector):
         Args:
             producer: the producer of the data
             batch_size: the batch size to use in reading
+            strategy: :class:`Duplicates` KNN strategy
             threshold: :class:`Duplicates` threshold strategy
 
         Returns:
@@ -181,7 +184,10 @@ class _DuplicatesBuilder(Introspector):
         if threshold is None:
             threshold = Duplicates.ThresholdStrategy.Slope()
 
-        duplicates = Duplicates.introspect(producer, batch_size=batch_size, threshold=threshold)
+        if strategy is None:
+            strategy = Duplicates.KNNStrategy.KNNAnnoy()
+
+        duplicates = Duplicates.introspect(producer, batch_size=batch_size, threshold=threshold, strategy=strategy)
 
         columns = {}
         for response_name, clusters in duplicates.results.items():

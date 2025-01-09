@@ -117,7 +117,9 @@ setup_args = dict(
             "canvas_data_map",
             "canvas_list",
             "canvas_scatterplot",
-            "canvas_summary"
+            "canvas_summary",
+            "canvas_familiarity",
+            "canvas_duplicates"
         ],
         'examples': [
             "tensorflow",
