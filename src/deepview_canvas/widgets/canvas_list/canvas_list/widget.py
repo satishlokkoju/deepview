@@ -15,7 +15,6 @@
 #
 
 from pathlib import Path
-import os
 import canvas_ux
 from traitlets import Unicode
 from typing import Tuple
