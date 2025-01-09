@@ -32,21 +32,6 @@ jobs:
         echo "//github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ~/.npmrc
         echo "@satishlokkoju:registry=https://npm.pkg.github.com" >> ~/.npmrc
     
-    - name: Cache pip packages
-      uses: actions/cache@v3
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/pyproject.toml') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-    
-    - name: Cache node modules
-      uses: actions/cache@v3
-      with:
-        path: node_modules
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
     
     - name: Install dependencies
       timeout-minutes: 30
