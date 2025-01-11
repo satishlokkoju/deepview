@@ -79,9 +79,6 @@ test = [
     "pytest-xdist[psutil]",
     "pytest-timeout",
     "flake8-copyright",
-
-    # not really a test, but a dev tool
-    "bumpversion",
 ]
 doc = [
     "ipykernel",
@@ -107,7 +104,6 @@ notebook = [
 complete = [
     "deepview[image]==3.5.0",
     "deepview[dimreduction]==3.5.0",
-    "deepview[duplicates]==3.5.0",
     "deepview[dataset-report]==3.5.0",
     "deepview[tensorflow]==3.5.0",
     "deepview[torch]==3.5.0",
