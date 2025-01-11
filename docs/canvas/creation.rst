@@ -195,6 +195,5 @@ The resulting code would then be:
 
 After some CSS, you should see something similar to the following table:
 
-.. image:: _static/table.png
+.. image:: ../img/table.png
     :width: 200
-

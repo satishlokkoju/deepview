@@ -1,6 +1,6 @@
-==========
+============
 ``deepview``
-==========
+============
 
 The DeepView API is split into a few logical sections:
 

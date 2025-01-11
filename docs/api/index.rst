@@ -1,8 +1,8 @@
 .. _api:
 
-==========
+============
 DeepView API
-==========
+============
 
 This section details the API of the different DeepView packages.
 

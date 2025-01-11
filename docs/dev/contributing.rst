@@ -27,7 +27,7 @@ Clone the code from `the main repository <https://github.com/satishlokkoju/deepv
 .. _standardinstallation:
 
 Install DeepView from Local Code
-##############################
+################################
 
 1. Install python version 3.9 (recommended). To run TensorFlow1, install Python 3.7.
 

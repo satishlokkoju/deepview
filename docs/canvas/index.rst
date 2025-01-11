@@ -24,8 +24,8 @@ Canvas is a framework for composing interactive machine learning interfaces with
 
 .. raw:: html
 
-    <video width="100%" controls poster="_static/22-canvas-chi.png">
-      <source src="_static/Canvas.mp4" type="video/mp4">
+    <video width="100%" controls poster="../img/22-canvas-chi.png">
+      <source src="../img/Canvas.mp4" type="video/mp4">
     Your browser does not support the video tag.
     </video>
 

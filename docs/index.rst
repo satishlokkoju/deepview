@@ -1,5 +1,5 @@
 DeepView – Data and Network Introspection Kit
-===========================================
+=============================================
 
 A Python toolkit for analyzing machine learning models and datasets. DeepView can:
 
@@ -219,3 +219,8 @@ for more information about the experiments.
    Support / Debugging <general/support>
    dev/contributing
    Changelog <reference/changelog>
+
+.. toctree::
+   :hidden:
+
+   genindex

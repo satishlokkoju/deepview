@@ -113,9 +113,8 @@ setup_args = dict(
     python_requires=">=3.8",
     install_requires=[
         'ipywidgets>=7.0.0',
-        "pyarrow",
-        "pandas",
-        "jupyterlab>=3.*",
+        "jupyter_packaging>=0.7.9",
+        "jupyterlab>=3.6.8"
     ],
     extras_require={
         'widgets': [

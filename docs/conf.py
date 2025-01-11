@@ -34,6 +34,7 @@ extensions = [
     'sphinx.ext.napoleon',
     'sphinx.ext.intersphinx',
     'nbsphinx',
+    'jupyter_sphinx',
     'myst_parser'
 ]
 
@@ -105,5 +106,5 @@ nbsphinx_timeout = 600
 nbsphinx_prolog = '''
 .. note:: This page was generated from a Jupyter notebook.
           The original can be downloaded from
-          `here <https://raw.github.com/apple/deepview/main/{{env.docname}}.ipynb>`_.
+          `here <https://raw.github.com/satishlokkoju/deepview/main/{{env.docname}}.ipynb>`_.
 '''

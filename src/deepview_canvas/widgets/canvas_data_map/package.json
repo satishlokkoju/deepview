@@ -1,6 +1,6 @@
 {
   "name": "canvas-data-map",
-  "version": "1.0.2",
+  "version": "3.5.0",
   "description": "A component for visualizing data on a map.",
   "private": true,
   "keywords": [

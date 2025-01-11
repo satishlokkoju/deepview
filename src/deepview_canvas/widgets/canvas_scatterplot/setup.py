@@ -102,6 +102,11 @@ setup_args = dict(
         'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: 3.11',
         'Framework :: Jupyter',
+        'Framework :: Jupyter :: JupyterLab',
+        'Framework :: Jupyter :: JupyterLab :: 3',
+        'Framework :: Jupyter :: JupyterLab :: 4',
+        'Framework :: Jupyter :: JupyterLab :: Extensions',
+        'Framework :: Jupyter :: JupyterLab :: Extensions :: Prebuilt'
     ],
     include_package_data=True,
     python_requires=">=3.8",
@@ -109,9 +114,7 @@ setup_args = dict(
         'ipywidgets>=7.0.0',
         "pandas",
         "pyarrow",
-        "jupyter_packaging==0.7.9",
-        "jupyterlab==3.*",
-        'canvas_ux'
+        'canvas_ux>=3.5.0'
     ],
     extras_require={
         'examples': [

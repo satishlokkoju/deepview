@@ -63,7 +63,7 @@ Data loaders
 ------------
 
 :class:`ImageProducer <deepview.base.ImageProducer>`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 DeepView provides a helper producer, :class:`ImageProducer <deepview.base.ImageProducer>`,
 to load all images from a local directory. By default, it will do a
@@ -80,7 +80,7 @@ the MNIST dataset is stored locally:
     :noindex:
 
 :class:`TrainTestSplitProducer <deepview.base.TrainTestSplitProducer>`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autoclass:: deepview.base.TrainTestSplitProducer
     :noindex:

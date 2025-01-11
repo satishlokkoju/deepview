@@ -21,13 +21,13 @@ Batch filtering and concatenation
 ---------------------------------
 
 :class:`Composer <deepview.processors.Composer>` for filtering
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autoclass:: deepview.processors.Composer
     :noindex:
 
 :class:`Concatenator <deepview.processors.Concatenator>` for merging fields
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autoclass:: deepview.processors.Concatenator
     :noindex:
@@ -36,13 +36,13 @@ Renaming fields and metadata
 ----------------------------
 
 :class:`FieldRenamer <deepview.processors.FieldRenamer>`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autoclass:: deepview.processors.FieldRenamer
     :noindex:
 
 :class:`MetadataRenamer <deepview.processors.MetadataRenamer>`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autoclass:: deepview.processors.MetadataRenamer
     :noindex:
@@ -51,19 +51,19 @@ Removing fields and metadata
 ----------------------------
 
 :class:`FieldRemover <deepview.processors.FieldRemover>`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autoclass:: deepview.processors.FieldRemover
     :noindex:
 
 :class:`MetadataRemover <deepview.processors.MetadataRemover>`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autoclass:: deepview.processors.MetadataRemover
     :noindex:
 
 :class:`SnapshotRemover <deepview.processors.SnapshotRemover>`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autoclass:: deepview.processors.SnapshotRemover
     :noindex:
@@ -72,19 +72,19 @@ General data transforms
 -----------------------
 
 :class:`MeanStdNormalizer <deepview.processors.MeanStdNormalizer>`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autoclass:: deepview.processors.MeanStdNormalizer
     :noindex:
 
 :class:`Pooler <deepview.processors.Pooler>` (Max Pooling)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autoclass:: deepview.processors.Pooler
     :noindex:
 
 :class:`Transposer <deepview.processors.Transposer>`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autoclass:: deepview.processors.Transposer
     :noindex:
@@ -93,13 +93,13 @@ Image operations
 ----------------
 
 :class:`ImageResizer <deepview.processors.ImageResizer>` to resize images
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autoclass:: deepview.processors.ImageResizer
     :noindex:
 
 :class:`ImageRotationProcessor <deepview.processors.ImageRotationProcessor>` to rotate images
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autoclass:: deepview.processors.ImageRotationProcessor
     :noindex:
@@ -108,13 +108,13 @@ Augmentations
 ^^^^^^^^^^^^^
 
 :class:`ImageGaussianBlurProcessor <deepview.processors.ImageGaussianBlurProcessor>`
-**********************************************************************************
+************************************************************************************
 
 .. autoclass:: deepview.processors.ImageGaussianBlurProcessor
     :noindex:
 
 :class:`ImageGammaContrastProcessor <deepview.processors.ImageGammaContrastProcessor>`
-************************************************************************************
+**************************************************************************************
 
 .. autoclass:: deepview.processors.ImageGammaContrastProcessor
     :noindex:
@@ -123,7 +123,7 @@ Utility processors
 ------------------
 
 :class:`Cacher <deepview.processors.Cacher>` to cache responses from pipelines
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autoclass:: deepview.processors.Cacher
     :noindex:

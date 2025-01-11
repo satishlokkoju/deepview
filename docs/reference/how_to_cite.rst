@@ -1,8 +1,8 @@
 .. _how_to_cite:
 
-=============
+===============
 Citing DeepView
-=============
+===============
 
 The general general DeepView publication can be cited as:
 
@@ -52,7 +52,7 @@ Familiarity (no vis):
  - No additional expected citation for this introspector without use of Symphony visualization (see earlier citations)
 
 Example of citing DeepView
-------------------------
+--------------------------
 
 For instance, when using both :ref:`Familiarity analysis <familiarity>`
 and :ref:`PFA for compression <network_compression>`, the following citations are appropriate:

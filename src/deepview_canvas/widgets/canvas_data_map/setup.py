@@ -98,21 +98,24 @@ setup_args = dict(
         'Topic :: Scientific/Engineering :: Information Analysis',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
         'Framework :: Jupyter',
+        'Framework :: Jupyter :: JupyterLab',
+        'Framework :: Jupyter :: JupyterLab :: 3',
+        'Framework :: Jupyter :: JupyterLab :: 4',
+        'Framework :: Jupyter :: JupyterLab :: Extensions',
+        'Framework :: Jupyter :: JupyterLab :: Extensions :: Prebuilt'
     ],
     include_package_data=True,
-    python_requires=">=3.6",
+    python_requires=">=3.8",
     install_requires=[
         'ipywidgets>=7.0.0',
         "pandas",
         "pyarrow",
-        "jupyter_packaging==0.7.9",
-        "jupyterlab==3.*",
-        'canvas_ux'
+        'canvas_ux>=3.5.0'
     ],
     extras_require={
         'examples': [

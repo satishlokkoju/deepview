@@ -1,6 +1,6 @@
 {
   "name": "canvas-list",
-  "version": "1.0.2",
+  "version": "3.5.0",
   "description": "A list view of all the instances.",
   "private": true,
   "keywords": [

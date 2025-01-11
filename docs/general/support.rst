@@ -5,7 +5,7 @@ Support
 =======
 
 Contributing to DeepView
-----------------------
+------------------------
 Please see the :ref:`Contributor's Guide <contributing>`.
 
 Submit Feedback

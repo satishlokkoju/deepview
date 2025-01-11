@@ -68,39 +68,39 @@ DeepView has additional installation options, which are installed in square brac
 
 Here are the options currently available:
 
-+---------------------------+----------------------------------------------------------------------+
-| Module                    | Description                                                          |
-+===========================+======================================================================+
-| deepview                  | Always installed, base DeepView, with                                |
-|                           | :ref:`Familiarity <familiarity>`, :ref:`PFA <network_compression>`,  |
-|                           | :ref:`INA <inactive_units>`, and                                     |
-|                           | :ref:`DimensionReduction <dimension_reduction>`.                     |
-+---------------------------+----------------------------------------------------------------------+
-| -> [notebook]             | Installs dependencies to run and visualize the jupyter notebook      |
-|                           | tutorials, including jupyter_, matplotlib_, pandas_, ...             |
-+---------------------------+----------------------------------------------------------------------+
-| -> [image]                | Installs opencv_ (headless) and Pillow to enable image processing    |
-|                           | capabilities.                                                        |
-+---------------------------+----------------------------------------------------------------------+
-| -> [dimreduction]         | Installs umap_learn_ and pacmap for dimensionality reduction.        |
-+---------------------------+----------------------------------------------------------------------+
-| -> [dataset-report]       | Installs all requirements to run the Dataset Report.                 |
-+---------------------------+----------------------------------------------------------------------+
++---------------------------+------------------------------------------------------------------------+
+| Module                    | Description                                                            |
++===========================+========================================================================+
+| deepview                  | Always installed, base DeepView, with                                  |
+|                           | :ref:`Familiarity <familiarity>`, :ref:`PFA <network_compression>`,    |
+|                           | :ref:`INA <inactive_units>`, and                                       |
+|                           | :ref:`DimensionReduction <dimension_reduction>`.                       |
++---------------------------+------------------------------------------------------------------------+
+| -> [notebook]             | Installs dependencies to run and visualize the jupyter notebook        |
+|                           | tutorials, including jupyter_, matplotlib_, pandas_, ...               |
++---------------------------+------------------------------------------------------------------------+
+| -> [image]                | Installs opencv_ (headless) and Pillow to enable image processing      |
+|                           | capabilities.                                                          |
++---------------------------+------------------------------------------------------------------------+
+| -> [dimreduction]         | Installs umap_learn_ and pacmap for dimensionality reduction.          |
++---------------------------+------------------------------------------------------------------------+
+| -> [dataset-report]       | Installs all requirements to run the Dataset Report.                   |
++---------------------------+------------------------------------------------------------------------+
 | -> [tensorflow]           | Installs :ref:`deepview_tensorflow <tensorflow_api>` and TF2 to load & |
 |                           | run TF_ models within DeepView.                                        |
-+---------------------------+----------------------------------------------------------------------+
++---------------------------+------------------------------------------------------------------------+
 | -> [tensorflow1]          | Installs :ref:`deepview_tensorflow <tensorflow_api>` and TF1 to load & |
 |                           | run TF_ models within DeepView. Must have Python <=3.7 due to TF 1.    |
-+---------------------------+----------------------------------------------------------------------+
-| -> [tensorflow1-gpu]      | Same as preceding row, but with TensorFlow GPU. Must have            |
-|                           | Python <=3.7 due to TF 1 constraints.                                |
-+---------------------------+----------------------------------------------------------------------+
-| -> [torch]                | Installs ``deepview_pytorch``: convert between PyTorch Dataset and   |
-|                           | DeepView Producer.                                                   |
-+---------------------------+----------------------------------------------------------------------+
-| -> [complete]             | Installs ``notebook``, ``image``, ``dimreduction``,                  |
-|                           | ``dataset-report``, ``tensorflow``, & ``torch`` options.             |
-+---------------------------+----------------------------------------------------------------------+
++---------------------------+------------------------------------------------------------------------+
+| -> [tensorflow1-gpu]      | Same as preceding row, but with TensorFlow GPU. Must have              |
+|                           | Python <=3.7 due to TF 1 constraints.                                  |
++---------------------------+------------------------------------------------------------------------+
+| -> [torch]                | Installs ``deepview_pytorch``: convert between PyTorch Dataset and     |
+|                           | DeepView Producer.                                                     |
++---------------------------+------------------------------------------------------------------------+
+| -> [complete]             | Installs ``notebook``, ``image``, ``dimreduction``,                    |
+|                           | ``dataset-report``, ``tensorflow``, & ``torch`` options.               |
++---------------------------+------------------------------------------------------------------------+
 
 .. _TF: https://www.tensorflow.org/versions/r1.15/api_docs/python/tf
 .. _jupyter: https://jupyter.readthedocs.io/en/latest/running.html#running

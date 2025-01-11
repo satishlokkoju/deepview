@@ -1,8 +1,8 @@
 .. _architecture_overview:
 
-============================
+==============================
 DeepView Architecture Overview
-============================
+==============================
 
 This page contains an overview of the DeepView architecture and how pieces work together. Please see
 the following three pages for more detailed information:
