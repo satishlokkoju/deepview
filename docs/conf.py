@@ -53,7 +53,7 @@ templates_path = ['_templates']
 
 
 # HTML Options
-html_theme = 'sphinx_book_theme'
+html_theme = 'furo'
 html_theme_options = {
     'use_fullscreen_button': False,
     'show_toc_level': 2,
