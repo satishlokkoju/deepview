@@ -43,6 +43,10 @@ jobs:
           echo "//github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ~/.npmrc
           echo "@satishlokkoju:registry=https://npm.pkg.github.com" >> ~/.npmrc
       
+      - name: Install Pandoc
+        run: |
+            sudo apt-get update
+            sudo apt-get install -y pandoc
       
       - name: Install dependencies
         timeout-minutes: 30
