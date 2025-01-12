@@ -49,3 +49,6 @@ build/
 
 # junit.xml
 junit.xml
+
+# documentation
+docs/_build/*

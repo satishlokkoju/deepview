@@ -130,17 +130,6 @@ setup_args = dict(
             "opencv-python",
             "gitpython"
         ],
-        'docs': [
-            'jupyter_sphinx',
-            'nbsphinx',
-            'nbsphinx-link',
-            'pytest_check_links',
-            'pypandoc',
-            'recommonmark',
-            'sphinx>=1.5',
-            'sphinx_book_theme',
-            'sphinx_mdinclude'
-        ],
     },
     entry_points={
     },

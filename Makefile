@@ -78,6 +78,7 @@ test-notebooks:
 #########
 doc:
 	@$(MAKE) -C docs html
+	@pip install -r docs/requirements.txt
 	@echo "\nOpen docs/_build/html/index.html to get started.\n"
 
 clean:

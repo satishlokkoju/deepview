@@ -83,14 +83,19 @@ test = [
 doc = [
     "ipykernel",
     "jupyter_client",
-    "nbsphinx",
-    "pandoc",
-    "sphinx",
-    "sphinx-book-theme",
     "matplotlib", # to build notebooks
     "pandas",
     "jupyter-datatables",
     "seaborn",
+    'jupyter_sphinx',
+    'nbsphinx',
+    'nbsphinx-link',
+    'pytest_check_links',
+    'pypandoc',
+    'recommonmark',
+    'sphinx>=1.5',
+    'sphinx_book_theme',
+    'sphinx_mdinclude'
 ]
 notebook = [
     "notebook < 7.0.0",
