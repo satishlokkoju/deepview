@@ -13,3 +13,4 @@ recommonmark
 sphinx>=1.5
 sphinx_book_theme
 sphinx_mdinclude
+myst-parser
