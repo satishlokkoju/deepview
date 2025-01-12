@@ -93,7 +93,7 @@ doc = [
     'pytest_check_links',
     'pypandoc',
     'recommonmark',
-    'sphinx>=8.0.0',
+    'sphinx>=7.0.0',
     'furo',
     'sphinx_mdinclude',
     'myst-parser'
