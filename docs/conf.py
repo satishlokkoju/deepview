@@ -35,7 +35,7 @@ extensions = [
     'sphinx.ext.intersphinx',
     'nbsphinx',
     'jupyter_sphinx',
-    'myst_parser'
+    'sphinx_mdinclude'
 ]
 
 # The suffix(es) of source filenames, multiple as a list of strings:
@@ -59,6 +59,7 @@ html_theme_options = {
     'show_toc_level': 2,
 }
 html_static_path = ['_static']
+html_title = "DeepView Documentation"
 html_css_files = ['custom.css']
 htmlhelp_basename = 'deepviewdoc' # Output file base name for HTML help builder.
 

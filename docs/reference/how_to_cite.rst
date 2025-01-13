@@ -4,7 +4,7 @@
 Citing DeepView
 ===============
 
-The general general DeepView publication can be cited as:
+The general DeepView publication can be cited as:
 
 - Welsh, Megan Maher; Koski, David; Sarabia, Miguel; Sivakumar, Niv; Arawjo, Ian; Joshi, Aparna;
   Doumbouya, Moussa; Suau, Xavier; Zappella, Luca; Apostoloff, Nicholas (2023).
@@ -23,7 +23,7 @@ The general general DeepView publication can be cited as:
 In addition, there are possible additional citations to include for each specific introspector
 (algorithm) that was used. These citations are listed below.
 
-Visualizing the Dataset Report, Familiarity, Duplicates, or Projection (Dimension Reduction) with `Canvas UI <https://github.com/satishlokkoju/deepview>`_:
+Visualizing the Dataset Report, Familiarity, Duplicates, or Projection (Dimension Reduction) with `Symphony UI <https://github.com/apple/ml-symphony>`_:
  - Bäuerle, Alex, Ángel Alexander Cabrera, Fred Hohman, Megan Maher, David Koski, Xavier Suau, Titus Barik, and Dominik Moritz.
    `"Symphony: Composing Interactive Interfaces for Machine Learning." <https://dl.acm.org/doi/abs/10.1145/3491102.3502102>`_
    In *CHI Conference on Human Factors in Computing Systems,* pp. 1-14. 2022.

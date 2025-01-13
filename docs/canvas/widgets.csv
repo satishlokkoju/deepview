@@ -1,6 +1,6 @@
 Component|Description|Package
-Data Map | ```{include} ../../src/deepview_canvas/widgets/canvas_data_map/README.md``` | `canvas_data_map <https://github.com/satishlokkoju/deepview/tree/main/src/deepview_canvas/widgets/canvas_data_map>`__
-List | ```{include} ../../src/deepview_canvas/widgets/canvas_list/README.md``` | `canvas_list <https://github.com/satishlokkoju/deepview/tree/main/src/deepview_canvas/widgets/canvas_list>`__ 
-Scatterplot | ```{include} ../../src/deepview_canvas/widgets/canvas_scatterplot/README.md``` | `canvas_scatterplot <https://github.com/satishlokkoju/deepview/tree/main/src/deepview_canvas/widgets/canvas_scatterplot>`__
-Summary | ```{include} ../../src/deepview_canvas/widgets/canvas_summary/README.md``` | `canvas_summary <https://github.com/satishlokkoju/deepview/tree/main/src/deepview_canvas/widgets/canvas_summary>`__
-Duplicates | ```{include} ../../src/deepview_canvas/widgets/canvas_duplicates/README.md``` | `canvas_duplicates <https://github.com/satishlokkoju/deepview/tree/main/src/deepview_canvas/widgets/canvas_duplicates>`__
+Data Map | .. mdinclude:: ../../src/deepview_canvas/widgets/canvas_data_map/README.md | `canvas_data_map <https://github.com/satishlokkoju/deepview/tree/main/src/deepview_canvas/widgets/canvas_data_map>`__
+List | .. mdinclude:: ../../src/deepview_canvas/widgets/canvas_list/README.md | `canvas_list <https://github.com/satishlokkoju/deepview/tree/main/src/deepview_canvas/widgets/canvas_list>`__ 
+Scatterplot | .. mdinclude:: ../../src/deepview_canvas/widgets/canvas_scatterplot/README.md | `canvas_scatterplot <https://github.com/satishlokkoju/deepview/tree/main/src/deepview_canvas/widgets/canvas_scatterplot>`__
+Summary | .. mdinclude:: ../../src/deepview_canvas/widgets/canvas_summary/README.md | `canvas_summary <https://github.com/satishlokkoju/deepview/tree/main/src/deepview_canvas/widgets/canvas_summary>`__
+Duplicates | .. mdinclude:: ../../src/deepview_canvas/widgets/canvas_duplicates/README.md | `canvas_duplicates <https://github.com/satishlokkoju/deepview/tree/main/src/deepview_canvas/widgets/canvas_duplicates>`__

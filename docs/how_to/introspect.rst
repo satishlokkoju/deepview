@@ -54,7 +54,7 @@ For instance, an example for :ref:`IUA <inactive_units>`:
 The results of DeepView **data** introspectors can be visualized and explored in different manners.
 If the data introspectors are run as part of the
 :ref:`Dataset Report <dataset_report>`, the introspection results may be directly fed to and
-explored interactively with the `Symphony UI <https://github.com/apple/ml-symphony>`_.
+explored interactively with the `Canvas Framework <https://github.com/satishlokkoju/deepview>`_ which is a part of DeepView ToolKit.
 If the introspector is run outside of the :ref:`Dataset Report <dataset_report>`, the
 :ref:`DeepView notebook examples <example_notebooks>` show one of many possible ways each result may
 be visualized.

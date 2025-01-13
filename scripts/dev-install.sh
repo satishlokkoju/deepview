@@ -2,7 +2,6 @@
 #yarn
 #yarn workspace @betterwithdata/canvas_viz build
 #yarn workspace canvas-ux build
-#pip3 install -e "canvas_ux[docs]"
 #jupyter labextension develop --overwrite canvas_ux
 pip install jupyterlab
 cd src/deepview_canvas/canvas_viz

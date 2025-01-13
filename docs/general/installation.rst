@@ -25,9 +25,9 @@ Installation
 Python Support
 --------------
 DeepView currently supports Python version 3.7 or greater for macOS or Linux.
-Python 3.9 is recommended. Note: to run TensorFlow 1, install Python 3.7.
+Python 3.10 is recommended. Note: to run TensorFlow 1, install Python 3.7 (Though not tested)
 
-To install Python version 3.9 (recommended):
+To install Python version 3.10 (recommended):
 
 **MacOS:** The Python installer package can be
 `downloaded <https://www.python.org/ftp/python/3.9.13/python-3.9.13-macosx10.9.pkg>`_ from the
@@ -117,7 +117,7 @@ First, install the notebook dependencies::
     pip install "deepview[notebook]"
 
 Next, download the
-`DeepView notebooks directly <https://github.com/apple/deepview/tree/main/docs/notebooks>`_
+`DeepView notebooks directly <https://github.com/satishlokkoju/deepview/tree/main/docs/notebooks>`_
 or use them via :ref:`cloning the deepview repository <Clone the Code>`.
 
 

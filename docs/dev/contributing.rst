@@ -83,7 +83,7 @@ then set up with::
 
     git lfs install
 
-Currently, tracked via `.gitattributes <https://github.com/apple/deepview/blob/main/.gitattributes>`_,
+Currently, tracked via `.gitattributes <https://github.com/satishlokkoju/deepview/blob/main/.gitattributes>`_,
 the DeepView LFS files are:
 
 - .png
@@ -212,11 +212,11 @@ This project uses `pytest`_ and pytest extensions as follows:
 +-------------------------------------------+---------------------------------+--------------------------------+
 
 .. _pytest: https://docs.pytest.org/en/latest/
-.. _pyini: https://github.com/apple/deepview/blob/main/pytest.ini
+.. _pyini: https://github.com/satishlokkoju/deepview/blob/main/pytest.ini
 
 .. _mypy: http://mypy-lang.org
 .. _pymypy: https://pypi.org/project/pytest-mypy/
-.. _myini: https://github.com/apple/deepview/blob/main/mypy.ini
+.. _myini: https://github.com/satishlokkoju/deepview/blob/main/mypy.ini
 
 .. _flake8: http://flake8.pycqa.org/en/latest/
 .. _pyfl8: https://pypi.org/project/pytest-flake8/

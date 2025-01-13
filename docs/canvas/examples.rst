@@ -20,7 +20,7 @@ Examples
 Exploring Image Datasets
 ========================
 
-`Run the example Jupyter notebook here. <https:/github.com/betterwithdata/ml-canvas/examples/canvas-cifar-example.ipynb>`_
+`Run the example Jupyter notebook here. <https:/github.com/satishlokkoju/deepview/blob/main/notebooks/data_introspection/eda-cifar.ipynb>`_
 
 Canvas has a set of widgets that use preprocessing to analyze large ML datasets.
 In this example, we look at the `CIFAR-10 <https://www.cs.toronto.edu/~kriz/cifar.html>`_ image classification dataset and use `DeepView <https://github.com/satishlokkoju/deepview>`_ and `Canvas <https://github.com/satishlokkoju/deepview/tree/main/src/deepview_canvas>`_ to generate an interactive dataset report.

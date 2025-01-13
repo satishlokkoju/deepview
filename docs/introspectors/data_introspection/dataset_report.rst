@@ -13,7 +13,7 @@ three DeepView dataset introspection algorithms:
 - :ref:`DimensionReduction (data projection) <dimension_reduction>`
 
 To explore the dataset in an interactive UI, the Dataset Report results can be fed directly
-into `Symphony <https://github.com/apple/ml-symphony>`_, a research platform for creating
+into `Canvas Framework <https://github.com/satishlokkoju/deepview>`_, a vsiualization platform for creating
 interactive data science components that allows for filtering, sorting, and exporting data samples.
 
 For motivation behind the Dataset Report, see :ref:`Description` below.
