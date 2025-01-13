@@ -21,4 +21,4 @@ Information about the frontend package of the widgets.
 """
 
 module_name = "canvas-ux"
-module_version = "^1.0.1"
+module_version = "^3.5.0"

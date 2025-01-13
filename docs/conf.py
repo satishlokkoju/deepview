@@ -59,7 +59,7 @@ html_theme_options = {
     'show_toc_level': 2,
 }
 html_static_path = ['_static']
-html_title = "DeepView Documentation"
+html_title = f"DeepView Documentation (v{release})"
 html_css_files = ['custom.css']
 htmlhelp_basename = 'deepviewdoc' # Output file base name for HTML help builder.
 

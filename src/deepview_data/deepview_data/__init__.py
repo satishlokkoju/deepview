@@ -32,7 +32,7 @@
 # limitations under the License.
 #
 
-"""TensorFlow extensions of DeepView."""
+"""Support for custom image datasets in DeepView"""
 
 __version__ = "3.5.0"
 

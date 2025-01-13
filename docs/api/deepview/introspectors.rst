@@ -45,8 +45,11 @@ Duplicates
 ~~~~~~~~~~
 
 .. autoclass:: deepview.introspectors.Duplicates
-    :members: ThresholdStrategy, DuplicateSetCandidate, introspect, results, count
+    :members: KNNStrategy, ThresholdStrategy, DuplicateSetCandidate, introspect, results, count
     :undoc-members:
+
+.. autoclass:: deepview.introspectors.DuplicatesStrategyType
+    :special-members: __call__
 
 .. autoclass:: deepview.introspectors.DuplicatesThresholdStrategyType
     :special-members: __call__
