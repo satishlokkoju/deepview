@@ -64,7 +64,7 @@ class ImageFolderDataset(TrainTestSplitProducer, _Logged):
         self.root_folder = root_folder
         self.image_size = image_size
         self.train_split = train_split
-        self.valid_extensions = valid_extensions or ['.jpg', '.jpeg', '.png']
+        self.valid_extensions = valid_extensions or ['.jpg', '.jpeg', '.JPEG', '.png']
         self.max_samples = max_samples
         self.split_dataset, self.file_names = self._load_data_from_folder()
 
