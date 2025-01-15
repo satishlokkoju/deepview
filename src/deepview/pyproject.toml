@@ -99,7 +99,7 @@ doc = [
     'myst-parser'
 ]
 notebook = [
-    "notebook < 7.0.0",
+    "notebook>6.0.0,<8.0.0",
     "matplotlib",
     "pandas",
     "jupyter-datatables",

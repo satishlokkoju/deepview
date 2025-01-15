@@ -1,10 +1,24 @@
 components := deepview deepview_data deepview_tensorflow deepview_torch deepview_canvas
 
-clean_dirs := src/deepview*/dist junit*.xml coverage .coverage* .env* docs/_build
-clean_dirs += */.pytest_cache src/deepview*/.pytest_cache .pytest_cache .mypy_cache
-clean_dirs += src/deepview*/*/__pycache__ src/deepview*/.mypy_cache __pycache__ notebooks/.ipynb_checkpoints
-clean_dirs += src/deepview*/*/.pytest_cache src/deepview*/*/.mypy_cache src/deepview_canvas/node_modules src/deepview_canvas/*/node_modules
-clean_dirs += src/deepview_canvas/canvas_viz/storybook-static docs/_static/storybook-static notebooks/.verify
+# Clean directories for different components
+python_clean_dirs := src/deepview*/dist src/deepview_canvas/*/dist */.pytest_cache src/deepview*/.pytest_cache .pytest_cache .mypy_cache
+python_clean_dirs += src/deepview/**/__pycache__ src/deepview/*/**/__pycache__ src/deepview/*/*/**/__pycache__
+python_clean_dirs += src/deepview_canvas/**/__pycache__ src/deepview_canvas/*/**/__pycache__ src/deepview_canvas/*/*/**/__pycache__ 
+python_clean_dirs += src/deepview_tensorflow/**/__pycache__ src/deepview_tensorflow/*/**/__pycache__ src/deepview_canvas/canvas_ux/build
+python_clean_dirs += src/deepview_data/**/__pycache__ src/deepview_data/*/**/__pycache__
+python_clean_dirs += src/deepview_torch/**/__pycache__ src/deepview_torch/*/**/__pycache__
+
+js_clean_dirs := src/deepview_canvas/node_modules src/deepview_canvas/*/node_modules src/deepview_canvas/*/*/node_modules
+js_clean_dirs += src/deepview_canvas/canvas_viz/storybook-static src/deepview_canvas/widgets/*/dist
+js_clean_dirs += src/deepview_canvas/widgets/*/build src/deepview_canvas/widgets/*/*/dist 
+js_clean_dirs += src/deepview_canvas/widgets/*/*/standalone src/deepview_canvas/widgets/*/*/labextension
+js_clean_dirs += src/deepview_canvas/widgets/*/*/lib src/deepview_canvas/*/*/lib
+
+docs_clean_dirs := docs/_build docs/_static/storybook-static
+
+test_clean_dirs := junit*.xml coverage .coverage* notebooks/.verify notebooks/.ipynb_checkpoints
+
+env_clean_dirs := .env*
 
 export PIP_INDEX_URL := https://pypi.org/simple
 
@@ -85,8 +99,27 @@ doc:
 	@pip install -r docs/requirements.txt
 	@echo "\nOpen docs/_build/html/index.html to get started.\n"
 
-clean:
-	@-rm -rf $(clean_dirs)
+clean: clean-python clean-js clean-docs clean-test clean-env
+	@echo "All clean targets executed successfully"
 
+clean-python:
+	@echo "Cleaning Python build and cache files..."
+	@-rm -rf $(python_clean_dirs)
 
-.PHONY: all install install-tf1-gpu install-tf1 uninstall-component uninstall $(components) test test-all test-pytest test-pytest-all test-smoke test-notebooks doc clean
+clean-js:
+	@echo "Cleaning JavaScript/TypeScript build files..."
+	@-rm -rf $(js_clean_dirs)
+
+clean-docs:
+	@echo "Cleaning documentation build files..."
+	@-rm -rf $(docs_clean_dirs)
+
+clean-test:
+	@echo "Cleaning test artifacts..."
+	@-rm -rf $(test_clean_dirs)
+
+clean-env:
+	@echo "Cleaning environment files..."
+	@-rm -rf $(env_clean_dirs)
+
+.PHONY: all install install-tf1-gpu install-tf1 uninstall-component uninstall $(components) test test-all test-pytest test-pytest-all test-smoke test-notebooks doc clean clean-python clean-js clean-docs clean-test clean-env

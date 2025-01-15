@@ -92,11 +92,11 @@
     "svelte-preprocess": "^4.9.8",
     "tailwindcss": "^2.2.15",
     "typescript": "^4.4.3",
-    "webpack": "^4.46.0",
+    "webpack": "^5.97.1",
     "webpack-cli": "^4.1.0"
   },
   "resolutions": {
-    "webpack": "4.46.0"
+    "webpack": "5.97.1"
   },
   "config": {
     "commitizen": {

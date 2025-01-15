@@ -17,14 +17,19 @@
 from __future__ import absolute_import
 
 from jupyter_server import serverapp as server_app
-from notebook import notebookapp as notebook_app
 
-
+import os
+import notebook
 import urllib
 import json
-import os
 import ipykernel
 import pathlib
+
+NOTEBOOK_VERSION = tuple(map(int, notebook.__version__.split('.')))
+IS_NOTEBOOK_LT_7 = NOTEBOOK_VERSION[0] < 7
+
+if IS_NOTEBOOK_LT_7:
+    from notebook import notebookapp as notebook_app
 
 
 def get_current_dir() -> str:
@@ -52,23 +57,24 @@ def get_current_dir() -> str:
                         notebook_path = pathlib.Path(sess['notebook']['path'])
                         return str(notebook_path.parents[0])
             except Exception:
-                continue  # Try next server or fall through to notebook_app
+                continue  # Try next server or fall through to notebook_app if notebook < 7
 
-        # Fall back to notebook_app (Jupyter Notebook)
-        for srv in notebook_app.list_running_servers():  # type: ignore
-            try:
-                if srv['token'] == '' and not srv['password']:  # No token and no password
-                    req = urllib.request.urlopen(srv['url']+'api/sessions')
-                else:
-                    req = urllib.request.urlopen(srv['url']+'api/sessions?token='+srv['token'])
+        if IS_NOTEBOOK_LT_7:
+            # Fall back to notebook_app (Jupyter Notebook)
+            for srv in notebook_app.list_running_servers():  # type: ignore
+                try:
+                    if srv['token'] == '' and not srv['password']:  # No token and no password
+                        req = urllib.request.urlopen(srv['url']+'api/sessions')
+                    else:
+                        req = urllib.request.urlopen(srv['url']+'api/sessions?token='+srv['token'])
 
-                sessions = json.load(req)
-                for sess in sessions:
-                    if sess['kernel']['id'] == kernel_id:
-                        notebook_path = pathlib.Path(sess['notebook']['path'])
-                        return str(notebook_path.parents[0])
-            except Exception:
-                continue  # Try next server
+                    sessions = json.load(req)
+                    for sess in sessions:
+                        if sess['kernel']['id'] == kernel_id:
+                            notebook_path = pathlib.Path(sess['notebook']['path'])
+                            return str(notebook_path.parents[0])
+                except Exception:
+                    continue  # Try next server
 
     except Exception:
         pass  # Fall through to returning current directory

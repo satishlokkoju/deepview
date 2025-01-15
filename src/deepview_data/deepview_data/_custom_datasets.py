@@ -48,10 +48,10 @@ class ImageFolderDataset(TrainTestSplitProducer, _Logged):
         max_samples: Maximum number of samples to load (-1 for all, default: -1)
     """
 
-    root_folder: t.Final[str]
-    image_size: t.Final[Tuple[int, int]]
-    train_split: t.Final[float]
-    valid_extensions: t.Final[List[str]]
+    root_folder: str
+    image_size: Tuple[int, int]
+    train_split: float
+    valid_extensions: List[str]
 
     def __init__(self,
                  root_folder: str,
@@ -192,6 +192,7 @@ class ImageFolderDataset(TrainTestSplitProducer, _Logged):
         return ((X[train_indices], y[train_indices]), (X[test_indices], y[test_indices])), filenames[indices].tolist()
 
 
+@t.final
 class CustomDatasets:
     """
     Custom Datasets, each bundled as a DeepView :class:`Producer <deepview.base.Producer>`.

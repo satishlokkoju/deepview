@@ -1,6 +1,11 @@
 DeepView Open Source Changelog
 ================================
 
+Version 3.7.0 (2025-01-18)
+--------------------------
+- Fixed the bug in canvas_summary nbextension that was causing it to stop working.
+
+
 Version 3.6.0 (2025-01-15)
 --------------------------
 - Fixed the versioning in DeepView and Canvas to be consistent.
