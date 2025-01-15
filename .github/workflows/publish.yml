@@ -113,8 +113,9 @@ jobs:
       
       - name: Build and package canvas_viz
         run: |
+          cd src/deepview_canvas
           yarn workspace @betterwithdata/canvas_viz build
-          
+        
       - name: Build and package canvas_ux
         run: |
           cd src/deepview_canvas/canvas_ux
