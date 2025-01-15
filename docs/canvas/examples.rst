@@ -17,6 +17,8 @@ The example contains a precomptued analysis and demonstrates a handful of Canvas
 * `List <https://github.com/satishlokkoju/deepview/tree/main/src/deepview_canvas/widgets/canvas_list>`__ : An browsable interface to explore the datset instances.
 * `Scatterplot <https://github.com/satishlokkoju/deepview/tree/main/src/deepview_canvas/widgets/canvas_scatterplot>`__: An interactive embedding visualization to help with cluster identification.
 * `DataMap <https://github.com/satishlokkoju/deepview/tree/main/src/deepview_canvas/widgets/canvas_datamap>`__: A map visualization to help with cluster identification.
+* `Duplicates <https://github.com/satishlokkoju/deepview/tree/main/src/deepview_canvas/widgets/canvas_duplicates>`__: A map visualization to identify potential duplicates.
+* `Familiarity <https://github.com/satishlokkoju/deepview/tree/main/src/deepview_canvas/widgets/canvas_familiarity>`__: A map visualization to analyze familiarity of the datasets.
 
 
 ===============

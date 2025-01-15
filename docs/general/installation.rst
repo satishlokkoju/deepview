@@ -76,6 +76,11 @@ Here are the options currently available:
 |                           | :ref:`INA <inactive_units>`, and                                       |
 |                           | :ref:`DimensionReduction <dimension_reduction>`.                       |
 +---------------------------+------------------------------------------------------------------------+
+| -> [canvas]               | Installs ``canvas_ux`` and widgets for visualization.                  |
+|                           | canvas_duplicates, canvas_summary_, canvas_familiarity_, ...           |
++---------------------------+------------------------------------------------------------------------+
+| -> [data]                 | Installs ``deepview_data``: utility functions for image data analysis. |
++---------------------------+------------------------------------------------------------------------+
 | -> [notebook]             | Installs dependencies to run and visualize the jupyter notebook        |
 |                           | tutorials, including jupyter_, matplotlib_, pandas_, ...               |
 +---------------------------+------------------------------------------------------------------------+
@@ -99,7 +104,7 @@ Here are the options currently available:
 |                           | DeepView Producer.                                                     |
 +---------------------------+------------------------------------------------------------------------+
 | -> [complete]             | Installs ``notebook``, ``image``, ``dimreduction``,                    |
-|                           | ``dataset-report``, ``tensorflow``, & ``torch`` options.               |
+|                           | ``dataset-report``, ``tensorflow``, ``canvas`` , & ``torch`` options.  |
 +---------------------------+------------------------------------------------------------------------+
 
 .. _TF: https://www.tensorflow.org/versions/r1.15/api_docs/python/tf

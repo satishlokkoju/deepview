@@ -46,5 +46,4 @@ Table of Contents
     state
     common
     examples
-    contributing
     api

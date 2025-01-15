@@ -4,7 +4,7 @@ clean_dirs := src/deepview*/dist junit*.xml coverage .coverage* .env* docs/_buil
 clean_dirs += */.pytest_cache src/deepview*/.pytest_cache .pytest_cache .mypy_cache
 clean_dirs += src/deepview*/*/__pycache__ src/deepview*/.mypy_cache __pycache__ notebooks/.ipynb_checkpoints
 clean_dirs += src/deepview*/*/.pytest_cache src/deepview*/*/.mypy_cache src/deepview_canvas/node_modules src/deepview_canvas/*/node_modules
-clean_dirs += src/deepview_canvas/canvas_viz/storybook-static docs/_static/storybook-static
+clean_dirs += src/deepview_canvas/canvas_viz/storybook-static docs/_static/storybook-static notebooks/.verify
 
 export PIP_INDEX_URL := https://pypi.org/simple
 

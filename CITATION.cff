@@ -4,6 +4,6 @@ authors:
 - family-names: "Lokkoju"
   given-names: "Satish"
 title: "Visual Data Analysis Framework"
-version: 3.5.0
-date-released: 2025-01-09
+version: 3.6.0
+date-released: 2025-01-15
 url: "https://github.com/satishlokkoju/deepview"

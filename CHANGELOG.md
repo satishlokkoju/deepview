@@ -1,6 +1,13 @@
 DeepView Open Source Changelog
 ================================
 
+Version 3.6.0 (2025-01-15)
+--------------------------
+- Fixed the versioning in DeepView and Canvas to be consistent.
+- Fixed the docs and examples.
+- Updated the documentation to include new features and fixes.
+
+
 Version 3.5.0 (2025-01-08)
 --------------------------
 - Added support Visualization Framework for DeepView named Canvas. The visualization framework allows users to create interactive visualizations for DeepView components. The framework is built using Svelte and SvelteKit and is based on the [Symphony](https://github.com/apple/ml-symphony) framework. Support for JupyterLab and Jupyter Notebook has been added. And bugs have been fixed.
