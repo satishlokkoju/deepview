@@ -54,7 +54,7 @@ module.exports = {
     },
   },
   fontFamily: {
-    sans: ["-betterwithdata-system", "BlinkMacSystemFont", "Helvetica", "sans-serif"],
+    sans: ["-apple-system", "BlinkMacSystemFont", "Helvetica", "sans-serif"],
   },
   darkMode: "media",
   plugins: [require("@tailwindcss/forms")],
