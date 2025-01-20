@@ -19,7 +19,7 @@
 </script>
 
 <Meta
-  title="SubHeading"
+  title="AppHeading"
   component={SubHeading}
   argTypes={{
     heading: { control: "text" },

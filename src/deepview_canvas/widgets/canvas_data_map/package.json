@@ -16,14 +16,14 @@
   ],
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "homepage": "https://github.com/betterwithdata/ml-canvas",
+  "homepage": "https://github.com/satishlokkoju/deepview_canvas",
   "bugs": {
-    "url": "https://github.com/betterwithdata/ml-canvas/issues"
+    "url": "https://github.com/satishlokkoju/deepview/issues"
   },
-  "author": "betterwithdata",
+  "author": "satishlokkoju",
   "repository": {
     "type": "git",
-    "url": "https://github.com/betterwithdata/ml-canvas"
+    "url": "https://github.com/satishlokkoju/deepview.git"
   },
   "scripts": {
     "build": "webpack --mode=development --progress && jupyter labextension build --development=True .",
@@ -78,9 +78,9 @@
     "rimraf": "^3.0.2",
     "source-map-loader": "^3.0.0",
     "style-loader": "^3.2.1",
-    "svelte": "^3.42.5",
-    "svelte-loader": "^3.1.1",
-    "svelte-preprocess": "^4.9.4",
+    "svelte": "^4.0.0",
+    "svelte-loader": "^3.1.7",
+    "svelte-preprocess": "^5.1.3",
     "tailwindcss": "^2.2.15",
     "ts-loader": "^9.1.0",
     "typescript": "^4.9.0",

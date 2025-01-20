@@ -10,8 +10,5 @@ pip install canvas_ux
 
 ## Usage
 
-To learn how to use Canvas, see the [documentation](https://betterwithdata.github.io/ml-canvas/).
+To learn how to use Canvas, see the [documentation](https://satishlokkoju.github.io/deepview/).
 
-## Development
-
-To learn about how to build Canvas from source and how to contribute to the framework, please look at [CONTRIBUTING.md](../CONTRIBUTING.md) and the [development documentation](https://betterwithdata.github.io/ml-canvas/contributing.html).
