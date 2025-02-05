@@ -12,14 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License. -->
 
-
 <script>
   import { Meta, Template, Story } from "@storybook/addon-svelte-csf";
   import DataSampleDetail from "../src/elements/DataSampleDetail.svelte";
-  import { writable } from "svelte/store";
   import "./utils.css";
   import { CanvasDataType } from "../src/types";
-  import AudioSample from "../static/canvas-audio-sample.mp3"
+  import AudioSample from "../static/canvas-audio-sample.mp3";
+  import { writable } from "svelte/store";
 </script>
 
 <Meta
@@ -27,10 +26,15 @@
   component={DataSampleDetail}
   argTypes={{
     type: {
-      control: { type: "select", options: ["image", "audio", "tabular"] },
-    },
+      control: "select",
+      options: ["image", "audio", "tabular"],
+      defaultValue: "image",
+      description: "Type of data sample to display"
+    }
   }}
 />
+
+
 
 <Template let:args>
   <DataSampleDetail

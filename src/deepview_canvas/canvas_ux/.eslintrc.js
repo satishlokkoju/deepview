@@ -8,10 +8,17 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: 'tsconfig.eslint.json',
-    sourceType: 'module'
+    sourceType: 'module',
+    extraFileExtensions: ['.svelte']
   },
-  plugins: ['@typescript-eslint', 'svelte3'],
-  overrides: [{files: ['*.svelte'], processor: 'svelte3/svelte3'}],
+  plugins: ['@typescript-eslint', 'svelte'],
+  overrides: [{
+    files: ['*.svelte'],
+    parser: 'svelte-eslint-parser',
+    parserOptions: {
+      parser: '@typescript-eslint/parser'
+    }
+  }],
   rules: {
     '@typescript-eslint/no-unused-vars': ['warn', { args: 'none' }],
     '@typescript-eslint/no-explicit-any': 'off',
@@ -27,6 +34,6 @@ module.exports = {
     'prefer-arrow-callback': 'error'
   },
   settings: {
-    'svelte3/typescript': true
+    'svelte3/typescript': true // Keep this as svelte3/typescript for backward compatibility
   }
 };

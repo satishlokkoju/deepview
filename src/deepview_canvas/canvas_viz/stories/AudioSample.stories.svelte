@@ -29,6 +29,11 @@
       control: 'boolean',
       description: 'Controls storybook mode',
       defaultValue: true
+    },
+    large: {
+      control: 'boolean',
+      description: 'Controls the size of the audio player',
+      defaultValue: false
     }
   }} 
 />
@@ -50,6 +55,7 @@
       instancesPerPage: 15,
     }),
     large: true,
+    storybook: true
   }}
 />
 

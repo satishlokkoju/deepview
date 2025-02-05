@@ -72,7 +72,6 @@
     "postcss-import": "^14.0.1",
     "postcss-load-config": "^3.0.1",
     "postcss-loader": "^6.1.0",
-    "precss": "^4.0.0",
     "prettier": "^2.4.0",
     "purgecss-from-svelte": "^2.0.2",
     "rimraf": "^3.0.2",

@@ -7,14 +7,14 @@ module.exports = ({ config, mode }) => {
       {
         loader: "postcss-loader",
         options: {
-          sourceMap: true,
-          config: {
-            path: "./.storybook/",
+          postcssOptions: {
+            config: path.resolve(__dirname, './postcss.config.js'),
           },
+          sourceMap: true
         },
       },
     ],
-    include: path.resolve(__dirname, "../storybook/"),
+    include: path.resolve(__dirname, "../"),
   });
 
   return config;
