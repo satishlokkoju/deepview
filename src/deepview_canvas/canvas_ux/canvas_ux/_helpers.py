@@ -18,15 +18,15 @@
 from __future__ import absolute_import
 
 import re
-from dataclasses import asdict
+from dataclasses import asdict, is_dataclass
 from pathlib import Path
 
 import pandas as pd
 import pyarrow as pa
 from traitlets import TraitType
-from typing import Optional, Union
+from typing import Optional, Union, Any
 
-from ._specs import CanvasDataType, CanvasSpec
+from ._specs import CanvasDataType
 
 
 def to_arrow_file(table: Union[pa.Table, pd.DataFrame], export_path: Union[str, Path]) -> None:
@@ -89,9 +89,20 @@ def get_num_instances_by_data_type(instancesPerPage: Optional[int], type: Canvas
         return 150
 
 
-def dataclass_to_camel_dict(spec: CanvasSpec) -> dict:
-    """Convert dataclass to """
-    spec_dict = asdict(spec)
+def dataclass_to_camel_dict(spec: Any) -> dict:
+    """Convert dataclass to camelCase dictionary
+
+    Args:
+        spec: A dataclass instance
+
+    Returns:
+        A dictionary representation of the dataclass instance
+    Raises:
+        TypeError: If spec is not a dataclass instance
+    """
+    if not is_dataclass(spec):
+        raise TypeError("Input must be a dataclass instance")
+    spec_dict = asdict(spec)  # type: ignore
     new_dict = {}
     for key in spec_dict:
         new_key = ''.join([word.title() for word in key.split('_')])
