@@ -71,7 +71,7 @@
     "@tsconfig/svelte": "^2.0.1",
     "@types/wavesurfer.js": "^6.0.12",
     "add": "^2.0.6",
-    "arquero": "^4.8.4",
+    "arquero": "^8.0.0",
     "babel-loader": "^8.2.2",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "3.3.0",

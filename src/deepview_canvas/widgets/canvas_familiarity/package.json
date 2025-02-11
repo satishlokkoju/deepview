@@ -27,7 +27,7 @@
   },
   "scripts": {
     "build": "webpack --mode=development --progress && jupyter labextension build --development=True .",
-    "build:prod": "webpack --mode=production && jupyter labextension build .",
+    "build:prod": "webpack --mode=production --progress && jupyter labextension build .",
     "clean": "yarn run clean:lib && yarn run clean:nbextension && yarn run clean:labextension",
     "clean:lib": "rimraf lib",
     "clean:labextension": "rimraf canvas/labextension",
@@ -43,7 +43,7 @@
   "dependencies": {
     "@betterwithdata/canvas_viz": "^1.0.0",
     "@jupyter-widgets/base": "^1.1.10 || ^2.0.0 || ^3.0.0 || ^4.0.0",
-    "arquero": "^4.7.2",
+    "arquero": "^8.0.0",
     "svelte-infinite-scroll": "^2.0.0"
   },
   "devDependencies": {

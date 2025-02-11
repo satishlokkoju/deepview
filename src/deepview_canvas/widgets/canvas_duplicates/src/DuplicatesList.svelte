@@ -14,7 +14,7 @@
 
 <script lang="ts">
   import type { CanvasSpec, TooltipSpec } from '@betterwithdata/canvas_viz';
-  import type ColumnTable from 'arquero/dist/types/table/column-table';
+  import type { ColumnTable } from 'arquero';
   import type { Writable } from 'svelte/store';
 
   import { PaginationControls } from '@betterwithdata/canvas_viz';

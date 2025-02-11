@@ -22,7 +22,7 @@
   import NextQueries from './NextQueries.svelte';
   import { getQueryTree } from './summarySpecs';
 
-  import type ColumnTable from 'arquero/dist/types/table/column-table';
+  import type { ColumnTable } from 'arquero';
 
   export let table: ColumnTable;
 

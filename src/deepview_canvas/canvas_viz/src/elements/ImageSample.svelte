@@ -31,9 +31,7 @@
   const contentsManager = ContentsService.getInstance();
 
   async function loadImage(filesPath: string, imageId: string): Promise<string> {
-    // console.log("Loading image:", imageId);
     if (storybook) {
-      // console.log("Loading image from storybook:", join(filesPath, imageId));
       return join(filesPath, imageId);
     } else {
       try {

@@ -15,7 +15,7 @@
  */
 
 import type { VegaLiteSpec } from 'svelte-vega';
-import type ColumnTable from 'arquero/dist/types/table/column-table';
+import type { ColumnTable } from 'arquero';
 
 import {
   QueryElement,

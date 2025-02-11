@@ -22,7 +22,7 @@
     TooltipSpec,
   } from '@betterwithdata/canvas_viz';
   import type { Readable, Writable } from 'svelte/store';
-  import type ColumnTable from 'arquero/dist/types/table/column-table';
+  import type { ColumnTable } from 'arquero';
 
   import { onDestroy, SvelteComponent } from 'svelte';
   import { mapHeight, mapWidth } from '@betterwithdata/canvas_viz';

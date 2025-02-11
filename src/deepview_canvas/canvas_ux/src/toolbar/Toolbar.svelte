@@ -14,7 +14,7 @@
 
 
 <script lang="ts">
-  import type ColumnTable from 'arquero/dist/types/table/column-table';
+  import type { ColumnTable } from 'arquero';
   import type { Readable, Writable } from 'svelte/store';
   import type { CanvasSpec, TooltipSpec } from '@betterwithdata/canvas_viz';
 

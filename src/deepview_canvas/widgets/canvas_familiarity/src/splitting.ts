@@ -15,7 +15,7 @@
  */
 
 
-import type ColumnTable from 'arquero/dist/types/table/column-table';
+import type { ColumnTable } from 'arquero';
 
 export function getUniqueValuesForStringColumnForFamiliarity(
   split: boolean,
@@ -26,7 +26,7 @@ export function getUniqueValuesForStringColumnForFamiliarity(
     if (split) {
       // Tf splitting familiarity
 
-      // DNI Kit doesn't compute for classes with less than 50 data points (by default)
+      // DeepView doesn't compute for classes with less than 50 data points (by default)
       // Filter out these less than 50 data point classes 
       let tempFamilarityPoint = table.get(familiarityColumn, 0) // get first familarity point, get classes from it's columns
       let familarityClassesList = Object.keys(tempFamilarityPoint)

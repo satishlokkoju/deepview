@@ -14,7 +14,7 @@
 
 <script lang="ts">
   import { ResolverType, CanvasSpec, TooltipSpec } from '@betterwithdata/canvas_viz';
-  import type ColumnTable from 'arquero/dist/types/table/column-table';
+  import type { ColumnTable } from 'arquero';
   import type { Writable } from 'svelte/store';
 
   import { CanvasVegaLite, Pagination } from '@betterwithdata/canvas_viz';
@@ -102,10 +102,13 @@
               {table}
               {filteredTable}
             />
+      
             <p class="text-xs text-darkgrey">
-              {#if filteredStatistics.column('mean').get(0) !== undefined}
-              Mean: {filteredStatistics.column('mean').get(0).toFixed(2)}
-              , STD: {filteredStatistics.column('std').get(0).toFixed(2)}
+              {#if filteredStatistics.get('mean', 0) !== undefined}
+              Mean: {filteredStatistics.get('mean', 0).toFixed(2)}
+              {/if}
+              {#if filteredStatistics.get('std', 0) !== undefined}
+              Std: {filteredStatistics.get('std', 0).toFixed(2)}
               {/if}
             </p>
           </div>
@@ -136,9 +139,11 @@
                       filteredTable={groupTable}
                     />
                     <p class="text-xs text-darkgrey">
-                      {#if groupedStatistics[i].column('mean').get(0) !== undefined}
-                      Mean: {groupedStatistics[i].column('mean').get(0).toFixed(2)}
-                      , STD: {groupedStatistics[i].column('std').get(0).toFixed(2)}
+                      {#if groupedStatistics[i].get('mean', 0) !== undefined}
+                      Mean: {groupedStatistics[i].get('mean', 0).toFixed(2)}
+                      {/if}
+                      {#if groupedStatistics[i].get('std', 0) !== undefined}
+                      Std: {groupedStatistics[i].get('std', 0).toFixed(2)}
                       {/if}
                     </p>
                   </div>

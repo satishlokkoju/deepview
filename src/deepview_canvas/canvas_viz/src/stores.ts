@@ -24,9 +24,8 @@ import type {
 } from "./types";
 import type { DOMWidgetModel } from "@jupyter-widgets/base";
 import type { Readable, Updater } from "svelte/store";
-import type ColumnTable from "arquero/dist/types/table/column-table";
 
-import { fromArrow, op } from "arquero";
+import { ColumnTable, fromArrow, op } from "arquero";
 import { derived, Writable } from "svelte/store";
 import { writable } from "svelte/store";
 import { cartesian } from "./helpers/table";
@@ -89,7 +88,7 @@ export const tooltip = widgetWritable<TooltipSpec>("tooltip", {
 });
 
 export const table: Readable<ColumnTable> = derived(dataTable, (d: DataView) =>
-  fromArrow(d)
+  fromArrow(d.buffer)
 );
 export const filteredTable: Readable<ColumnTable> = derived(
   [table, filter],
@@ -140,7 +139,7 @@ export const groupedTables: Readable<ColumnTable[]> = derived(
       let partitions = groupedTable.partitions();
 
       let groupedTables: ColumnTable[] = partitions.map((partition) =>
-        filteredTable.reify(partition)
+        filteredTable.reify(Array.from(partition))
       );
       return groupedTables;
     } else {

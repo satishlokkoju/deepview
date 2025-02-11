@@ -14,7 +14,7 @@
 
 
 <script lang="ts">
-  import type ColumnTable from "arquero/dist/types/table/column-table";
+  import { ColumnTable } from "arquero";
   import type { EmbedOptions } from "vega-embed";
   import type { VegaLiteSpec } from "svelte-vega";
   import { createEventDispatcher } from "svelte";

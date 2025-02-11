@@ -44,7 +44,7 @@
   "dependencies": {
     "@betterwithdata/canvas_viz": "^1.0.0",
     "@jupyter-widgets/base": "^1.1.10 || ^2.0.0 || ^3.0.0 || ^4.0.0",
-    "arquero": "^4.7.2"
+    "arquero": "^8.0.0"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^4.0.3",
