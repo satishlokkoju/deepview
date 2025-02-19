@@ -21,7 +21,8 @@
     "prebuild": "rm -rf ./dist",
     "build": "rollup -c",
     "watch": "rollup -c -w",
-    "storybook": "storybook dev -p 6006"
+    "storybook": "storybook dev -p 6006",
+    "build:storybook": "storybook build"
   },
   "files": [
     "src",
