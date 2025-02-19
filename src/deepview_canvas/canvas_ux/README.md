@@ -11,3 +11,4 @@ pip install canvas_ux
 ## Usage
 
 To learn how to use Canvas, see the [documentation](https://satishlokkoju.github.io/deepview/).
+

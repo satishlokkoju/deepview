@@ -14,7 +14,7 @@
 
 
 <script lang="ts">
-  import type ColumnTable from "arquero/dist/types/table/column-table";
+  import { ColumnTable } from "arquero";
   import type { EmbedOptions } from "vega-embed";
   import type { VegaLiteSpec } from "svelte-vega";
   import { createEventDispatcher } from "svelte";
@@ -57,9 +57,39 @@
     },
     showUnfilteredData: boolean
   ) {
-    parsedSpec = spec;
-    parsedSpecRaw = { ...spec, params: [] };
-    parsedSpecFiltered = { ...spec };
+     // Add signals to the spec
+     const specWithSignals = {
+      ...spec,
+      signals: [
+        {
+          name: "select",
+          value: null,
+          on: [{"events": "click", "update": "datum"}]
+        },
+        {
+          name: "brush",
+          value: null,
+          on: [
+            {
+              "events": "@chart:mousedown",
+              "update": "[x(), y()]"
+            },
+            {
+              "events": "[@chart:mousedown, window:mouseup] > window:mousemove!",
+              "update": "[brush[0], [x(), y()]]"
+            },
+            {
+              "events": {"signal": "double"},
+              "update": "null"
+            }
+          ]
+        }
+      ]
+    };
+
+    parsedSpec = specWithSignals;
+    parsedSpecRaw = { ...specWithSignals, params: [] };
+    parsedSpecFiltered = { ...specWithSignals };
     parsedData = data;
     if (typeof data.values === "string") {
       const stringData = data.values as string;

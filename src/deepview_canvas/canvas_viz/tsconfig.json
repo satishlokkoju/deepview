@@ -4,9 +4,17 @@
     "declaration": true,
     "outDir": "dist",
     "strict": true,
-    "types": ["svelte"],
-    "noImplicitAny": true
+    "types": ["svelte", "node"],
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": ["node_modules/*"]
+    }
   },
   "files": ["./src/index.ts"],
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "stories/**/*"]
 }

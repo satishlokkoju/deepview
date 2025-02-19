@@ -16,10 +16,7 @@
 
 import { get, Writable } from "svelte/store";
 
-export function selectAll(
-  selectedStore: Writable<string[]>,
-  newSelected: string[]
-) {
+export function selectAll(selectedStore: Writable<string[]>, newSelected: string[]) {
   let existingSelectedSet = new Set(get(selectedStore));
   let newSelectedSet = new Set(newSelected);
 

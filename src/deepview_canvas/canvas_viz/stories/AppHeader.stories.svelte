@@ -12,19 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License. -->
 
-<script>
-  import { Meta, Template, Story } from "@storybook/addon-svelte-csf";
+<script context="module">
   import SubHeading from "../src/elements/SubHeading.svelte";
   import "./utils.css";
+  export const meta = {
+    title: "AppHeading",
+    component: SubHeading,
+    argTypes: {
+      heading: { control: "DeepView Heading" },
+    },
+  };
 </script>
 
-<Meta
-  title="SubHeading"
-  component={SubHeading}
-  argTypes={{
-    heading: { control: "text" },
-  }}
-/>
+<script>
+  import { Template, Story } from "@storybook/addon-svelte-csf";
+</script>
+
 
 <Template let:args>
   <SubHeading {...args} />
@@ -33,7 +36,7 @@
 <Story
   name="Default"
   args={{
-    heading: "test",
+    heading: "DeepView Test",
   }}
 />
 

@@ -23,7 +23,7 @@
   } from '@betterwithdata/canvas_viz';
   import type { Readable, Writable } from 'svelte/store';
   import type { SvelteComponent } from 'svelte';
-  import type ColumnTable from 'arquero/dist/types/table/column-table';
+  import type { ColumnTable } from 'arquero';
 
   import { mapHeight, mapWidth } from '@betterwithdata/canvas_viz';
 

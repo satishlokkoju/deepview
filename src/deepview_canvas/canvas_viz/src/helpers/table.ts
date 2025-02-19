@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
-
-import type ColumnTable from "arquero/dist/types/table/column-table";
+import type { ColumnTable } from "arquero";
 
 const UNIQUE_COLS_PCTG = 0.1;
 
@@ -22,12 +21,17 @@ export function getColumnType(
   table: ColumnTable,
   columnName: string
 ): string | undefined {
-  const col = table.column(columnName);
-  if (col === undefined) {
+  // Check if column exists
+  if (!table.column(columnName)) {
     return undefined;
   }
-  const firstValue = col.get(0);
-  if (firstValue.constructor.name === "SignedBigNum") {
+
+  // Get the first value using array() method
+  const columnValues = table.array(columnName);
+  const firstValue = columnValues[0];
+
+  // Handle special case for SignedBigNum (often used for large numbers in Arquero)
+  if (firstValue?.constructor.name === "SignedBigNum") {
     return "number";
   }
   if (typeof firstValue === "object") {

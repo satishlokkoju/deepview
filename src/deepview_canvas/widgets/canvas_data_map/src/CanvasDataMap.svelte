@@ -16,7 +16,7 @@
 <script lang="ts">
   import type { DataMapSpec, CanvasSpec } from '@betterwithdata/canvas_viz';
   import type { Writable, Readable } from 'svelte/store';
-  import type ColumnTable from 'arquero/dist/types/table/column-table';
+  import type { ColumnTable } from 'arquero';
   import type { VegaLiteSpec } from 'svelte-vega';
 
   import { VegaLite } from 'svelte-vega';

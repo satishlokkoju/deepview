@@ -296,7 +296,6 @@ def _stage_2_runner(producer: Producer, batch_size: int, config: ReportConfig,
         )
 
         assert filtered_labels is not None
-
         split_intrs: t.Sequence[t.Callable[[Producer], t.Any]] = (
             _SplitFamiliarity.get_label_introspectors(
                 label_mapping=filtered_labels,

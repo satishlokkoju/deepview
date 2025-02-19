@@ -37,13 +37,10 @@
       "canvas_viz/",
       "widgets/*",
       "canvas_ux/"
-    ],
-    "nohoist": [
-      "**/@storybook/**"
     ]
   },
-  "devDependencies": {
-    "gh-pages": "^5.0.0"
+  "installConfig": {
+    "hoistingLimits": "workspaces"
   },
   "packageManager": "yarn@4.5.3"
 }
