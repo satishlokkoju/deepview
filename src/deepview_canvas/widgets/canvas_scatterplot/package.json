@@ -27,7 +27,7 @@
   },
   "scripts": {
     "build": "webpack --mode=development --progress && jupyter labextension build --development=True .",
-    "build:prod": "webpack --mode=production && jupyter labextension build .",
+    "build:prod": "webpack --mode=production --progress && jupyter labextension build .",
     "clean": "yarn run clean:lib && yarn run clean:nbextension && yarn run clean:labextension && yarn run clean:standalone",
     "clean:lib": "rimraf lib",
     "clean:labextension": "rimraf canvas_scatterplot/labextension",

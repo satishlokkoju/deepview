@@ -90,6 +90,7 @@ export const tooltip = widgetWritable<TooltipSpec>("tooltip", {
 export const table: Readable<ColumnTable> = derived(dataTable, (d: DataView) =>
   fromArrow(d.buffer)
 );
+
 export const filteredTable: Readable<ColumnTable> = derived(
   [table, filter],
   ([table, filter]) => {

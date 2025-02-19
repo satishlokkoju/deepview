@@ -81,13 +81,14 @@
     '#20639B'   // navy blue
   ];
 
-  $: categories = (
+  $: categories = categoryColumn ? (
     $filteredTable
       .rollup({
         col: op.array_agg_distinct(categoryColumn),
       })
       .object() as any
-  ).col;
+  ).col : [];
+  
   $: {
     if (scatterplot !== undefined) {
       const toSelectIds = $selected.map((point: string) =>
