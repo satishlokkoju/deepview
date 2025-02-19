@@ -123,6 +123,8 @@ class _SummaryBuilder(Introspector):
         for label_dimension, labels in dict_data.items():
             if label_dimension == _DataframeColumnPrefixes.ID.value:
                 continue
+            if label_dimension == _DataframeColumnPrefixes.FILENAME.value:
+                continue
             assert len(labels) == len(dict_data[_DataframeColumnPrefixes.ID.value])
             unique_labels[label_dimension] = Counter(labels)
 

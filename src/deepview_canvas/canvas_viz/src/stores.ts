@@ -125,9 +125,8 @@ export const groupNames: Readable<string[] | string[][]> = derived(
     } else return [];
   }
 );
-export const groupedTables: Readable<ColumnTable[]> = derived(
-  [filteredTable, groupColumns, groupNames, canvasSpec],
-  ([filteredTable, groupColumns, groupNames, canvasSpec]) => {
+
+export const groupedTables: Readable<ColumnTable[]> = derived( [filteredTable, groupColumns, groupNames, canvasSpec], ([filteredTable, groupColumns, groupNames, canvasSpec]) => {
     if (
       groupColumns !== undefined &&
       filteredTable !== undefined &&

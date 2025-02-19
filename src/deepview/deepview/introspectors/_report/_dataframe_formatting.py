@@ -49,6 +49,7 @@ class _FamiliarityPrefixes(enum.Enum):
 class _DataframeColumnPrefixes(enum.Enum):
     """Prefixes for various columns of datatable input."""
     ID = 'id'
+    FILENAME = 'filename'
     DUPLICATES = 'duplicates'
     PROJECTION = 'projection'
     FAMILIARITY = _FamiliarityPrefixes
@@ -224,10 +225,10 @@ class _DatasetReportMapping:
                         name.startswith(_DataframeColumnPrefixes.PROJECTION.value),
                         name.startswith(_DataframeColumnPrefixes.DUPLICATES.value),
                         name.startswith(_FamiliarityPrefixes.OVERALL.value),
-                        name.startswith(_FamiliarityPrefixes.SPLIT_FAMILIARITY.value))):
+                        name.startswith(_FamiliarityPrefixes.SPLIT_FAMILIARITY.value),
+                        name.startswith(_DataframeColumnPrefixes.FILENAME.value))):
                 label_dimensions.append(name)
         object.__setattr__(self, "label_dimensions", label_dimensions)
-
         # extract the response names
         response_names = set()
         for name in columns:

@@ -112,7 +112,8 @@ class MyProducer(Producer):
                 Batch.StdKeys.LABELS: {
                     'color': random.choices(self.color_options, k=dataset_size),
                     'dataset': random.choices(self.dataset_options, k=dataset_size),
-                    '': ['label'] * dataset_size
+                    '': ['label'] * dataset_size,
+                    'filename': ['filename'+str(i) for i in range(dataset_size)]
                 },
                 Batch.StdKeys.IDENTIFIER: identifiers
             }
@@ -130,12 +131,12 @@ def test_summary_builder() -> None:
     producer = MyProducer(dataset_size=dataset_size)
     summary = _SummaryBuilder.introspect(producer, batch_size=5)
 
-    # There should be 4 columns for {dataset_size} data samples
-    assert summary.data.shape == (dataset_size, 4)
+    # There should be 5 columns for {dataset_size} data samples
+    assert summary.data.shape == (dataset_size, 5)
 
     # Make sure the keys are what is expected (ID column title is from SummaryBuilder)
     id_title = _DataframeColumnPrefixes.ID.value
-    assert set(summary.data.keys()) == {id_title, 'color', 'dataset', ''}
+    assert set(summary.data.keys()) == {id_title, 'color', 'dataset', '', 'filename'}
 
     # Check unique labels
     assert summary.unique_labels['color'].keys() == set(producer.color_options)
@@ -144,6 +145,7 @@ def test_summary_builder() -> None:
 
     # Check first row of data is valid
     assert summary.data[id_title][0][0] in string.ascii_letters
+    assert summary.data['filename'][0][0] in string.ascii_letters
     assert summary.data['color'][0] in producer.color_options
     assert summary.data['dataset'][0] in producer.dataset_options
 
@@ -362,20 +364,20 @@ def test_condense_dataframes_by_label_dim() -> None:
         # Only summary
         (
                 {"familiarity": None, "duplicates": None, "projection": None},
-                ['color', 'dataset', ''],
+                ['color', 'dataset', '', 'filename'],
                 False
         ),
         # Summary + duplicates
         (
                 {"familiarity": None, "projection": None},
-                ['color', 'dataset', '',
+                ['color', 'dataset', '', 'filename',
                  'duplicates_layer1'],
                 False
         ),
         # Summary + familiarity
         (
                 {"duplicates": None, "projection": None, "split_familiarity_min": 5},
-                ['color', 'dataset', '',
+                ['color', 'dataset', '', 'filename',
                  'splitFamiliarity_layer1_byAttr_color', 'splitFamiliarity_layer1_byAttr_dataset',
                  'splitFamiliarity_layer1_byAttr_',
                  'familiarity_layer1'],
@@ -384,28 +386,28 @@ def test_condense_dataframes_by_label_dim() -> None:
         # Summary + no split familiarity
         (
                 {"duplicates": None, "projection": None},
-                ['color', 'dataset', '',
+                ['color', 'dataset', '', 'filename',
                  'familiarity_layer1'],
                 False
         ),
         # Summary + projection
         (
                 {"duplicates": None, "familiarity": None},
-                ['color', 'dataset', '',
+                ['color', 'dataset', '', 'filename',
                  'projection_layer1_x', 'projection_layer1_y'],
                 True
         ),
         # Summary + duplicates + projection
         (
                 {"familiarity": None},
-                ['color', 'dataset', '',
+                ['color', 'dataset', '', 'filename',
                  'duplicates_layer1', 'projection_layer1_x', 'projection_layer1_y'],
                 True
         ),
         # Summary + duplicates + familiarity
         (
                 {"projection": None, "split_familiarity_min": 5},
-                ['color', 'dataset', '',
+                ['color', 'dataset', '', 'filename',
                  'duplicates_layer1',
                  'splitFamiliarity_layer1_byAttr_color', 'splitFamiliarity_layer1_byAttr_dataset',
                  'splitFamiliarity_layer1_byAttr_',
@@ -416,7 +418,7 @@ def test_condense_dataframes_by_label_dim() -> None:
         # Summary + familiarity + projection
         (
                 {"duplicates": None, "split_familiarity_min": 5},
-                ['color', 'dataset', '',
+                ['color', 'dataset', '', 'filename',
                  'projection_layer1_x', 'projection_layer1_y',
                  'splitFamiliarity_layer1_byAttr_color', 'splitFamiliarity_layer1_byAttr_dataset',
                  'splitFamiliarity_layer1_byAttr_',
@@ -427,7 +429,7 @@ def test_condense_dataframes_by_label_dim() -> None:
         # Everything
         (
                 {"split_familiarity_min": 5},  # Use default everything
-                ['color', 'dataset', '',
+                ['color', 'dataset', '', 'filename',
                  'duplicates_layer1', 'projection_layer1_x', 'projection_layer1_y',
                  'splitFamiliarity_layer1_byAttr_color', 'splitFamiliarity_layer1_byAttr_dataset',
                  'splitFamiliarity_layer1_byAttr_',
