@@ -80,15 +80,34 @@
     '#FFB6C1',  // light pink
     '#20639B'   // navy blue
   ];
-
-  $: categories = categoryColumn ? (
-    $filteredTable
-      .rollup({
-        col: op.array_agg_distinct(categoryColumn),
-      })
-      .object() as any
-  ).col : [];
   
+  $: categories = (() => {
+    // Early return if no data or category column
+    if (!categoryColumn || !$filteredTable) return [];
+    
+    const columns = $filteredTable.columnNames();
+    
+    // Validate category column exists
+    if (!columns.includes(categoryColumn)) {
+      console.warn(`Category column not found: ${categoryColumn}`);
+      categoryColumn = undefined;
+      return [];
+    }
+    
+    try {
+      return $filteredTable
+        .rollup({ col: op.array_agg_distinct(categoryColumn) })
+        .object()
+        .col ?? [];
+    } catch (error) {
+      console.error('Error computing categories:', error);
+      console.error('Available columns:', $filteredTable.columnNames());
+      // Also clear categoryColumn on error
+      categoryColumn = undefined;
+      return [];
+    }
+  })();
+
   $: {
     if (scatterplot !== undefined) {
       const toSelectIds = $selected.map((point: string) =>
