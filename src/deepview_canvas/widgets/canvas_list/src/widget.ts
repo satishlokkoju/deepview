@@ -17,11 +17,10 @@
 import { MODULE_NAME, MODULE_VERSION } from './version';
 import {
   DOMWidgetModel,
-  DOMWidgetView,
   ISerializers,
 } from '@jupyter-widgets/base';
 
-import {serializers, JupyterWidget } from '@betterwithdata/canvas_viz';
+import {serializers, CanvasBaseDomWidgetView } from '@betterwithdata/canvas_viz';
 
 import CanvasList from './CanvasList.svelte';
 
@@ -47,14 +46,8 @@ export class CanvasListModel extends DOMWidgetModel {
   static view_module_version = MODULE_VERSION;
 }
 
-export class CanvasListView extends DOMWidgetView {
+export class CanvasListView extends CanvasBaseDomWidgetView {
   render() {
-    new JupyterWidget({
-      target: this.el,
-      props: {
-        model: this.model,
-        widget: CanvasList,
-      },
-    });
+    this.setupWidget(this.model, CanvasList);
   }
 }

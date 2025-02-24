@@ -17,11 +17,10 @@
 import { MODULE_NAME, MODULE_VERSION } from './version';
 import {
   DOMWidgetModel,
-  DOMWidgetView,
   ISerializers,
 } from '@jupyter-widgets/base';
 
-import {serializers, JupyterWidget } from '@betterwithdata/canvas_viz';
+import {serializers, CanvasBaseDomWidgetView } from '@betterwithdata/canvas_viz';
 
 import CanvasFamiliarity from './CanvasFamiliarity.svelte';
 
@@ -47,14 +46,8 @@ export class CanvasFamiliarityModel extends DOMWidgetModel {
   static view_module_version = MODULE_VERSION;
 }
 
-export class CanvasFamiliarityView extends DOMWidgetView {
+export class CanvasFamiliarityView extends CanvasBaseDomWidgetView {
   render() {
-    new JupyterWidget({
-      target: this.el,
-      props: {
-        model: this.model,
-        widget: CanvasFamiliarity,
-      },
-    });
+    this.setupWidget(this.model, CanvasFamiliarity);
   }
 }

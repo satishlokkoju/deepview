@@ -18,11 +18,10 @@
 import { MODULE_NAME, MODULE_VERSION } from './version';
 import {
   DOMWidgetModel,
-  DOMWidgetView,
   ISerializers,
 } from '@jupyter-widgets/base';
 
-import {serializers, JupyterWidget } from '@betterwithdata/canvas_viz';
+import {serializers, CanvasBaseDomWidgetView } from '@betterwithdata/canvas_viz';
 
 import CanvasScatterplot from './CanvasScatterplot.svelte';
 
@@ -48,14 +47,8 @@ export class CanvasScatterplotModel extends DOMWidgetModel {
   static view_module_version = MODULE_VERSION;
 }
 
-export class CanvasScatterplotView extends DOMWidgetView {
+export class CanvasScatterplotView extends CanvasBaseDomWidgetView {
   render() {
-    new JupyterWidget({
-      target: this.el,
-      props: {
-        model: this.model,
-        widget: CanvasScatterplot,
-      },
-    });
+    this.setupWidget(this.model, CanvasScatterplot);
   }
 }

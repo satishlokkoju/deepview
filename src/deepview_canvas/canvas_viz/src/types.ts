@@ -144,10 +144,6 @@ export type QueryResolver = (
   table: ColumnTable
 ) => SummaryElement | undefined;
 
-export interface WidgetWritable<T> extends Writable<T> {
-  setModel: (m: DOMWidgetModel) => void;
-}
-
 export interface ConfusionMatrixEntry {
   tp: number;
   tn: number;

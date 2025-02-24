@@ -16,13 +16,12 @@
 
 import {
   DOMWidgetModel,
-  DOMWidgetView,
   ISerializers,
 } from '@jupyter-widgets/base';
 
 import { MODULE_NAME, MODULE_VERSION } from './version';
 
-import { JupyterWidget } from '@betterwithdata/canvas_viz';
+import { CanvasBaseDomWidgetView } from '@betterwithdata/canvas_viz';
 
 import Toolbar from './toolbar/Toolbar.svelte';
 
@@ -52,14 +51,9 @@ export class ToolbarModel extends DOMWidgetModel {
   static view_module_version = MODULE_VERSION;
 }
 
-export class ToolbarView extends DOMWidgetView {
+export class ToolbarView extends CanvasBaseDomWidgetView {
   render() {
-    new JupyterWidget({
-      target: this.el,
-      props: {
-        model: this.model,
-        widget: Toolbar,
-      },
-    });
+    this.setupWidget(this.model, Toolbar);
   }
 }
+

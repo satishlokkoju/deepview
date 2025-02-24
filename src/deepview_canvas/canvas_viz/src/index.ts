@@ -20,6 +20,7 @@ export * from "./types";
 export * from "./elements";
 export * from "./helpers";
 export * from "./stores";
+export * from "./canvasbasewidget";
 export { default as JupyterWidget } from "./JupyterWidget.svelte";
 
 export const serializers: ISerializers = {

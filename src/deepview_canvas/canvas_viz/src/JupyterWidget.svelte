@@ -30,8 +30,7 @@
     table,
     filteredTable,
     groupedTables,
-    widgetWritable,
-    initializeStores,
+    createSyncedWidget
   } from "./stores";
 
   import { DataSampleDetail } from "./elements";
@@ -39,14 +38,7 @@
   export let model: DOMWidgetModel;
   export let widget: SvelteComponent;
 
-  initializeStores(model);
-
-  let widgetSpec = widgetWritable<WidgetSpec | SummaryWidgetSpec>(
-    "widget_spec",
-    model.attributes.widget_spec
-  );
-  widgetSpec.setModel(model);
-
+  let widgetSpec = createSyncedWidget<WidgetSpec | SummaryWidgetSpec>("widget_spec", model.attributes.widget_spec, model);
   function handleSpecChanged(event: CustomEvent) {
     widgetSpec.set(event.detail.spec);
   }
@@ -80,4 +72,5 @@
 {:else}
   No data to show.
 {/if}
+
 <DataSampleDetail {tooltip} {canvasSpec} />

@@ -8,9 +8,9 @@ cd src/deepview_canvas/canvas_viz
 jlpm prebuild; jlpm ; jlpm install;jlpm build
 cd ../canvas_ux
 jlpm clean;jlpm install;jlpm run build:prod;pip install .
-cd ../widgets/canvas_list
+cd ../widgets/canvas_summary
 jlpm clean;jlpm install;jlpm run build:prod;pip install .
-cd ../canvas_summary
+cd ../canvas_list
 jlpm clean;jlpm install;jlpm run build:prod;pip install .
 cd ../canvas_scatterplot
 jlpm clean;jlpm install;jlpm run build:prod;pip install .
