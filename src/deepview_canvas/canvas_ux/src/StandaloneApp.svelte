@@ -37,7 +37,55 @@
     filteredTable,
     selected,
     widgetSpecs,
+    initializeStores,
   } from '@betterwithdata/canvas_viz';
+
+  // Create a more complete mock model for standalone mode
+  const mockModel = {
+    // Internal storage for model values
+    _values: new Map<string, any>(),
+    // Internal storage for event listeners
+    _listeners: new Map<string, Function[]>(),
+    // Mock attributes object with index signature to allow dynamic property access
+    attributes: {} as Record<string, any>,
+    
+    // Get a value from the model
+    get: function(key: string) {
+      return this._values.get(key);
+    },
+    
+    // Set a value in the model and trigger change events
+    set: function(key: string, value: any) {
+      this._values.set(key, value);
+      // Also update attributes for direct access
+      this.attributes[key] = value;
+      
+      // Trigger any registered change listeners
+      const eventName = 'change:' + key;
+      const listeners = this._listeners.get(eventName) || [];
+      listeners.forEach(callback => callback());
+      
+      return this;
+    },
+    
+    // Register an event listener
+    on: function(event: string, callback: Function, context: any = null) {
+      if (!this._listeners.has(event)) {
+        this._listeners.set(event, []);
+      }
+      this._listeners.get(event)!.push(callback.bind(context));
+      return this;
+    },
+    
+    // Mock save_changes method
+    save_changes: function() {
+      // In standalone mode, we don't need to do anything
+      return this;
+    }
+  };
+  
+  // Initialize stores with our improved mock model
+  initializeStores(mockModel as any);
 
   import StandalonePage from './StandalonePage.svelte';
   import Toolbar from './toolbar/Toolbar.svelte';
@@ -54,11 +102,13 @@
   $: pages = widgetInfo === undefined ? [] : Object.keys(widgetInfo.pages);
   $: selectedPage =
     selectedPage === undefined && pages !== undefined ? pages[0] : selectedPage;
-  $: canvasSpec.set(
-    widgetInfo === undefined
-      ? ({} as CanvasSpec)
-      : (widgetInfo.spec as CanvasSpec)
-  );
+  $: if (canvasSpec && typeof canvasSpec.set === 'function') {
+    canvasSpec.set(
+      widgetInfo === undefined
+        ? ({} as CanvasSpec)
+        : (widgetInfo.spec as CanvasSpec)
+    );
+  }
 
   function clearURL(widgetInfo: WidgetInfo) {
     URL_PARAMS.delete('filter');
