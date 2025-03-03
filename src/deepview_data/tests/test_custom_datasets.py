@@ -18,8 +18,7 @@ import os
 import shutil
 import tempfile
 import unittest
-import typing
-from typing import List, Tuple, Sequence
+from typing import List, Tuple
 import numpy as np
 from PIL import Image
 from pathlib import Path
@@ -91,10 +90,9 @@ class TestImageFolderDataset(unittest.TestCase, _Logged):
             valid_extensions=['.jpg', '.jpeg', '.png'],
             max_samples=-1
         )
-        (x_train, y_train), (x_test, y_test) = dataset.split_dataset
+        (x_train, y_train), (x_test, y_test) = dataset.raw_dataset
         self.assertEqual(len(x_train) + len(x_test), self.num_images)
         self.assertEqual(len(y_train) + len(y_test), self.num_images)
-        self.assertEqual(x_train.shape[1:], self.image_size + (3,))
 
     def test_custom_train_split(self) -> None:
         """Test custom train-test split ratio."""
@@ -106,7 +104,7 @@ class TestImageFolderDataset(unittest.TestCase, _Logged):
             valid_extensions=['.jpg', '.jpeg', '.png'],
             max_samples=-1
         )
-        (x_train, y_train), (x_test, y_test) = dataset.split_dataset
+        (x_train, y_train), (x_test, y_test) = dataset.raw_dataset
         self.assertAlmostEqual(len(x_train) / self.num_images, custom_split, places=1)
 
     def test_valid_extensions(self) -> None:
@@ -118,7 +116,7 @@ class TestImageFolderDataset(unittest.TestCase, _Logged):
             valid_extensions=['.png'],
             max_samples=-1
         )
-        (x_train, y_train), (x_test, y_test) = dataset.split_dataset
+        (x_train, y_train), (x_test, y_test) = dataset.raw_dataset
         total_samples = len(x_train) + len(x_test)
         self.assertEqual(total_samples, self.num_png_images)
 
@@ -132,7 +130,7 @@ class TestImageFolderDataset(unittest.TestCase, _Logged):
             valid_extensions=['.jpg', '.jpeg', '.png'],
             max_samples=max_samples
         )
-        (x_train, y_train), (x_test, y_test) = dataset.split_dataset
+        (x_train, y_train), (x_test, y_test) = dataset.raw_dataset
         total_samples = len(x_train) + len(x_test)
         self.assertEqual(total_samples, max_samples)
 
@@ -146,7 +144,7 @@ class TestImageFolderDataset(unittest.TestCase, _Logged):
             valid_extensions=['.jpg', '.jpeg', '.png'],
             max_samples=max_samples
         )
-        (x_train, y_train), (x_test, y_test) = dataset.split_dataset
+        (x_train, y_train), (x_test, y_test) = dataset.raw_dataset
         unique_labels, counts = np.unique(np.concatenate([y_train, y_test]), return_counts=True)
         self.assertTrue(np.all(counts >= max_samples // len(unique_labels)))
 
@@ -160,7 +158,7 @@ class TestImageFolderDataset(unittest.TestCase, _Logged):
             valid_extensions=['.jpg', '.jpeg', '.png'],
             max_samples=max_samples
         )
-        (x_train, y_train), (x_test, y_test) = dataset.split_dataset
+        (x_train, y_train), (x_test, y_test) = dataset.raw_dataset
         unique_labels = np.unique(np.concatenate([y_train, y_test]))
         self.assertTrue(len(unique_labels) >= 1)
 
@@ -176,7 +174,7 @@ class TestImageFolderDataset(unittest.TestCase, _Logged):
                 valid_extensions=['.jpg', '.png'],
                 max_samples=-1
             )
-            _ = dataset.split_dataset
+            _ = dataset.raw_dataset
         self.assertIn("No valid class folders found", str(cm.exception))
 
     def test_invalid_image(self) -> None:
@@ -205,7 +203,7 @@ class TestImageFolderDataset(unittest.TestCase, _Logged):
         )
 
         # Get total number of valid images from the split dataset
-        (x_train, y_train), (x_test, y_test) = dataset.split_dataset
+        (x_train, y_train), (x_test, y_test) = dataset.raw_dataset
         total_samples = len(x_train) + len(x_test)
 
         # Should have all original images plus one valid image
@@ -223,33 +221,18 @@ class TestImageFolderDataset(unittest.TestCase, _Logged):
             valid_extensions=['.jpg', '.jpeg', '.png'],
             max_samples=-1
         )
-        (x_train, _), (x_test, _) = dataset.split_dataset
-        # Check that images are uint8 and in range [0, 255]
-        self.assertEqual(x_train.dtype, np.uint8)
-        self.assertEqual(x_test.dtype, np.uint8)
-        self.assertTrue(np.all(x_train >= 0))
-        self.assertTrue(np.all(x_train <= 255))
-        self.assertTrue(np.all(x_test >= 0))
-        self.assertTrue(np.all(x_test <= 255))
+        (x_train, _), (x_test, _) = dataset.raw_dataset
 
-    def test_array_writability(self) -> None:
-        """Test that loaded images are writable."""
-        dataset = CustomDatasets.ImageFolderDataset(
-            root_folder=self.test_dir,
-            image_size=self.image_size,
-            train_split=0.8,
-            valid_extensions=['.jpg', '.jpeg', '.png'],
-            max_samples=-1
-        )
-        (x_train, _), (x_test, _) = dataset.split_dataset
-        try:
-            # Test writability by modifying values directly
-            x_train[0][0, 0, 0] = 128
-            x_test[0][0, 0, 0] = 128
-        except ValueError as e:
-            self.fail(f"Array modification failed: {e}")
-        self.assertEqual(x_train[0][0, 0, 0], 128)
-        self.assertEqual(x_test[0][0, 0, 0], 128)
+        # Test producer output
+        batch_iter = dataset(batch_size=3)
+        batch = next(iter(batch_iter))
+
+        # Loop through elements in batch
+        for k, v in batch.fields.items():
+            # Check that images are uint8 and in range [0, 255]
+            self.assertEqual(v.dtype, np.uint8)
+            self.assertTrue(np.all(v >= 0))
+            self.assertTrue(np.all(v <= 255))
 
     def test_get_producer(self) -> None:
         """Test that get_producer returns a correctly configured TrainTestSplitProducer."""
@@ -257,25 +240,14 @@ class TestImageFolderDataset(unittest.TestCase, _Logged):
         dataset = CustomDatasets.ImageFolderDataset(
             root_folder=self.test_dir,
             image_size=self.image_size,
-            max_samples=max_samples
+            max_samples=max_samples,
+            write_to_folder=True
         )
-
-        write_folder = dataset.write_to_folder
-        if write_folder is None:
-            raise ValueError("write_to_folder should not be None")
-
-        # Add the write_to_folder to tracked directories for cleanup
-        self.created_dirs.append(write_folder)
 
         # Test producer configuration
         self.assertEqual(dataset.max_samples, max_samples)
         self.assertTrue(dataset.attach_metadata)
-        self.assertIsNotNone(write_folder)
-        self.assertTrue(write_folder.startswith('processed_'))
-
-        # Verify folder name format
-        expected_folder = 'processed_' + os.path.basename(self.test_dir)
-        self.assertEqual(write_folder, expected_folder)
+        self.assertTrue(dataset.write_to_folder)
 
         # Test producer output
         batch_iter = dataset(batch_size=3)
@@ -290,9 +262,14 @@ class TestImageFolderDataset(unittest.TestCase, _Logged):
         self.assertEqual(len(batch.metadata[Batch.StdKeys.LABELS]["label"]), 3)
         self.assertEqual(len(batch.metadata[Batch.StdKeys.LABELS]["dataset"]), 3)
 
+        # Verify folder name format
+        expected_folder = 'deepview-dataset-' + os.path.basename(self.test_dir)
+        # Add the write_to_folder to tracked directories for cleanup
+        self.created_dirs.append(expected_folder)
+
         # Verify images are written to disk
-        self.assertTrue(os.path.exists(write_folder))
-        written_images = list(Path(write_folder).rglob('*.png'))
+        self.assertTrue(os.path.exists(expected_folder))
+        written_images = list(Path(expected_folder).rglob('*.png'))
         self.assertEqual(len(written_images), 3)  # Should have written 3 images for the batch
 
     def test_metadata(self) -> None:
@@ -302,13 +279,9 @@ class TestImageFolderDataset(unittest.TestCase, _Logged):
             image_size=self.image_size
         )
 
-        # Verify file_names attribute is set
-        self.assertIsNotNone(dataset.file_names)
-        self.assertEqual(len(typing.cast(Sequence[str], dataset.file_names)), self.num_images)
-
-        # Verify split_dataset is set
-        self.assertIsNotNone(dataset.split_dataset)
-        (x_train, y_train), (x_test, y_test) = dataset.split_dataset
+        # Verify raw_dataset is set
+        self.assertIsNotNone(dataset.raw_dataset)
+        (x_train, y_train), (x_test, y_test) = dataset.raw_dataset
         self.assertEqual(len(x_train) + len(x_test), self.num_images)
 
     def test_load_data_with_invalid_extension(self) -> None:
@@ -324,7 +297,7 @@ class TestImageFolderDataset(unittest.TestCase, _Logged):
         )
 
         # Verify the invalid file is skipped
-        self.assertEqual(len(dataset.split_dataset[0][0]) + len(dataset.split_dataset[1][0]), 12)  # Only valid images should be loaded
+        self.assertEqual(len(dataset.raw_dataset[0][0]) + len(dataset.raw_dataset[1][0]), 12)  # Only valid images should be loaded
 
     def test_load_data_with_empty_class(self) -> None:
         """Test loading data with an empty class directory."""
@@ -338,7 +311,7 @@ class TestImageFolderDataset(unittest.TestCase, _Logged):
         )
 
         # Verify the empty class is handled correctly
-        unique_labels = np.unique(np.concatenate([dataset.split_dataset[0][1], dataset.split_dataset[1][1]]))
+        unique_labels = np.unique(np.concatenate([dataset.raw_dataset[0][1], dataset.raw_dataset[1][1]]))
         self.assertNotIn("empty_class", unique_labels)
 
     def test_load_data_with_corrupted_image(self) -> None:
@@ -354,7 +327,7 @@ class TestImageFolderDataset(unittest.TestCase, _Logged):
         )
 
         # Verify the corrupted file is handled gracefully
-        self.assertEqual(len(dataset.split_dataset[0][0]) + len(dataset.split_dataset[1][0]), 12)  # Only valid images should be loaded
+        self.assertEqual(len(dataset.raw_dataset[0][0]) + len(dataset.raw_dataset[1][0]), 12)  # Only valid images should be loaded
 
     def test_train_split_with_invalid_ratio(self) -> None:
         """Test train split with invalid ratio."""

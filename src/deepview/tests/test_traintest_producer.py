@@ -1,5 +1,5 @@
 import os
-import tempfile
+import shutil
 import numpy as np
 import pytest
 from deepview.base import TrainTestSplitProducer, Batch
@@ -155,43 +155,36 @@ def test_file_names_and_write_to_disk() -> None:
     x_test = (np.random.rand(2, *image_shape) * 255).astype(np.uint8)
     y_test = np.array([['cat'], ['dog']])
 
-    # Create file names
-    file_names = ['train1.jpg', 'train2.jpg', 'train3.jpg',
-                  'test1.jpg', 'test2.jpg']
+    producer = TrainTestSplitProducer(
+        split_dataset=((x_train, y_train), (x_test, y_test)),
+        attach_metadata=True,
+        write_to_folder=True
+    )
 
-    with tempfile.TemporaryDirectory() as temp_dir:
-        producer = TrainTestSplitProducer(
-            split_dataset=((x_train, y_train), (x_test, y_test)),
-            attach_metadata=True,
-            write_to_folder=temp_dir,
-            file_names=file_names
-        )
+    # Check that files are written correctly
+    batches = list(producer(batch_size=5))
+    assert len(batches) == 1
+    batch = batches[0]
+    metadata = batch.metadata
 
-        # Check that files are written correctly
-        batches = list(producer(batch_size=5))
-        assert len(batches) == 1
-        batch = batches[0]
-        metadata = batch.metadata
+    temp_dir = producer._temp_folder
+    # Verify file paths exist
+    assert temp_dir is not None, "Temporary directory was not created"
+    assert os.path.exists(temp_dir)
+    assert os.path.exists(os.path.join(temp_dir, 'train'))
+    assert os.path.exists(os.path.join(temp_dir, 'test'))
+    assert 'label' in metadata[Batch.StdKeys.LABELS]
+    labels_list = metadata[Batch.StdKeys.LABELS]['label']
+    assert isinstance(labels_list, list)
+    assert len(labels_list) == 5
 
-        # Verify file paths exist
-        assert os.path.exists(temp_dir)
-        assert os.path.exists(os.path.join(temp_dir, 'train'))
-        assert os.path.exists(os.path.join(temp_dir, 'test'))
-
-        # Verify file names in metadata
-        assert 'filename' in metadata[Batch.StdKeys.LABELS]
-        file_names_list = metadata[Batch.StdKeys.LABELS]['filename']
-        assert isinstance(file_names_list, list)
-        assert len(file_names_list) == len(file_names)
-        assert all(a == b for a, b in zip(file_names_list, file_names))
-
-        # Test with invalid file names length
-        with pytest.raises(DeepViewException) as exc_info:
-            TrainTestSplitProducer(
-                split_dataset=((x_train, y_train), (x_test, y_test)),
-                file_names=['test.jpg']  # Wrong length
-            )
-        assert str(exc_info.value) == "file_names must be of the same length as samples."
+    # Clean up temporary directory
+    temp_dir = producer._temp_folder
+    if temp_dir is not None and os.path.exists(temp_dir):
+        try:
+            shutil.rmtree(temp_dir)
+        except Exception as e:
+            print(f"Warning: Failed to remove directory {temp_dir}: {e}")
 
 
 def test_dataset_filtering() -> None:

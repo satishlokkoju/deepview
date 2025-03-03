@@ -49,8 +49,7 @@ class _KerasDatasetLoader(TrainTestSplitProducer):
                  split_dataset: t.Optional[dt.TrainTestSplitType] = None,
                  attach_metadata: bool = True,
                  max_samples: int = -1,
-                 write_to_folder: t.Optional[str] = None,
-                 file_names: t.Optional[t.Sequence[str]] = None) -> None:
+                 write_to_folder: bool = False) -> None:
         # Load the dataset:
         if split_dataset is None:
             split_dataset = self.load_dataset()
@@ -58,8 +57,7 @@ class _KerasDatasetLoader(TrainTestSplitProducer):
             split_dataset=split_dataset,
             attach_metadata=attach_metadata,
             max_samples=max_samples,
-            write_to_folder=write_to_folder,
-            file_names=file_names
+            write_to_folder=write_to_folder
         )
 
     @staticmethod

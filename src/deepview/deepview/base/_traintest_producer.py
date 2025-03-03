@@ -41,6 +41,8 @@ try:
 except ImportError:
     pass
 
+import random
+import string
 from pathlib import Path
 from ._batch._batch import Batch
 from ._producer import Producer
@@ -92,17 +94,15 @@ class TrainTestSplitProducer(Producer):
     max_samples: int = -1
     """Max data samples to pull from. Set to -1 to pull all samples."""
 
-    write_to_folder: t.Optional[str] = None
-    """Path to write the data to. If None, does not write anything."""
-
-    file_names: t.Optional[t.Sequence[str]] = None
-    """File names of the samples."""
+    write_to_folder: bool = False
+    """bool to write data to folder for visualization. If False, does not write anything."""
 
     _samples: np.ndarray = dataclasses.field(init=False)
     _labels: np.ndarray = dataclasses.field(init=False)
     _dataset_ids: np.ndarray = dataclasses.field(init=False)
     _dataset_labels: np.ndarray = dataclasses.field(init=False)
     _permutation: t.Optional[np.ndarray] = dataclasses.field(init=False)
+    _temp_folder: t.Optional[str] = dataclasses.field(init=False)
 
     def __post_init__(self) -> None:
         # Verify type of data matches expectation
@@ -152,8 +152,10 @@ class TrainTestSplitProducer(Producer):
             # If max_samples is less than 0 or greater than the dataset, sample the whole dataset
             self.max_samples = len(self._samples)
 
-        if self.file_names is not None and len(self.file_names) != len(self._samples):
-            raise DeepViewException("file_names must be of the same length as samples.")
+        if self.write_to_folder:
+            random_string = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(6))
+            self._temp_folder = './deepview-dataset-' + random_string
+            os.makedirs(self._temp_folder, exist_ok=True)
 
         self._permutation = None
 
@@ -270,9 +272,11 @@ class TrainTestSplitProducer(Producer):
             )
 
             if self.attach_metadata:
-                if self.write_to_folder is not None:
+                if self.write_to_folder:
                     # Use pathname as the identifier for each data sample, excluding base data directory
-                    builder.metadata[Batch.StdKeys.IDENTIFIER] = self._write_images_to_disk(indices, self.write_to_folder)
+                    # _temp_folder should be initialized when write_to_folder is True
+                    assert self._temp_folder is not None, "temp_folder must be initialized when write_to_folder is True"
+                    builder.metadata[Batch.StdKeys.IDENTIFIER] = self._write_images_to_disk(indices, self._temp_folder)
                 else:
                     builder.metadata[Batch.StdKeys.IDENTIFIER] = indices
 
@@ -281,8 +285,6 @@ class TrainTestSplitProducer(Producer):
                     "label": np.take(self._labels, indices),
                     "dataset": np.take(self._dataset_labels, indices)
                 }
-                if self.file_names is not None:
-                    labels_dict["filename"] = np.take(self.file_names, indices)
                 builder.metadata[Batch.StdKeys.LABELS] = labels_dict
 
             yield builder.make_batch()
