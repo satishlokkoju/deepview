@@ -62,6 +62,9 @@
 </script>
 
 <div
+  role="button"
+  tabindex="0"
+  aria-label="Data sample {number !== undefined ? `${number + 1}` : ''}"
   on:mouseenter={() => {
     hover = true;
     updateSampleTooltip();
@@ -71,6 +74,12 @@
     updateSampleTooltip();
   }}
   on:mousemove={handleMousemove}
+  on:keydown={(e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      select();
+      e.preventDefault();
+    }
+  }}
   class="relative"
 >
   <svelte:component

@@ -44,17 +44,56 @@ export function getColumnType(
 }
 
 export function getBinnableStringColumns(table: ColumnTable): string[] {
-  const colNames = table.columnNames();
-  const binnnableStringColumns: string[] = [];
-  for (const colName of colNames) {
-    const columnType = getColumnType(table, colName);
-    if (columnType === "string") {
-      if (isStringColumnBinnable(colName, table)) {
-        binnnableStringColumns.push(colName);
-      }
-    }
+  if (!table) {
+    console.warn("[table] getBinnableStringColumns: Table is null or undefined");
+    return [];
   }
-  return binnnableStringColumns;
+
+  try {
+    const colNames = table.columnNames();
+    const binnnableStringColumns: string[] = [];
+    
+    // Process in batches for large tables to avoid UI freezing
+    const processColumns = (startIdx: number, batchSize: number) => {
+      const endIdx = Math.min(startIdx + batchSize, colNames.length);
+      
+      for (let i = startIdx; i < endIdx; i++) {
+        const colName = colNames[i];
+        try {
+          const columnType = getColumnType(table, colName);
+          if (columnType === "string") {
+            try {
+              if (isStringColumnBinnable(colName, table)) {
+                binnnableStringColumns.push(colName);
+              }
+            } catch (error) {
+              console.warn(`[table] Error checking if column ${colName} is binnable:`, error);
+            }
+          }
+        } catch (error) {
+          console.warn(`[table] Error processing column ${colName}:`, error);
+        }
+      }
+      
+      // If there are more columns to process, schedule the next batch
+      if (endIdx < colNames.length) {
+        setTimeout(() => processColumns(endIdx, batchSize), 0);
+      }
+    };
+    
+    // For smaller tables, process all at once
+    if (colNames.length <= 20) {
+      processColumns(0, colNames.length);
+    } else {
+      // For larger tables, process in smaller batches
+      processColumns(0, 20);
+    }
+    
+    return binnnableStringColumns;
+  } catch (error) {
+    console.error("[table] getBinnableStringColumns: Error processing table:", error);
+    return [];
+  }
 }
 
 export function isStringColumnBinnable(
@@ -62,11 +101,31 @@ export function isStringColumnBinnable(
   table: ColumnTable
 ): boolean {
   /** If more than UNIQUE_COLS_PCTG percent of the column are unique strings, likely an ID, don't bin. */
-  const unique = table.groupby(columnName).count().numRows();
-  if (unique < UNIQUE_COLS_PCTG * table.numRows()) {
-    return true;
+  const threshold = Math.ceil(UNIQUE_COLS_PCTG * table.numRows());
+  
+  // Early optimization: if we have fewer rows than threshold, we can use the original approach
+  if (table.numRows() <= threshold) {
+    const unique = table.groupby(columnName).count().numRows();
+    return unique < threshold;
   }
-  return false;
+  
+  // More memory-efficient approach for larger tables
+  const uniqueValues = new Set<string>();
+  const column = table.array(columnName);
+  
+  // Only need to check until we exceed threshold
+  for (let i = 0; i < column.length; i++) {
+    const value = column[i]?.toString() || '';
+    uniqueValues.add(value);
+    
+    // If we've already found more unique values than our threshold,
+    // we can stop early and return false
+    if (uniqueValues.size >= threshold) {
+      return false;
+    }
+  }
+  
+  return true;
 }
 
 export const cartesian = (...a: string[][]): string[] =>

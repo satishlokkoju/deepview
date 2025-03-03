@@ -52,7 +52,7 @@
   }
 
 
-  let container: HTMLDivElement;
+  let container: HTMLElement;
   let wavesurfer: WaveSurfer;
   let playing: boolean = false;
   let oldId: string = "";
@@ -100,7 +100,12 @@
 </script>
 
 <div class="flex flex-col {large ? 'w-48 mx-1' : 'w-24 m-1'}">
-  <div bind:this={container} on:click />
+  <button 
+    bind:this={container} 
+    on:click 
+    type="button"
+    class="p-0 border-0 bg-transparent"
+  />
   <div>
     <IconButton on:click={changePlayStatus}>
       <Fa icon={playing ? faPause : faPlay} slot="icon" />

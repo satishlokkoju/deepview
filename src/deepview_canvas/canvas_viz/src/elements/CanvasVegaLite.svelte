@@ -60,29 +60,14 @@
      // Add signals to the spec
      const specWithSignals = {
       ...spec,
-      signals: [
+      params: [
         {
           name: "select",
-          value: null,
-          on: [{"events": "click", "update": "datum"}]
+          select: {"type": "point", "encodings": ["x", "y"]}
         },
         {
           name: "brush",
-          value: null,
-          on: [
-            {
-              "events": "@chart:mousedown",
-              "update": "[x(), y()]"
-            },
-            {
-              "events": "[@chart:mousedown, window:mouseup] > window:mousemove!",
-              "update": "[brush[0], [x(), y()]]"
-            },
-            {
-              "events": {"signal": "double"},
-              "update": "null"
-            }
-          ]
+          select: {"type": "interval", "encodings": ["x", "y"]}
         }
       ]
     };

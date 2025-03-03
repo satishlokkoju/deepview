@@ -41,9 +41,11 @@
         class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
         aria-label="Pagination"
       >
-        <p
+        <button
+          type="button"
           class="bg-white relative cursor-pointer inline-flex items-center px-2 py-2 rounded-l-md border border-lightgrey text-sm font-medium text-gray-500 hover:bg-lightgrey"
           on:click={() => (page !== 0 ? page-- : "")}
+          disabled={page === 0}
         >
           <span class="sr-only">Previous</span>
           <!-- Heroicon name: solid/chevron-left -->
@@ -60,8 +62,8 @@
               clip-rule="evenodd"
             />
           </svg>
-        </p>
-        <!-- Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
+        </button>
+
         <p
           aria-current="page"
           class="z-10 bg-indigo-50 border-lightgrey text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium bg-white"
@@ -69,9 +71,11 @@
           Page {page + 1} of {maxPage}
         </p>
 
-        <p
+        <button
+          type="button"
           class="bg-white relative cursor-pointer inline-flex items-center px-2 py-2 rounded-r-md border border-lightgrey text-sm font-medium text-gray-500 hover:bg-lightgrey"
           on:click={() => (page < maxPage - 1 ? page++ : "")}
+          disabled={page >= maxPage - 1}
         >
           <span class="sr-only">Next</span>
           <!-- Heroicon name: solid/chevron-right -->
@@ -88,7 +92,7 @@
               clip-rule="evenodd"
             />
           </svg>
-        </p>
+        </button>
       </nav>
     </div>
   </div>

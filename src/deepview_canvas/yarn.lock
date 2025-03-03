@@ -6986,6 +6986,7 @@ __metadata:
     eslint: "npm:^7.4.0"
     eslint-config-prettier: "npm:^8.1.0"
     eslint-plugin-prettier: "npm:^4.0.0"
+    eslint-plugin-svelte: "npm:^2.35.1"
     mini-css-extract-plugin: "npm:^2.3.0"
     mkdirp: "npm:^1.0.4"
     postcss: "npm:^8.2.10"
@@ -7148,7 +7149,7 @@ __metadata:
     postcss-loader: "npm:^6.1.0"
     prettier: "npm:^2.4.0"
     purgecss-from-svelte: "npm:^2.0.2"
-    regl-scatterplot: "npm:^1.0.0"
+    regl-scatterplot: "npm:^1.13.2"
     rimraf: "npm:^3.0.2"
     source-map-loader: "npm:^3.0.0"
     style-loader: "npm:^3.2.1"
@@ -9486,7 +9487,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-svelte@npm:^2.46.1":
+"eslint-plugin-svelte@npm:^2.35.1, eslint-plugin-svelte@npm:^2.46.1":
   version: 2.46.1
   resolution: "eslint-plugin-svelte@npm:2.46.1"
   dependencies:
@@ -16144,9 +16145,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"regl-scatterplot@npm:^1.0.0":
-  version: 1.13.0
-  resolution: "regl-scatterplot@npm:1.13.0"
+"regl-scatterplot@npm:^1.13.2":
+  version: 1.13.2
+  resolution: "regl-scatterplot@npm:1.13.2"
   dependencies:
     "@flekschas/utils": "npm:^0.32.2"
     dom-2d-camera: "npm:^2.2.6"
@@ -16158,7 +16159,7 @@ __metadata:
   peerDependencies:
     pub-sub-es: ~3.0.0
     regl: ~2.1.1
-  checksum: 10c0/3e8ff6d5c4c2c7a6b0c7d279705f1f7d1f74d877f842bd5f6d21d7d7d6aca602693071043ffcc42e57b2f33e411fec3a975d4da47d24fb387501f7ad41f596fb
+  checksum: 10c0/694a5f4d4d38688bd22008e7d774e16efd6e6e6c9c1112013cedd677ce14847681dbe14a7eff77a6207b5ba265601005943f05a86a27b81075bd86f5d5983cdd
   languageName: node
   linkType: hard
 

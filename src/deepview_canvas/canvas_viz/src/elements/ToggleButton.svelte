@@ -18,20 +18,31 @@
   export let title: string;
 </script>
 
-<div
-  class="flex justify-between items-center"
+<button
+  type="button"
+  class="flex justify-between items-center w-full"
   on:click={() => (active = !active)}
+  on:keydown={(e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      active = !active;
+      e.preventDefault();
+    }
+  }}
+  aria-pressed={active}
+  aria-label={title}
 >
   <span class="pr-1">{title}</span>
   <div
     class="w-10 h-6 flex items-center bg-midgrey rounded-full p-1 duration-100 ease-in-out {active
       ? 'bg-highlight'
       : ''}"
+    aria-hidden="true"
   >
     <div
       class="bg-white w-4 h-4 rounded-full shadow-md transform duration-100 ease-in-out {active
         ? 'translate-x-4'
         : ''}"
+      aria-hidden="true"
     />
   </div>
-</div>
+</button>

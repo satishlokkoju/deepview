@@ -318,6 +318,8 @@
     class="flex-grow relative"
     on:dblclick={handleKeydown}
     use:watchResize={resized}
+    role="application"
+    aria-label="Interactive scatterplot visualization"
   >
     {#if xColumn !== undefined && yColumn !== undefined}
       <canvas bind:this={scatterCanvas} />

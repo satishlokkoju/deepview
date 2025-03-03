@@ -40,7 +40,13 @@ export default [
       svelte({
         preprocess: sveltePreprocess({ sourceMap: false }),
       }),
-      resolve({ browser: true }),
+      resolve({ 
+        browser: true,
+        dedupe: ['svelte'],
+        extensions: ['.svelte', '.mjs', '.js', '.json', '.node'],
+        exportConditions: ['svelte'],
+        mainFields: ['svelte', 'browser', 'module', 'main']
+      }),
       commonjs({ sourceMap: false }),
       css({ output: "bundle.css" }),
       typescript({ sourceMap: false }),

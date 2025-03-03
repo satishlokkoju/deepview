@@ -62,7 +62,6 @@
       {title}
     </h3>
     <IconButton
-      uiChange={true}
       on:click={() => {
         selectAll(
           selected,
