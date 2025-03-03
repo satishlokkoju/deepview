@@ -1,5 +1,4 @@
 <!-- # Copyright 2024 BetterWithData
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -33,7 +32,7 @@
   export let canvasSpec: Writable<CanvasSpec>;
   export let tooltip: Writable<TooltipSpec>;
   export let defaultNumberShown: number;
-  export let storybook: boolean = false;
+  export let storybook = false;
   export let candidatesGroupNumber: number;
 
   $: filteredPoints = $groupNames
@@ -43,7 +42,7 @@
         points: dataPoints.filter((point: Record<string, unknown>) => {
           let match = true;
           attrs.forEach((attr, i) => {
-            if (point[$groupColumns[i]] !== attr) match = false;
+            if (point[$groupColumns[i]] !== attr) {match = false;}
           });
           return match;
         }),

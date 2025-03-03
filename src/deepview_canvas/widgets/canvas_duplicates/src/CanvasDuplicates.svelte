@@ -25,14 +25,14 @@
   import { mapHeight, Dropdown, ComponentHeader } from '@betterwithdata/canvas_viz';
 
   export let widgetSpec: WidgetSpec;
-  export let fullSize: boolean = false;
+  export let fullSize = false;
   export let filteredTable: Writable<ColumnTable>;
   export let canvasSpec: Writable<CanvasSpec>;
   export let groupColumns: Writable<string[]>;
   export let groupNames: Writable<string[][]>;
   export let selected: Writable<string[]>;
   export let tooltip: Writable<TooltipSpec>;
-  export let storybook: boolean = false;
+  export let storybook = false;
 
   let selectedLayer: string;
   let container: HTMLDivElement;
@@ -42,7 +42,7 @@
   );
   $: layerNames = columnNames.map((name) => name.substring(11));
   $: if (selectedLayer === undefined)
-    selectedLayer = layerNames[0] !== undefined ? layerNames[0] : '';
+    {selectedLayer = layerNames[0] !== undefined ? layerNames[0] : '';}
   $: selectedColumn =
     selectedLayer === undefined
       ? ''

@@ -1,17 +1,27 @@
-module.exports = {
+module.exports = {  
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended'
+    'plugin:prettier/recommended',
+    'plugin:svelte/recommended'
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: 'tsconfig.eslint.json',
-    sourceType: 'module'
+    sourceType: 'module',
+    extraFileExtensions: ['.svelte']
   },
-  plugins: ['@typescript-eslint', 'svelte3'],
-  overrides: [{files: ['*.svelte'], processor: 'svelte3/svelte3'}],
+  plugins: ['@typescript-eslint', 'svelte'],
+  overrides: [
+    {
+      files: ['*.svelte'],
+      parser: 'svelte-eslint-parser',
+      parserOptions: {
+        parser: '@typescript-eslint/parser'
+      }
+    }
+  ],
   rules: {
     '@typescript-eslint/no-unused-vars': ['warn', { args: 'none' }],
     '@typescript-eslint/no-explicit-any': 'off',
@@ -27,6 +37,8 @@ module.exports = {
     'prefer-arrow-callback': 'error'
   },
   settings: {
-    'svelte3/typescript': true
+    'svelte': {
+      'typescript': true
+    }
   }
 };

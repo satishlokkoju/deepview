@@ -65,6 +65,7 @@
     "eslint": "^7.4.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-svelte": "^2.35.1",
     "mini-css-extract-plugin": "^2.3.0",
     "mkdirp": "^1.0.4",
     "postcss": "^8.2.10",

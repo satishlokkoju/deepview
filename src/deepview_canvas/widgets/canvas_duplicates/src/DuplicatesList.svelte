@@ -1,5 +1,5 @@
-<!-- # Copyright 2024 BetterWithData
-#
+<!--
+# Copyright 2024 BetterWithData
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -27,7 +27,7 @@
   export let groupNames: Writable<string[][]>;
   export let selected: Writable<string[]>;
   export let tooltip: Writable<TooltipSpec>;
-  export let storybook: boolean = false;
+  export let storybook = false;
 
   const NUMBER_SHOWN = 17;
   $: rowsPerPage = Math.ceil(
