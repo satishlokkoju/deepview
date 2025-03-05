@@ -320,7 +320,7 @@ class ImageFolderDataset(Producer, _Logged):
                 sample_list.append(img)
 
             # Convert list of images to numpy array
-            samples_array = np.array(sample_list)
+            samples_array: np.ndarray = np.array(sample_list)
 
             builder = Batch.Builder(
                 fields={"samples": samples_array}
