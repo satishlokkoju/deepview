@@ -1,6 +1,6 @@
 {
   "name": "canvas-data-map",
-  "version": "3.6.0",
+  "version": "3.7.0",
   "description": "A component for visualizing data on a map.",
   "private": true,
   "keywords": [
@@ -42,7 +42,7 @@
     "dev": "yarn run watch && python -m http.server --directory ./canvas_data_map/standalone 8082"
   },
   "dependencies": {
-    "@betterwithdata/canvas_viz": "^1.0.0",
+    "@betterwithdata/canvas_viz": "^1.1.0",
     "@jupyter-widgets/base": "^1.1.10 || ^2.0.0 || ^3.0.0 || ^4.0.0",
     "arquero": "^8.0.0"
   },

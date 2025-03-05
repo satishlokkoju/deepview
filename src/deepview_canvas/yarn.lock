@@ -1241,7 +1241,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@betterwithdata/canvas_viz@npm:^1.0.0, @betterwithdata/canvas_viz@workspace:canvas_viz":
+"@betterwithdata/canvas_viz@npm:^1.0.0, @betterwithdata/canvas_viz@npm:^1.1.0, @betterwithdata/canvas_viz@workspace:canvas_viz":
   version: 0.0.0-use.local
   resolution: "@betterwithdata/canvas_viz@workspace:canvas_viz"
   dependencies:
@@ -6915,7 +6915,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "canvas-data-map@workspace:widgets/canvas_data_map"
   dependencies:
-    "@betterwithdata/canvas_viz": "npm:^1.0.0"
+    "@betterwithdata/canvas_viz": "npm:^1.1.0"
     "@fullhuman/postcss-purgecss": "npm:^4.0.3"
     "@jupyter-widgets/base": "npm:^1.1.10 || ^2.0.0 || ^3.0.0 || ^4.0.0"
     "@jupyterlab/builder": "npm:^3.6.8 || ^4.0.0"
@@ -7017,7 +7017,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "canvas-familiarity@workspace:widgets/canvas_familiarity"
   dependencies:
-    "@betterwithdata/canvas_viz": "npm:^1.0.0"
+    "@betterwithdata/canvas_viz": "npm:^1.1.0"
     "@fullhuman/postcss-purgecss": "npm:^4.0.3"
     "@jupyter-widgets/base": "npm:^1.1.10 || ^2.0.0 || ^3.0.0 || ^4.0.0"
     "@jupyterlab/builder": "npm:^3.6.8 || ^4.0.0"
@@ -7068,7 +7068,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "canvas-list@workspace:widgets/canvas_list"
   dependencies:
-    "@betterwithdata/canvas_viz": "npm:^1.0.0"
+    "@betterwithdata/canvas_viz": "npm:^1.1.0"
     "@fullhuman/postcss-purgecss": "npm:^4.0.3"
     "@jupyter-widgets/base": "npm:^1.1.10 || ^2.0.0 || ^3.0.0 || ^4.0.0"
     "@jupyterlab/builder": "npm:^3.6.8 || ^4.0.0"
@@ -7119,7 +7119,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "canvas-scatterplot@workspace:widgets/canvas_scatterplot"
   dependencies:
-    "@betterwithdata/canvas_viz": "npm:^1.0.0"
+    "@betterwithdata/canvas_viz": "npm:^1.1.0"
     "@fullhuman/postcss-purgecss": "npm:^4.0.3"
     "@jupyter-widgets/base": "npm:^1.1.10 || ^2.0.0 || ^3.0.0 || ^4.0.0"
     "@jupyterlab/builder": "npm:^3.6.8 || ^4.0.0"
@@ -7171,7 +7171,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "canvas-summary@workspace:widgets/canvas_summary"
   dependencies:
-    "@betterwithdata/canvas_viz": "npm:^1.0.0"
+    "@betterwithdata/canvas_viz": "npm:^1.1.0"
     "@fullhuman/postcss-purgecss": "npm:^4.0.3"
     "@jupyter-widgets/base": "npm:^1.1.10 || ^2.0.0 || ^3.0.0 || ^4.0.0"
     "@jupyterlab/builder": "npm:^3.6.8 || ^4.0.0"
@@ -7221,7 +7221,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "canvas-ux@workspace:canvas_ux"
   dependencies:
-    "@betterwithdata/canvas_viz": "npm:^1.0.0"
+    "@betterwithdata/canvas_viz": "npm:^1.1.0"
     "@fullhuman/postcss-purgecss": "npm:^4.0.3"
     "@jupyter-widgets/base": "npm:^1.1.10 || ^2.0.0 || ^3.0.0 || ^4.0.0"
     "@jupyterlab/builder": "npm:^3.6.8 || ^4.0.0"

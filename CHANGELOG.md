@@ -1,10 +1,13 @@
 DeepView Open Source Changelog
 ================================
 
-Version 3.7.0 (2025-01-18)
+Version 3.7.0 (2025-03-05)
 --------------------------
 - Fixed the bug in canvas_summary nbextension that was causing it to stop working.
-
+- Improved the performance of canvas widgets
+- Refactored the Deepview Data library to handle efficiently
+- Simplified the fetching of keras sample datasets and made it work with Canvas Visualizations.
+- 
 
 Version 3.6.0 (2025-01-15)
 --------------------------

@@ -1,6 +1,6 @@
 {
   "name": "canvas-ux",
-  "version": "3.6.0",
+  "version": "3.7.0",
   "description": "Modular data science widgets.",
   "private": true,
   "keywords": [
@@ -43,7 +43,7 @@
     "dev": "yarn run watch & python -m http.server --directory ./standalone 8082"
   },
   "dependencies": {
-    "@betterwithdata/canvas_viz": "^1.0.0",
+    "@betterwithdata/canvas_viz": "^1.1.0",
     "@jupyter-widgets/base": "^1.1.10 || ^2.0.0 || ^3.0.0 || ^4.0.0",
     "arquero": "^8.0.0",
     "brace": "^0.11.1"
