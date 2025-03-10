@@ -80,7 +80,8 @@
       e.preventDefault();
     }
   }}
-  class="relative"
+  on:click={() => select()}
+  class="relative cursor-pointer"
 >
   <svelte:component
     this={getComponentForType($canvasSpec.dataType)}

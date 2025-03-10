@@ -39,13 +39,20 @@
   let windowHeight = 0;
   let tooltipWidth = 0;
   let tooltipHeight = 0;
+  let maxTooltipWidth = 0;
+
+  $: maxTooltipWidth = tooltipWidth > maxTooltipWidth ? tooltipWidth : maxTooltipWidth;
+
   $: yPos =
     windowHeight > $tooltip.mousePos.y + tooltipHeight
       ? $tooltip.mousePos.y
       : $tooltip.mousePos.y - tooltipHeight - 20;
+
+  // TODO: The offset is necessary because the sidebar of jupyter lab messes up the
+  // tooltip position. This messes up the stories. Need to fix this
   $: xStyle =
-    windowWidth > $tooltip.mousePos.x + tooltipWidth + 10
-      ? `left: ${$tooltip.mousePos.x}px;`
+    windowWidth > $tooltip.mousePos.x + maxTooltipWidth + 100
+      ? `left: ${$tooltip.mousePos.x - 250 }px;`
       : `right: 10px;`;
   $: style = `top: ${yPos}px; ${xStyle}; background: black`;
 </script>

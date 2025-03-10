@@ -21,4 +21,4 @@ Information about the frontend package of the widgets.
 """
 
 module_name = "canvas-familiarity"
-module_version = "^3.7.0"
+module_version = "^3.7.1"

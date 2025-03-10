@@ -1,6 +1,6 @@
 {
   "name": "canvas-summary",
-  "version": "3.7.0",
+  "version": "3.7.1",
   "description": "Providing a data overview with vega charts.",
   "private": true,
   "keywords": [

@@ -1,6 +1,6 @@
 {
   "name": "canvas-familiarity",
-  "version": "3.7.0",
+  "version": "3.7.1",
   "description": "Find outliers and common instances in a dataset.",
   "private": true,
   "keywords": [

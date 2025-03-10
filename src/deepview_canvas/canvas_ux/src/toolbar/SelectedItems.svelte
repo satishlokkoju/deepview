@@ -75,7 +75,10 @@
           on:click={() => {
             copyText = 'Copied!';
             navigator.clipboard.writeText(
-              JSON.stringify(elements.map((d) => d[$canvasSpec.idColumn]))
+              JSON.stringify(elements.map((d) => {
+                // Use filename if it exists, otherwise use the configured ID column
+                return d.filename !== undefined ? d.filename : d[$canvasSpec.idColumn];
+              }))
             );
           }}
         >

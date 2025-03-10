@@ -34,7 +34,7 @@
 
 """DeepView PyTorch integration and support."""
 
-__version__ = "3.7.0"
+__version__ = "3.7.1"
 
 import deepview
 from ._torch_producer import (
