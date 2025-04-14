@@ -98,10 +98,10 @@ setup_args = dict(
         'Topic :: Scientific/Engineering :: Information Analysis',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.8',
-        'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
+        'Programming Language :: Python :: 3.13',
         'Framework :: Jupyter',
         'Framework :: Jupyter :: JupyterLab',
         'Framework :: Jupyter :: JupyterLab :: 3',
@@ -110,7 +110,7 @@ setup_args = dict(
         'Framework :: Jupyter :: JupyterLab :: Extensions :: Prebuilt'
     ],
     include_package_data=True,
-    python_requires=">=3.8",
+    python_requires=">3.9",
     install_requires=[
         'ipywidgets>=7.0.0',
         "pandas",

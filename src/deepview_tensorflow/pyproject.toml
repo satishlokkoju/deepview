@@ -15,10 +15,10 @@ classifiers = [
     'Topic :: Scientific/Engineering :: Artificial Intelligence',
     'Topic :: Scientific/Engineering :: Information Analysis',
     'Development Status :: 5 - Production/Stable',
-    'Programming Language :: Python :: 3.8',
-    'Programming Language :: Python :: 3.9',
     'Programming Language :: Python :: 3.10',
     'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    'Programming Language :: Python :: 3.13',
     'Operating System :: MacOS',
     'Operating System :: POSIX :: Linux',
     'Intended Audience :: Developers',
@@ -26,7 +26,7 @@ classifiers = [
     'Intended Audience :: Science/Research'
 ]
 
-requires-python = ">=3.8"
+requires-python = ">3.9"
 requires = [
     # Internal
     "deepview==3.8.0",
