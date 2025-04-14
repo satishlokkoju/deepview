@@ -1,6 +1,6 @@
 {
   "name": "canvas-duplicates",
-  "version": "3.7.1",
+  "version": "3.8.0",
   "description": "Inspect potential duplicates in a dataset.",
   "private": true,
   "keywords": [

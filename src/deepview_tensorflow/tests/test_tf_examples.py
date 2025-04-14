@@ -42,17 +42,12 @@ from deepview_tensorflow import (
     TFModelWrapper,
     TFDatasetExamples
 )
-from deepview_tensorflow._tensorflow._tensorflow_protocols import running_tf_1
 from deepview_tensorflow._tensorflow._tensorflow_file_loaders import _clear_keras_session
 
 
 def test_load_example_model() -> None:
 
-    if running_tf_1():
-        layer_name = "conv_pw_13/Conv2D:0"
-    else:
-        layer_name = "conv_pw_13"
-
+    layer_name = "conv_pw_13"
     _clear_keras_session()
     mobilenet = TFModelExamples.MobileNet()
     assert isinstance(mobilenet, TFModelWrapper)

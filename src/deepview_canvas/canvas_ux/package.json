@@ -1,6 +1,6 @@
 {
   "name": "canvas-ux",
-  "version": "3.7.1",
+  "version": "3.8.0",
   "description": "Modular data science widgets.",
   "private": true,
   "keywords": [
@@ -78,7 +78,7 @@
     "precss": "^4.0.0",
     "prettier": "^2.4.0",
     "purgecss-from-svelte": "^2.0.2",
-    "rimraf": "^3.0.2",
+    "rimraf": "^4.0.2",
     "source-map-loader": "^3.0.0",
     "style-loader": "^3.2.1",
     "svelte": "^4.0.0",

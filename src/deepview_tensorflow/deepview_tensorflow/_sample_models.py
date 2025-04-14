@@ -108,7 +108,7 @@ class TFModelWrapper:
             model: TF Keras model
         """
         with tempfile.TemporaryDirectory() as temp_dir:
-            model_path = os.path.join(temp_dir, 'model.h5')
+            model_path = os.path.join(temp_dir, 'model.keras')
             model.save(model_path)
             dni_model = load_tf_model_from_path(model_path)
         return dni_model

@@ -118,12 +118,12 @@ class _Tensorflow2ModelDetails(_ModelDetails):
         for layer in self.model.layers:
             yield ResponseInfo(
                 name=layer.name,
-                dtype=_convert_tf_dtype(layer.output.type_spec.dtype),
-                shape=_convert_tf_shape(layer.output.type_spec.shape),
+                dtype=layer.output.dtype,
+                shape=layer.output.shape,
                 layer=ResponseInfo.Layer(
-                    name=_remove_op_number(layer.output.name),
-                    kind=_convert_tf_operation(layer.output.name),
-                    typename=_extract_kind(layer.output.name)
+                    name=_remove_op_number(layer.name),
+                    kind=_convert_tf_operation(layer.name),
+                    typename=_extract_kind(layer.name)
                 )
             )
 

@@ -40,11 +40,8 @@ try:
     import tensorflow as tf
     from deepview_tensorflow import load_tf_model_from_memory
     from deepview_tensorflow.samples import get_simple_cnn_model
-    from deepview_tensorflow._tensorflow._tensorflow_protocols import running_tf_1
 except ImportError:
-    # This is so there is a stub for this function for mypy, but flake8 rationally recommends
-    #   not defining functions using lambdas. This is never run, so it's left here.
-    running_tf_1 = lambda: False  # noqa: E731
+    pass
 
 from deepview.base import pipeline, ResponseInfo
 from deepview._availability import (
@@ -157,17 +154,9 @@ class TestPFAforCNN:
             "num_classes": 10
         }
 
-        if running_tf_1():
-            sess = tf.Session()
-            tf.random.set_random_seed(751994)
-            _ = get_simple_cnn_model(simple_cnn_config_override)
-            sess.run(tf.global_variables_initializer())
-
-            self.model = load_tf_model_from_memory(session=sess)
-        else:
-            tf.random.set_seed(751994)
-            keras_model = get_simple_cnn_model(simple_cnn_config_override)
-            self.model = load_tf_model_from_memory(model=keras_model)
+        tf.random.set_seed(751994)
+        keras_model = get_simple_cnn_model(simple_cnn_config_override)
+        self.model = load_tf_model_from_memory(model=keras_model)
 
     def test_pfa_on_keras_model(self) -> None:
         dataset = StubImageDataset(

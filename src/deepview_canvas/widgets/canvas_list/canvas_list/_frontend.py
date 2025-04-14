@@ -21,4 +21,4 @@ Information about the frontend package of the widgets.
 """
 
 module_name = "canvas-list"
-module_version = "^3.7.1"
+module_version = "^3.8.0"

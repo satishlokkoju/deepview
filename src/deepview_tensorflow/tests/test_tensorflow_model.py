@@ -47,7 +47,6 @@ from deepview_tensorflow.samples import get_simple_cnn_model
 import deepview.typing as dt
 import deepview.typing._types as t
 from deepview.exceptions import DeepViewException
-from deepview_tensorflow._tensorflow._tensorflow_protocols import running_tf_1
 
 
 @pytest.fixture(scope="module")
@@ -61,16 +60,8 @@ def model_path(tmp_path_factory: pytest.TempPathFactory) -> pathlib.Path:
 
     base_path = tmp_path_factory.mktemp('model')
 
-    if running_tf_1():
-        weights_path = base_path / 'simple_cnn.h5'
-        model.save_weights(str(weights_path))
-
-        arch_path = base_path / 'simple_cnn.json'
-        arch_path.write_text(model.to_json())
-        model_path = base_path
-    else:
-        model_path = base_path / 'model.h5'
-        model.save(model_path)
+    model_path = base_path / 'model.keras'
+    model.save(model_path)
 
     return model_path
 
@@ -78,15 +69,6 @@ def model_path(tmp_path_factory: pytest.TempPathFactory) -> pathlib.Path:
 def test_instantiation(model_path: pathlib.Path) -> None:
     model = load_tf_model_from_path(model_path)
     assert (model is not None)
-
-
-def _check_tf1_names(conv2d_operations: t.Sequence[ResponseInfo], model: Model) -> None:
-    for conv2d_operation in conv2d_operations:
-        assert conv2d_operation.name.endswith('Conv2D:0')
-        assert conv2d_operation.layer.name.endswith('Conv2D')
-
-        assert conv2d_operation.name.startswith('conv')
-        assert conv2d_operation.layer.name.startswith('conv')
 
 
 def _check_tf2_names(conv2d_operations: t.Sequence[ResponseInfo], model: Model) -> None:
@@ -107,10 +89,7 @@ def test_response_meta(model_path: pathlib.Path) -> None:
     # there should be at least one conv2d operation
     assert (len(conv2d_operations) > 0)
 
-    if running_tf_1():
-        _check_tf1_names(conv2d_operations, model)
-    else:
-        _check_tf2_names(conv2d_operations, model)
+    _check_tf2_names(conv2d_operations, model)
 
 
 def test_response_generation(model_path: pathlib.Path) -> None:
@@ -197,10 +176,8 @@ def test_auto_field_renamer(model_path: pathlib.Path) -> None:
 
         for response_batch in response_producer(batch_size=10):
             break
-    if running_tf_1():
-        assert "feed_dict" in str(excinfo.value)
-    else:
-        assert "Invalid input" in str(excinfo.value)
+
+    assert "Invalid input" in str(excinfo.value)
 
     # Fake a model that expects "2 inputs" and try to trigger error with
     # misnamed batch fields:

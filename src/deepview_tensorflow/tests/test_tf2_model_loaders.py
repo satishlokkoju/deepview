@@ -50,11 +50,10 @@ from deepview_tensorflow._tensorflow._tf2_loading import (
 )
 
 from deepview_tensorflow._tensorflow._tf2_file_loaders import (
-    _TF2SavedKerasModelLoader,
     _TF2KerasArchAndWeightsLoader,
     _TF2KerasWholeModelLoader,
 )
-from deepview_tensorflow._tensorflow._tensorflow_protocols import _TFLoader, running_tf_1
+from deepview_tensorflow._tensorflow._tensorflow_protocols import _TFLoader
 
 
 @pytest.fixture
@@ -103,39 +102,25 @@ def _test_loading(model_path: pathlib.Path) -> t.Type[_TFLoader]:
     return loader
 
 
-@pytest.mark.skipif(running_tf_1(), reason="Skipping TF2 tests because TF1 is running.")
-def test_load_tf_keras_saved_model(tmp_path: pathlib.Path,
-                                   keras_model: tf.keras.models.Model) -> None:
-    # Save model as "saved model" format
-    model_path = tmp_path / 'saved_model'
-    keras_model.save(str(model_path))
-
-    loader = _test_loading(model_path)
-    assert loader == _TF2SavedKerasModelLoader
-
-
-@pytest.mark.skipif(running_tf_1(), reason="Skipping TF2 tests because TF1 is running.")
 def test_tf_load_keras_whole_model(tmp_path: pathlib.Path,
                                    keras_model: tf.keras.models.Model) -> None:
-    model_path = tmp_path / 'saved_model.h5'
+    model_path = tmp_path / 'saved_model.keras'
     keras_model.save(str(model_path))
 
     loader = _test_loading(model_path)
     assert loader == _TF2KerasWholeModelLoader
 
 
-@pytest.mark.skipif(running_tf_1(), reason="Skipping TF2 tests because TF1 is running.")
 def test_load_keras_arch_and_weights(tmp_path: pathlib.Path,
                                      keras_model: tf.keras.models.Model) -> None:
     # Save model in separate architecture and weights files
     tmp_path.joinpath('model.json').write_text(keras_model.to_json())
-    keras_model.save_weights(str(tmp_path/'model.h5'))
+    keras_model.save_weights(str(tmp_path/'model.weights.h5'))
 
     loader = _test_loading(tmp_path)
     assert loader == _TF2KerasArchAndWeightsLoader
 
 
-@pytest.mark.skipif(running_tf_1(), reason="Skipping TF2 tests because TF1 is running.")
 def test_tf_load_from_memory(keras_model: tf.keras.models.Model) -> None:
     loaded_model = load_tf_model_from_memory(model=keras_model)
     assert loaded_model is not None
@@ -143,7 +128,6 @@ def test_tf_load_from_memory(keras_model: tf.keras.models.Model) -> None:
     _test_model(loaded_model)
 
 
-@pytest.mark.skipif(running_tf_1(), reason="Skipping TF2 tests because TF1 is running.")
 def test_tf_keras_whole_model_responses(keras_model: tf.keras.models.Model) -> None:
     # Load sample model from memory
     model = load_tf_model_from_memory(model=keras_model)

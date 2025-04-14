@@ -33,9 +33,7 @@
 #
 
 from ._simple_cnn_keras import get_model as get_simple_cnn_model
-from ._simple_lstm_tensorflow import get_model as get_simple_tf1_lstm_model
 
 __all__ = [
-    "get_simple_cnn_model",
-    "get_simple_tf1_lstm_model"
+    "get_simple_cnn_model"
 ]

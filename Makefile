@@ -27,17 +27,9 @@ export PIP_INDEX_URL := https://pypi.org/simple
 ################
 all: install
 
-install: cmd = install -s --deps=develop --extras=notebook,image,dimreduction,dataset-report,tf2
+install: cmd = install -s --deps=develop --extras=notebook,image,dimreduction,dataset-report,tf
 install: $(components)
 	@echo "Done installing DeepView."
-
-install-tf1-gpu: cmd = install -s --deps=develop --extras=notebook,image,dimreduction,dataset-report,tf1-gpu
-install-tf1-gpu: $(components)
-	@echo "Done installing DeepView with TF1 GPU."
-
-install-tf1: cmd = install -s --deps=develop --extras=notebook,image,dimreduction,dataset-report,tf1
-install-tf1: $(components)
-	@echo "Done installing DeepView with TF 1."
 
 $(components):
 	@if [ "$@" = "deepview_canvas" ]; then \

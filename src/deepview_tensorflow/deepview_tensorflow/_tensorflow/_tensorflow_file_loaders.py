@@ -102,4 +102,4 @@ class _TFKerasArchAndWeightsLoader(_TFLoader, t.Protocol):
 class _TFKerasWholeModelLoader(_TFLoader, t.Protocol):
     @staticmethod
     def can_load(pathname: pathlib.Path) -> bool:
-        return pathname.suffix == '.h5'
+        return pathname.suffix == '.keras'

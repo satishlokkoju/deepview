@@ -35,15 +35,9 @@
 import dataclasses
 import pathlib
 
-import tensorflow as tf
-
 from deepview.base._model import _ModelDetails
 from deepview.exceptions import DeepViewException
 import deepview.typing._types as t
-
-
-def running_tf_1() -> bool:
-    return tf.__version__[0] == '1'
 
 
 class _TFLoader(t.Protocol):

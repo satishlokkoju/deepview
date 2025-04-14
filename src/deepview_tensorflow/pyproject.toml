@@ -29,7 +29,7 @@ classifiers = [
 requires-python = ">=3.8"
 requires = [
     # Internal
-    "deepview==3.7.1",
+    "deepview==3.8.0",
     
     # External
     "tqdm>=4.65.0",
@@ -38,29 +38,7 @@ requires = [
 ]
 
 [tool.flit.metadata.requires-extra]
-tf2 = ["tensorflow>=2.11.0,<=2.15.0"]
-tf1 = [
-    # Requirement of tensorflow 1:
-    "numpy<1.19",
-    "protobuf<4.0",
-
-    # External
-    "Keras<2.4",
-    "h5py<3.0",
-
-    "tensorflow<2.0"
-]
-tf1-gpu = [
-    # Requirement of tensorflow 1:
-    "numpy<1.19",
-    "protobuf<4.0",
-
-    # External
-    "Keras<2.4",
-    "h5py<3.0",
-
-    "tensorflow-gpu<2.0"
-]
+tf = ["tensorflow>2.15.0"]
 
 [tool.flit.metadata.urls]
 Documentation = "https://satishlokkoju.github.io/deepview"
