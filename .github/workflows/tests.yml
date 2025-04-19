@@ -25,7 +25,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '20.6.0'
+        node-version: '22.13.1'
     
     - name: Configure npm for GitHub Packages
       run: |

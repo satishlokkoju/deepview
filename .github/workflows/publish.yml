@@ -235,7 +235,7 @@ jobs:
       id-token: write
     environment:
       name: pypi
-      url: https://pypi.org/p/deepview-canvas-ux
+      url: https://pypi.org/p/canvas-ux
     steps:
       - name: Retrieve distributions
         uses: actions/download-artifact@v4
