@@ -87,8 +87,8 @@ doc:
 	@cd src/deepview_canvas && yarn install && yarn run build:storybook
 	@rm -rf docs/_static/storybook-static
 	@cp -r src/deepview_canvas/canvas_viz/storybook-static docs/_static/
-	@$(MAKE) -C docs html
 	@pip install -r docs/requirements.txt
+	@$(MAKE) -C docs html
 	@echo "\nOpen docs/_build/html/index.html to get started.\n"
 
 clean: clean-python clean-js clean-docs clean-test clean-env
