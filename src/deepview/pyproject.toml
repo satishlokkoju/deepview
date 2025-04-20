@@ -78,24 +78,6 @@ test = [
     "pytest-timeout",
     "flake8-copyright",
 ]
-doc = [
-    "ipykernel",
-    "jupyter_client",
-    "matplotlib", # to build notebooks
-    "pandas",
-    "jupyter-datatables",
-    "seaborn",
-    'jupyter_sphinx',
-    'nbsphinx',
-    'nbsphinx-link',
-    'pytest_check_links',
-    'pypandoc',
-    'recommonmark',
-    'sphinx>=7.0.0',
-    'furo',
-    'sphinx_mdinclude',
-    'myst-parser'
-]
 notebook = [
     "notebook>6.0.0,<8.0.0",
     "matplotlib",
