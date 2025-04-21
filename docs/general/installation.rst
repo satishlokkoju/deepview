@@ -94,12 +94,6 @@ Here are the options currently available:
 | -> [tensorflow]           | Installs :ref:`deepview_tensorflow <tensorflow_api>` and TF2 to load & |
 |                           | run TF_ models within DeepView.                                        |
 +---------------------------+------------------------------------------------------------------------+
-| -> [tensorflow1]          | Installs :ref:`deepview_tensorflow <tensorflow_api>` and TF1 to load & |
-|                           | run TF_ models within DeepView. Must have Python <=3.7 due to TF 1.    |
-+---------------------------+------------------------------------------------------------------------+
-| -> [tensorflow1-gpu]      | Same as preceding row, but with TensorFlow GPU. Must have              |
-|                           | Python <=3.7 due to TF 1 constraints.                                  |
-+---------------------------+------------------------------------------------------------------------+
 | -> [torch]                | Installs ``deepview_pytorch``: convert between PyTorch Dataset and     |
 |                           | DeepView Producer.                                                     |
 +---------------------------+------------------------------------------------------------------------+

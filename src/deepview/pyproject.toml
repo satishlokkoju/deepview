@@ -61,7 +61,7 @@ canvas = [
 ]
 
 # MODEL EXTENSIONS
-tensorflow = ["deepview_tensorflow[tf2]==3.8.0"]
+tensorflow = ["deepview_tensorflow[tf]==3.8.0"]
 data = ["deepview_data==3.8.0"]
 torch = ["deepview_torch==3.8.0"]
 
