@@ -55,6 +55,7 @@ jobs:
           make install
       
       - name: Build documentation
+        timeout-minutes: 60
         run: |
           make doc
       
