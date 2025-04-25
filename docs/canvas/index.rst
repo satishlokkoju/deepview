@@ -46,4 +46,3 @@ Table of Contents
     state
     common
     examples
-    api

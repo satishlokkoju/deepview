@@ -55,8 +55,10 @@ templates_path = ['_templates']
 # HTML Options
 html_theme = 'furo'
 html_theme_options = {
-    'use_fullscreen_button': False,
-    'show_toc_level': 2,
+    # Furo theme options
+    'navigation_with_keys': True,
+    'sidebar_hide_name': False,
+    'top_of_page_buttons': ["edit"],
 }
 html_static_path = ['_static']
 html_title = f"DeepView Documentation (v{release})"

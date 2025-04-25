@@ -6,7 +6,7 @@ Installation
 
 .. admonition:: Quick install
 
-    In :ref:`Python3.9 <Python Support>` environment, in a :ref:`virtualenv <Virtualenv Creation>`:
+    In :ref:`Python3.10 <Python Support>` environment, in a :ref:`conda environment <Conda Environment Creation>`:
 
     .. code-block:: shell
 
@@ -24,13 +24,13 @@ Installation
 
 Python Support
 --------------
-DeepView currently supports Python version 3.7 or greater for macOS or Linux.
-Python 3.10 is recommended. Note: to run TensorFlow 1, install Python 3.7 (Though not tested)
+DeepView currently supports Python version 3.10 or greater for macOS or Linux.
+Python 3.10 is recommended.
 
 To install Python version 3.10 (recommended):
 
 **MacOS:** The Python installer package can be
-`downloaded <https://www.python.org/ftp/python/3.9.13/python-3.9.13-macosx10.9.pkg>`_ from the
+`downloaded <https://www.python.org/ftp/python/3.10.0/python-3.10.0-macos11.pkg>`_ from the
 `Python.org <https://www.python.org/>`_ website. During installation, deselecting
 GUI applications, UNIX command-line tools, and Python documentation will reduce the size of what
 is installed.
@@ -39,25 +39,25 @@ is installed.
 
 .. code-block:: shell
 
-    sudo apt install -y python3.9-dev python3.9-venv python3.9-tk
+    sudo apt install -y python3.10-dev python3.10-venv python3.10-tk
     sudo apt-get install -y libsm6 libxext6 libxrender-dev libgl1-mesa-glx
 
-Virtualenv Creation
--------------------
-It's recommended to use a `virtual environment <https://docs.python.org/3/tutorial/venv.html>`_ to
+Conda Environment Creation
+--------------------------
+It's recommended to use a `conda environment <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html>`_ to
 manage all dependencies:
 
 .. code-block:: shell
 
-    python3.9 -m venv .venv39
-    source .venv37/bin/activate
+    conda create -n deepview python=3.10
+    conda activate deepview
 
 And update pip and wheel::
 
     pip install --upgrade pip wheel
 
 Installation with pip
-----------------------
+---------------------
 The base DeepView is installed with pip as follows::
 
     pip install deepview
@@ -101,7 +101,7 @@ Here are the options currently available:
 |                           | ``dataset-report``, ``tensorflow``, ``canvas`` , & ``torch`` options.  |
 +---------------------------+------------------------------------------------------------------------+
 
-.. _TF: https://www.tensorflow.org/versions/r1.15/api_docs/python/tf
+.. _TF: https://www.tensorflow.org/versions/r2.15/api_docs/python/tf
 .. _jupyter: https://jupyter.readthedocs.io/en/latest/running.html#running
 .. _matplotlib: https://matplotlib.org
 .. _pandas: https://pandas.pydata.org/docs/
@@ -125,7 +125,7 @@ Finally, launch jupyter to open the notebooks::
     jupyter notebook
 
 Installation for developers
-============================
+===========================
 
 Check out the :ref:`Development Installation` page to install DeepView for development.
 

@@ -216,7 +216,8 @@ for more information about the experiments.
 
    api/index
    reference/how_to_cite
-   Support / Debugging <general/support>
+   Contributing <dev/contributing>
+   general/support
    Changelog <reference/changelog>
 
 .. toctree::

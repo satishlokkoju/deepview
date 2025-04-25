@@ -2,9 +2,6 @@
 Base API
 ========
 
-.. contents:: Contents
-    :local:
-
 Data Management – Producer
 --------------------------
 

@@ -51,7 +51,7 @@ To learn more about available UI elements, see :doc:`common`.
 Development
 ===========
 
-Assuming you have set up a development environment with Canvas and all its requirements installed (if not, see :doc:`contributing`),
+Assuming you have set up a development environment with Canvas and all its requirements installed (if not, see :doc:`/dev/contributing`),
 in the component directory install and build all npm dependencies:
 
 .. code-block:: bash

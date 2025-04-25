@@ -2,10 +2,6 @@
 Introspectors API
 =================
 
-.. contents:: Contents
-    :local:
-
-
 Data Introspectors
 -------------------
 Familiarity

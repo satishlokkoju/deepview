@@ -1,19 +1,5 @@
 .. _support:
 
-=======
-Support
-=======
-
-Contributing to DeepView
-------------------------
-Please see the :ref:`Contributor's Guide <contributing>`.
-
-Submit Feedback
----------------
-- Find a bug? Have a feature suggestion? Submit an Issue on the DeepView `GitHub Page <https://github.com/satishlokkoju/deepview>`_.
-
-.. _debugging_assistance:
-
 =========
 Debugging
 =========
@@ -88,15 +74,6 @@ define a custom :class:`Producer <deepview.base.Producer>` to resize the data sa
 this is noted in :ref:`the doc page on loading data <connect_your_data>`.
 
 
-Python 3.9.7
-------------
-There is a bug in Python 3.9.7 that makes this version **incompatible** with DeepView.
-
-More specifically, this `bug <https://github.com/python/cpython/issues/89244>`_ causes dataclasses
-that inherit from Protocols to have an incorrect ``__init__`` function. Dataclasses and Protocols
-are used throughout DeepView, so DeepView will fail on Python 3.9.7.
-
-
 tf.keras vs. keras models
 -------------------------
 This issue is only applicable certain versions, see below:
@@ -109,14 +86,12 @@ loading models and using DeepView.
     - Original keras was not subsumed into tensorflow to ensure compatibility and so that they could both organically develop.
     - Keras 2.3.0 is the first release of Keras that brings keras in sync with tf.keras
 
-DeepView supports the use of both TensorFlow 1 and TensorFlow 2. Throughout, for Keras use, DeepView
+DeepView supports the use of TensorFlow 2. Throughout, for Keras use, DeepView
 uses ``tf.keras``. Errors may arise when attempting to load a model with the function
 :func:`load_tf_model_from_path <deepview_tensorflow.load_tf_model_from_path>` for a model that was
 saved with native Keras. One possible solution is loading the model first outside of DeepView,
 and then using the :func:`load_tf_model_from_memory <deepview_tensorflow.load_tf_model_from_memory>`
 method to load into DeepView.
-(*Note*: In Tensorflow1, ensure that when clearing any session, it's the appropriate
-``tf.keras`` vs. ``keras`` backend session.)
 
 
 MacOS Python Certificate Failure

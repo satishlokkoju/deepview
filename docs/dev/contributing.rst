@@ -12,7 +12,7 @@ Development Installation
 Development Branch
 ##################
 
-The current development branch is `develop <https://github.com/satishlokkoju/deepview/tree/develop>`_. *Direct pushes to
+The current development branch is `develop <https://github.com/satishlokkoju/deepview/tree/development>`_. *Direct pushes to
 this branch are not allowed.* For all contributions, branch from and send pull requests to this branch.
 
 
@@ -54,14 +54,6 @@ is installed.
     make install
 
 This will install ``deepview[notebook,test,doc,tensorflow,dataset-report,image,dimreduction,duplicates]``.
-
-To install TF1-compatible code, try::
-
-    make install-tf1
-
-Or for TF1 GPU::
-
-    make install-tf1-gpu
 
 5. Start using DeepView! For example::
 
@@ -242,6 +234,93 @@ Remove all generated files::
 
     make clean
 
+
+Contributing to Canvas Components
+---------------------------------
+
+To add more functionality to :code:`canvas_ux`, :code:`canvas_viz`, or any component, first set up a dev environment.
+Then, packages can be updated and deployed.
+If your change could be useful to other users, please consider making a `pull request <https://github.com/satishlokkoju/deepview/pulls>`_.
+
+Canvas Development Installation
+###############################
+
+**1. Install JavaScript package managers.**
+
+Install `Node`_ and `Yarn`_ globally on your machine.
+
+**2. Create a Python environment.**
+
+With :code:`conda`, using :code:`canvas` as the environment name:
+
+.. code-block:: bash 
+
+    conda create -n canvas python=3.10
+    conda activate canvas
+
+Or, instead using :code:`venv`:
+
+.. code-block:: bash 
+
+    virtualenv --python /usr/local/opt/python/bin/python3 venv
+    source venv/bin/activate
+
+**3. Install Python dependencies.**
+
+Install Python dependences by running:
+
+.. code-block:: bash 
+
+    pip install -r requirements.txt
+
+**4. Install Canvas packages.**
+
+First, install the :code:`canvas_ux` Python package.
+
+.. code-block:: bash 
+
+    scripts/dev-install.sh
+
+Optionally, install all the widgets:
+
+.. code-block:: bash 
+
+    scripts/dev-install-widgets.sh
+
+**5. Build and watch for changes.**
+
+For the main :code:`canvas_ux` package:
+
+.. code-block:: bash 
+
+    yarn dev
+
+For :code:`canvas_viz`:
+
+.. code-block:: bash
+
+    cd canvas_viz
+    yarn watch
+
+Optionally, for the widgets:
+
+.. code-block:: bash 
+
+    scripts/dev-watch-widgets.sh
+
+Canvas Deployment Note
+######################
+
+As all packages depend on :code:`canvas_viz`, whenever :code:`canvas_viz` is updated, all packages need to follow.
+To do that, you need to manually bump all :code:`_version.py` files for all widgets and for the main Canvas package.
+Then, you can use:
+
+.. code-block:: bash 
+
+    scripts/dev-watch-widgets.sh 
+
+.. _Node: https://nodejs.org/
+.. _Yarn: https://yarnpkg.com/
 
 Submitting a Pull Request
 -------------------------
