@@ -129,13 +129,20 @@ jobs:
       - name: Build and package widgets
         run: |
           cd src/deepview_canvas/widgets
+          mkdir -p ../widget-artifacts
           for d in */ ; do
             if [ -d "$d" ]; then
+              widget_name=$(basename "$d")
+              echo "Building widget: $widget_name"
               cd "$d"
               yarn build:prod
               rm -rf dist
               python setup.py bdist_wheel
               python setup.py sdist
+              # Create a directory for this widget's artifacts
+              mkdir -p ../../widget-artifacts/$widget_name
+              # Copy the distributions to the widget-specific directory
+              cp dist/* ../../widget-artifacts/$widget_name/
               cd ..
             fi
           done
@@ -150,7 +157,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: canvas-widgets-dist
-          path: src/deepview_canvas/widgets/*/dist/
+          path: src/deepview_canvas/widget-artifacts/
 
   publish-deepview:
     runs-on: ubuntu-latest
@@ -247,21 +254,47 @@ jobs:
         with:
           packages-dir: dist/
 
-  publish-canvas-widgets:
+  # This job determines which widgets need to be published
+  prepare-canvas-widgets:
     runs-on: ubuntu-latest
     needs: build-canvas-packages
+    outputs:
+      widget-matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Download widget artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: canvas-widgets-dist
+          path: widget-artifacts/
+          
+      - name: Set up widget matrix
+        id: set-matrix
+        run: |
+          cd widget-artifacts
+          WIDGETS=$(ls -d */ | sed 's#/##g' | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          echo "matrix={\"widget\":$WIDGETS}" >> $GITHUB_OUTPUT
+          echo "Found widgets: $WIDGETS"
+
+  # This job publishes each widget as a separate package
+  publish-canvas-widgets:
+    needs: prepare-canvas-widgets
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{fromJson(needs.prepare-canvas-widgets.outputs.widget-matrix)}}
+      fail-fast: false
     permissions:
       id-token: write
     environment:
       name: pypi
-      url: https://pypi.org/p/deepview-canvas-widgets
+      url: https://pypi.org/p/${{ matrix.widget }}
     steps:
-      - name: Retrieve distributions
+      - name: Download widget artifacts
         uses: actions/download-artifact@v4
         with:
           name: canvas-widgets-dist
-          path: dist/
-      - name: Publish to PyPI
+          path: widget-artifacts/
+          
+      - name: Publish ${{ matrix.widget }} to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          packages-dir: dist/
+          packages-dir: widget-artifacts/${{ matrix.widget }}/
