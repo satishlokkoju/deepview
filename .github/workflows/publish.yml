@@ -293,8 +293,14 @@ jobs:
         with:
           name: canvas-widgets-dist
           path: widget-artifacts/
+      
+      - name: Create dist directory for PyPI publishing
+        run: |
+          mkdir -p dist
+          cp widget-artifacts/${{ matrix.widget }}/* dist/
+          ls -la dist/
           
       - name: Publish ${{ matrix.widget }} to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          packages-dir: widget-artifacts/${{ matrix.widget }}/
+          packages-dir: dist/
