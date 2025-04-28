@@ -176,13 +176,11 @@ class KNNFaiss(DuplicatesStrategyType):
         # n-closest distance matrix.  n can be anything > 2.  larger values will
         # produce larger initial clusters
         n = 10
-        distances = np.zeros((count, n))
-        indexes = np.zeros((count, n), "i")
-        _logger.debug("Finding %d nearest neighbors for each sample", n)
+        _logger.debug("Finding %d nearest neighbors for each sample using batch search", n)
 
-        # build the n-closest distance matrix
-        for i in range(count):
-            distances[i], indexes[i] = index.search(responses[i].reshape(1, -1), n)
+        # Use FAISS batch search to find nearest neighbors for all vectors at once
+        # This is much more efficient than searching one vector at a time
+        distances, indexes = index.search(responses, n)
 
         # find the distance threshold
         all_values = np.trim_zeros(np.sort(distances.reshape((count * n, ))))
@@ -292,6 +290,36 @@ class Slope(DuplicatesThresholdStrategyType):
         close = distances[probe]
 
         return close
+
+
+@t.final
+@dataclass(frozen=True)
+class DuplicatesConfig:
+    """Configuration for duplicates detection, combining both threshold and strategy.
+    You can specify either the threshold strategy, the algorithm strategy, or both.
+    Any unspecified parameter will use the default value.
+
+    Args:
+        threshold: Strategy to determine the distance threshold for duplicates.
+                  Default is Slope() threshold strategy.
+        strategy: Strategy to find nearest neighbors.
+                 Default is KNNAnnoy() strategy.
+    """
+    threshold: t.Optional[DuplicatesThresholdStrategyType] = None
+    strategy: t.Optional[DuplicatesStrategyType] = None
+
+    def __post_init__(self) -> None:
+        # Use default values for any unspecified parameters
+        # We need to use object.__setattr__ because the dataclass is frozen
+        if self.threshold is None:
+            object.__setattr__(self, 'threshold', Duplicates.ThresholdStrategy.Slope())
+        if self.strategy is None:
+            object.__setattr__(self, 'strategy', Duplicates.KNNStrategy.KNNAnnoy())
+
+    @classmethod
+    def default(cls) -> 'DuplicatesConfig':
+        """Create a default configuration with Slope threshold and KNNAnnoy strategy."""
+        return cls()
 
 
 @t.final

@@ -41,6 +41,7 @@ from ._duplicates import (
     DuplicatesThresholdStrategyType,
     DuplicatesStrategyType,
     Duplicates,
+    DuplicatesConfig
 )
 
 # Familiarity imports
@@ -79,6 +80,7 @@ __all__ = [
     Duplicates.__name__,
     DuplicatesThresholdStrategyType.__name__,
     DuplicatesStrategyType.__name__,
+    DuplicatesConfig.__name__,
     IUA.__name__,
     FamiliarityDistribution.__name__,
     FamiliarityStrategyType.__name__,

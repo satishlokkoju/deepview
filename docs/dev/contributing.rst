@@ -9,8 +9,6 @@ Here are some useful notes about DeepView development.
 Development Installation
 ------------------------
 
-Development Branch
-##################
 
 The current development branch is `develop <https://github.com/satishlokkoju/deepview/tree/development>`_. *Direct pushes to
 this branch are not allowed.* For all contributions, branch from and send pull requests to this branch.
@@ -29,24 +27,27 @@ Clone the code from `the main repository <https://github.com/satishlokkoju/deepv
 Install DeepView from Local Code
 ################################
 
-1. Install python version 3.9 (recommended). To run TensorFlow1, install Python 3.7.
+1. DeepView currently supports Python version 3.10 or greater for macOS or Linux.
+Python 3.10 is recommended.
 
 **MacOS:** The Python installer package can be
-`downloaded <https://www.python.org/ftp/python/3.9.13/python-3.9.13-macosx10.9.pkg>`_ from the
+`downloaded <https://www.python.org/ftp/python/3.10.0/python-3.10.0-macos11.pkg>`_ from the``
 `Python.org <https://www.python.org/>`_ website. During installation, deselecting
 GUI applications, UNIX command-line tools, and Python documentation will reduce the size of what
 is installed.
 
 **Ubuntu**::
 
-    sudo apt install -y python3.9-dev python3.9-venv python3.9-tk
+    sudo apt install -y python3.10-dev python3.10-venv python3.10-tk
     sudo apt-get install -y libsm6 libxext6 libxrender-dev libgl1-mesa-glx
 
-2. Create and activate a python 3.9 virtual environment, then update pip and wheel::
+2. It's recommended to use a `conda environment <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html>`_ to
+manage all dependencies:
 
-    python3.9 -m venv .venv39
-    source .venv39/bin/activate
-    pip install --upgrade pip wheel
+.. code-block:: shell
+
+    conda create -n deepview python=3.10
+    conda activate deepview
 
 3. Checkout the branch to install from (like our development branch, ``develop``).
 4. Install DeepView and other requirements for development::

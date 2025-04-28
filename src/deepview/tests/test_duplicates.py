@@ -95,8 +95,16 @@ def duplicate_producer() -> Producer:
 def test_duplicate_introspector(duplicate_producer: Producer) -> None:
     # use percentile to find the threshold -- this is normal distribution data
     # so it isn't shaped like the typical "long tail"
-    duplicates = Duplicates.introspect(duplicate_producer,
-                                       threshold=Duplicates.ThresholdStrategy.Percentile(98))
+    from deepview.introspectors import DuplicatesConfig
+    # Create a DuplicatesConfig with only Percentile threshold specified
+    # The strategy will default to KNNAnnoy
+    config = DuplicatesConfig(threshold=Duplicates.ThresholdStrategy.Percentile(98))
+    # Test using the config directly
+    duplicates = Duplicates.introspect(
+        duplicate_producer,
+        threshold=config.threshold,
+        strategy=config.strategy
+    )
     assert duplicates is not None
 
     # Response C should find the most duplicates, then B, then A, with the fewest

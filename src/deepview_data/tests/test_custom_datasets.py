@@ -36,7 +36,6 @@ class TestImageFolderDataset(unittest.TestCase, _Logged):
     num_images: int
     num_png_images: int
     test_images: List[str]
-    created_dirs: List[str]
 
     def setUp(self) -> None:
         self.test_dir = tempfile.mkdtemp()
@@ -46,7 +45,6 @@ class TestImageFolderDataset(unittest.TestCase, _Logged):
         self.num_images = len(self.classes) * self.images_per_class
         self.num_png_images = len(self.classes) * (self.images_per_class // 2)
         self.test_images = [f'image_{i}.jpg' if i % 2 == 0 else f'image_{i}.png' for i in range(self.images_per_class)]
-        self.created_dirs = [self.test_dir]  # Track created directories
         for class_name in self.classes:
             class_dir = os.path.join(self.test_dir, class_name)
             os.makedirs(class_dir)
@@ -64,13 +62,12 @@ class TestImageFolderDataset(unittest.TestCase, _Logged):
                 img.save(img_path, format=format_str)
 
     def tearDown(self) -> None:
-        # Clean up all created directories
-        for dir_path in self.created_dirs:
-            if os.path.exists(dir_path):
-                try:
-                    shutil.rmtree(dir_path)
-                except Exception as e:
-                    print(f"Warning: Failed to remove directory {dir_path}: {e}")
+        # Clean up the test directory
+        if os.path.exists(self.test_dir):
+            try:
+                shutil.rmtree(self.test_dir)
+            except Exception as e:
+                print(f"Warning: Failed to remove test directory {self.test_dir}: {e}")
 
     def test_initialization(self) -> None:
         dataset = CustomDatasets.ImageFolderDataset(
@@ -264,8 +261,6 @@ class TestImageFolderDataset(unittest.TestCase, _Logged):
 
         # Verify folder name format
         expected_folder = 'deepview-dataset-' + os.path.basename(self.test_dir)
-        # Add the write_to_folder to tracked directories for cleanup
-        self.created_dirs.append(expected_folder)
 
         # Verify images are written to disk
         self.assertTrue(os.path.exists(expected_folder))

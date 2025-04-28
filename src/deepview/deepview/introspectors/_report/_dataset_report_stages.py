@@ -52,8 +52,7 @@ from deepview.introspectors._dim_reduction._dimension_reduction import (
     OneOrManyDimStrategies
 )
 from deepview.introspectors._duplicates import (
-    Duplicates,
-    DuplicatesThresholdStrategyType,
+    DuplicatesConfig,
 )
 from deepview.introspectors._familiarity._familiarity import Familiarity
 from deepview.introspectors._familiarity._protocols import FamiliarityStrategyType
@@ -107,11 +106,13 @@ class ReportConfig:
     (default is :class:`DimensionReduction.Strategy.UMAP`).
     """
 
-    duplicates: t.Optional[DuplicatesThresholdStrategyType] = field(
-        default_factory=lambda: Duplicates.ThresholdStrategy.Slope())
+    duplicates: t.Optional[DuplicatesConfig] = field(
+        default_factory=lambda: DuplicatesConfig.default())
     """
-    Skip :class:`Duplicates` if None, else :class:`Duplicates.ThresholdStrategy` (default is
-    :class:`Slope <Duplicates.ThresholdStrategy.Slope>`).
+    Skip :class:`Duplicates` if None, else provide a :class:`DuplicatesConfig` that combines
+    both the threshold strategy and the algorithm strategy for finding duplicates.
+    Default is :class:`Slope <Duplicates.ThresholdStrategy.Slope>` threshold with
+    :class:`KNNAnnoy <Duplicates.KNNStrategy.KNNAnnoy>` algorithm.
     """
 
     familiarity: t.Optional[FamiliarityStrategyType] = field(
@@ -277,7 +278,8 @@ def _stage_2_runner(producer: Producer, batch_size: int, config: ReportConfig,
     # Define introspectors based on config
     if config.duplicates:
         duplicates_intr: t.Callable[[Producer], t.Any] = partial(
-            _DuplicatesBuilder.introspect, batch_size=batch_size, threshold=config.duplicates)
+            _DuplicatesBuilder.introspect, batch_size=batch_size,
+            threshold=config.duplicates.threshold, strategy=config.duplicates.strategy)
     else:
         duplicates_intr = partial(_introspector_stub, batch_size=batch_size)
 

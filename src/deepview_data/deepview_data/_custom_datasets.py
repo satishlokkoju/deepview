@@ -22,6 +22,7 @@ from tqdm import tqdm
 import glob
 from typing import List, Optional, Tuple, Dict
 from PIL import Image
+import shutil
 
 from pathlib import Path
 from deepview.base import Producer, Batch
@@ -257,6 +258,14 @@ class ImageFolderDataset(Producer, _Logged):
     def _class_path(self, index: int) -> str:
         return f"{self._dataset_labels[index]}/{self._labels[index]}"
 
+    def _get_dataset_folder_path(self) -> str:
+        """Get the path to the dataset folder created by this instance.
+
+        Returns:
+            The path to the dataset folder (relative to current working directory)
+        """
+        return 'deepview-dataset-' + os.path.basename(os.path.normpath(self.root_folder))
+
     def _write_images_to_disk(self, indices: t.Sequence[int], samples_array: np.ndarray, data_path: str) -> t.List[str]:
         """
         Write images to disk and return the file paths.
@@ -329,7 +338,7 @@ class ImageFolderDataset(Producer, _Logged):
             if self.attach_metadata:
                 if self.write_to_folder:
                     # Use pathname as the identifier for each data sample, excluding base data directory
-                    folder_name = 'deepview-dataset-' + os.path.basename(os.path.normpath(self.root_folder))
+                    folder_name = self._get_dataset_folder_path()
                     builder.metadata[Batch.StdKeys.IDENTIFIER] = self._write_images_to_disk(indices, samples_array, folder_name)
                 else:
                     builder.metadata[Batch.StdKeys.IDENTIFIER] = indices
@@ -344,6 +353,47 @@ class ImageFolderDataset(Producer, _Logged):
                 builder.metadata[Batch.StdKeys.LABELS] = labels_dict
 
             yield builder.make_batch()
+
+    def cleanup(self) -> bool:
+        """Explicitly clean up the dataset folder created by this instance.
+
+        This method attempts to delete the dataset folder if it exists and was created
+        by this instance (write_to_folder=True). It uses a robust approach to handle
+        potential file system locks.
+
+        Returns:
+            bool: True if cleanup was successful or not needed, False if cleanup failed
+        """
+        if not self.write_to_folder:
+            return True
+
+        folder_path = self._get_dataset_folder_path()
+        if not folder_path or not os.path.exists(folder_path):
+            return True
+
+        try:
+            # First try with shutil.rmtree
+            shutil.rmtree(folder_path, ignore_errors=True)
+
+            # Check if folder still exists
+            if not os.path.exists(folder_path):
+                return True
+
+        except Exception as e:
+            self.logger.warning(f"Error during cleanup of {folder_path}: {str(e)}")
+            return False
+
+        return False
+
+    def __del__(self) -> None:
+        """Destructor that cleans up resources when the object is garbage collected.
+        This method calls cleanup() to remove the dataset folder if it was created.
+        """
+        try:
+            self.cleanup()
+        except Exception:
+            # Suppress exceptions in __del__ as they can cause issues during garbage collection
+            pass
 
 
 @t.final

@@ -34,6 +34,7 @@
 
 import os
 import dataclasses
+import shutil
 
 import numpy as np
 try:
@@ -288,3 +289,42 @@ class TrainTestSplitProducer(Producer):
                 builder.metadata[Batch.StdKeys.LABELS] = labels_dict
 
             yield builder.make_batch()
+
+    def cleanup(self) -> bool:
+        """Explicitly clean up the dataset folder created by this instance.
+
+        This method attempts to delete the dataset folder if it exists and was created
+        by this instance (write_to_folder=True). It uses a robust approach to handle
+        potential file system locks.
+
+        Returns:
+            bool: True if cleanup was successful or not needed, False if cleanup failed
+        """
+        if not self.write_to_folder or not self._temp_folder:
+            return True
+
+        if not os.path.exists(self._temp_folder):
+            return True
+
+        try:
+            # First try with shutil.rmtree
+            shutil.rmtree(self._temp_folder, ignore_errors=True)
+
+            # Check if folder still exists
+            if not os.path.exists(self._temp_folder):
+                return True
+
+        except Exception:
+            return False
+
+        return False
+
+    def __del__(self) -> None:
+        """Destructor that cleans up resources when the object is garbage collected.
+        This method calls cleanup() to remove the dataset folder if it was created.
+        """
+        try:
+            self.cleanup()
+        except Exception:
+            # Suppress exceptions in __del__ as they can cause issues during garbage collection
+            pass

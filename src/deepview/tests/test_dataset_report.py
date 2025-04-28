@@ -56,7 +56,8 @@ from deepview.introspectors import (
     DimensionReduction,
     DatasetReport,
     ReportConfig,
-    Duplicates
+    Duplicates,
+    DuplicatesConfig
 )
 from deepview.introspectors._report._report_builder_introspectors import (
     _SummaryBuilder,
@@ -208,7 +209,14 @@ def test_nonstr_labels() -> None:
 def test_duplicates_builder_annoy() -> None:
     dataset_size = 20
     producer = MyProducer(dataset_size=dataset_size)
-    duplicates = _DuplicatesBuilder.introspect(producer, batch_size=5, strategy=Duplicates.KNNStrategy.KNNAnnoy())
+    # Create a DuplicatesConfig with only the strategy specified
+    # The threshold will default to Slope()
+    config = DuplicatesConfig(strategy=Duplicates.KNNStrategy.KNNAnnoy())
+    duplicates = _DuplicatesBuilder.introspect(
+        producer, batch_size=5,
+        threshold=config.threshold,
+        strategy=config.strategy
+    )
 
     assert duplicates.data.shape == (20, 1)
     assert duplicates.data["duplicates_layer1"] is not None
@@ -225,7 +233,13 @@ def test_duplicates_builder_annoy() -> None:
 def test_duplicates_builder_faiss() -> None:
     dataset_size = 20
     producer = MyProducer(dataset_size=dataset_size)
-    duplicates = _DuplicatesBuilder.introspect(producer, batch_size=5, strategy=Duplicates.KNNStrategy.KNNFaiss())
+    # Create a DuplicatesConfig with KNNFaiss strategy
+    config = DuplicatesConfig(strategy=Duplicates.KNNStrategy.KNNFaiss())
+    duplicates = _DuplicatesBuilder.introspect(
+        producer, batch_size=5,
+        threshold=config.threshold,
+        strategy=config.strategy
+    )
 
     assert duplicates.data.shape == (20, 1)
     assert duplicates.data["duplicates_layer1"] is not None

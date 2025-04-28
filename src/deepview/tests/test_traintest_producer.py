@@ -1,5 +1,4 @@
 import os
-import shutil
 import numpy as np
 import pytest
 from deepview.base import TrainTestSplitProducer, Batch
@@ -178,13 +177,49 @@ def test_file_names_and_write_to_disk() -> None:
     assert isinstance(labels_list, list)
     assert len(labels_list) == 5
 
-    # Clean up temporary directory
+    # Clean up temporary directory using the cleanup method
+    assert producer.cleanup()
+    assert not os.path.exists(temp_dir), "Directory should be deleted after cleanup"
+
+
+def test_cleanup_functionality() -> None:
+    """Test the cleanup functionality of TrainTestSplitProducer."""
+    image_shape = (32, 32, 3)
+
+    # Create sample data with uint8 images (0-255 range)
+    x_train = (np.random.rand(3, *image_shape) * 255).astype(np.uint8)
+    y_train = np.array([['cat'], ['dog'], ['bird']])
+    x_test = (np.random.rand(2, *image_shape) * 255).astype(np.uint8)
+    y_test = np.array([['cat'], ['dog']])
+
+    # Test with write_to_folder=True
+    producer = TrainTestSplitProducer(
+        split_dataset=((x_train, y_train), (x_test, y_test)),
+        attach_metadata=True,
+        write_to_folder=True
+    )
+
+    # Generate a batch to ensure folder is created
+    list(producer(batch_size=5))
+
+    # Verify folder exists
     temp_dir = producer._temp_folder
-    if temp_dir is not None and os.path.exists(temp_dir):
-        try:
-            shutil.rmtree(temp_dir)
-        except Exception as e:
-            print(f"Warning: Failed to remove directory {temp_dir}: {e}")
+    assert temp_dir is not None, "Temporary directory was not created"
+    assert os.path.exists(temp_dir)
+
+    # Test manual cleanup
+    assert producer.cleanup()
+    assert not os.path.exists(temp_dir), "Directory should be deleted after cleanup"
+
+    # Test with write_to_folder=False
+    producer_no_write = TrainTestSplitProducer(
+        split_dataset=((x_train, y_train), (x_test, y_test)),
+        attach_metadata=True,
+        write_to_folder=False
+    )
+
+    # Cleanup should return True even though no folder was created
+    assert producer_no_write.cleanup()
 
 
 def test_dataset_filtering() -> None:
