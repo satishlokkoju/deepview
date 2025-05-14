@@ -91,6 +91,11 @@ module.exports = (_, argv) => [
     devtool: 'source-map',
     externals,
     resolve,
+    performance: {
+      // Increase the size limit or set hints to false to disable warnings
+      maxEntrypointSize: 8000000, // 8MB
+      maxAssetSize: 8000000, // 8MB
+    },
   },
   /**
    * Lab extension
@@ -110,6 +115,11 @@ module.exports = (_, argv) => [
     },
     externals,
     resolve,
+    performance: {
+      // Increase the size limit or set hints to false to disable warnings
+      maxEntrypointSize: 8000000, // 8MB
+      maxAssetSize: 8000000, // 8MB
+    },
   },
 
   /**
@@ -132,5 +142,10 @@ module.exports = (_, argv) => [
     },
     externals,
     resolve,
+    performance: {
+      // Increase the size limit or set hints to false to disable warnings
+      maxEntrypointSize: 8000000, // 8MB
+      maxAssetSize: 8000000, // 8MB
+    },
   },
 ];

@@ -55,6 +55,7 @@
     "@phosphor/widgets": "^1.6.0",
     "@tailwindcss/forms": "^0.3.2",
     "@tsconfig/svelte": "^2.0.1",
+    "@types/node": "^22.15.3",
     "@types/webpack-env": "^1.13.6",
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",

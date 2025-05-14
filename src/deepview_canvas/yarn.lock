@@ -1271,6 +1271,7 @@ __metadata:
     "@types/wavesurfer.js": "npm:^6.0.12"
     add: "npm:^2.0.6"
     arquero: "npm:^8.0.0"
+    autoprefixer: "npm:^10.4.16"
     babel-loader: "npm:^8.2.2"
     browserify-zlib: "npm:^0.2.0"
     commitizen: "npm:^4.2.4"
@@ -1308,6 +1309,7 @@ __metadata:
     vega: "npm:^5.30.0"
     vega-embed: "npm:^6.29.0"
     vega-lite: "npm:^5.23.0"
+    vite: "npm:^4.5.2"
     wavesurfer.js: "npm:^5.1.0"
     webpack: "npm:^5.97.1"
     webpack-cli: "npm:^4.1.0"
@@ -5146,6 +5148,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:^22.15.3":
+  version: 22.15.3
+  resolution: "@types/node@npm:22.15.3"
+  dependencies:
+    undici-types: "npm:~6.21.0"
+  checksum: 10c0/2879f012d1aeba0bfdb5fed80d165f4f2cb3d1f2e1f98a24b18d4a211b4ace7d64bf2622784c78355982ffc1081ba79d0934efc2fb8353913e5871a63609661f
+  languageName: node
+  linkType: hard
+
 "@types/normalize-package-data@npm:^2.4.0":
   version: 2.4.4
   resolution: "@types/normalize-package-data@npm:2.4.4"
@@ -6215,7 +6226,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"autoprefixer@npm:^10.3.4":
+"autoprefixer@npm:^10.3.4, autoprefixer@npm:^10.4.16":
   version: 10.4.21
   resolution: "autoprefixer@npm:10.4.21"
   dependencies:
@@ -7228,6 +7239,7 @@ __metadata:
     "@phosphor/widgets": "npm:^1.6.0"
     "@tailwindcss/forms": "npm:^0.3.2"
     "@tsconfig/svelte": "npm:^2.0.1"
+    "@types/node": "npm:^22.15.3"
     "@types/webpack-env": "npm:^1.13.6"
     "@typescript-eslint/eslint-plugin": "npm:^4.31.1"
     "@typescript-eslint/parser": "npm:^4.31.1"
@@ -9344,7 +9356,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.18.0":
+"esbuild@npm:^0.18.0, esbuild@npm:^0.18.10":
   version: 0.18.20
   resolution: "esbuild@npm:0.18.20"
   dependencies:
@@ -15442,7 +15454,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.1.6, postcss@npm:^8.2.10, postcss@npm:^8.3.11, postcss@npm:^8.3.5, postcss@npm:^8.3.6, postcss@npm:^8.4.33, postcss@npm:^8.4.38, postcss@npm:^8.4.39":
+"postcss@npm:^8.1.6, postcss@npm:^8.2.10, postcss@npm:^8.3.11, postcss@npm:^8.3.5, postcss@npm:^8.3.6, postcss@npm:^8.4.27, postcss@npm:^8.4.33, postcss@npm:^8.4.38, postcss@npm:^8.4.39":
   version: 8.5.3
   resolution: "postcss@npm:8.5.3"
   dependencies:
@@ -16562,7 +16574,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup@npm:^2.25.0 || ^3.3.0":
+"rollup@npm:^2.25.0 || ^3.3.0, rollup@npm:^3.27.1":
   version: 3.29.5
   resolution: "rollup@npm:3.29.5"
   dependencies:
@@ -19377,6 +19389,46 @@ __metadata:
     vega-voronoi: "npm:~4.2.4"
     vega-wordcloud: "npm:~4.1.6"
   checksum: 10c0/4229162cdfe0649b75118424a87d3ec36314ec396ae440ccf44fd8e1fb72ce463697e84d1784d13809b5b13bbcfa3125f13cec2eab6ac00a19f5551baa84b218
+  languageName: node
+  linkType: hard
+
+"vite@npm:^4.5.2":
+  version: 4.5.14
+  resolution: "vite@npm:4.5.14"
+  dependencies:
+    esbuild: "npm:^0.18.10"
+    fsevents: "npm:~2.3.2"
+    postcss: "npm:^8.4.27"
+    rollup: "npm:^3.27.1"
+  peerDependencies:
+    "@types/node": ">= 14"
+    less: "*"
+    lightningcss: ^1.21.0
+    sass: "*"
+    stylus: "*"
+    sugarss: "*"
+    terser: ^5.4.0
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+    less:
+      optional: true
+    lightningcss:
+      optional: true
+    sass:
+      optional: true
+    stylus:
+      optional: true
+    sugarss:
+      optional: true
+    terser:
+      optional: true
+  bin:
+    vite: bin/vite.js
+  checksum: 10c0/58fdbb7e14650f78ebe290bb67f873900b914cee906c7367ad1c9786fb323ec60c3f085447341953b5e411a17703f86ed33723b31f98778d94f0ead06370b306
   languageName: node
   linkType: hard
 
