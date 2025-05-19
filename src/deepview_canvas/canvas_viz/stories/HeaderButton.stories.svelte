@@ -42,7 +42,7 @@ with padding.
   name="Default"
   args={{
     selected: false,
-    value: "test",
+    value: "testing watch",
   }}
 />
 

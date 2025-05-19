@@ -13,13 +13,13 @@
   "license": "Apache 2.0",
   "type": "module",
   "scripts": {
-    "build": "yarn workspaces foreach exec run build",
+    "build": "yarn workspaces foreach --all exec run build",
     "build:canvas": "yarn workspace canvas-ux build",
     "build:lib": "yarn workspace @betterwithdata/canvas_viz build",
     "build:storybook": "yarn workspace @betterwithdata/canvas_viz build:storybook",
     "dev": "cd canvas_ux && yarn dev",
     "watch:nbextension": "cd canvas_ux && yarn watch:nbextension",
-    "test": "pip3 install -r requirements.txt && scripts/dev-install.sh"
+    "test": "yarn workspace @betterwithdata/canvas_viz test"
   },
   "browserslist": [
     "last 3 chrome versions",

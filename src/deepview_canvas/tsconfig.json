@@ -21,7 +21,7 @@
       "svelte",
       "node"
     ],
-    "importsNotUsedAsValues": "error",
+    "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "forceConsistentCasingInFileNames": true
   },

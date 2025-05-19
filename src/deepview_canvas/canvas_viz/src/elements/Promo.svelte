@@ -27,6 +27,6 @@
     filled={true}
   >
     <Fa icon={faGithub} slot="icon" />
-    <span slot="text">Use Canvas</span>
+    <span slot="text">Use DeepView Canvas</span>
   </IconButton>
 </div>

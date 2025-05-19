@@ -31,6 +31,8 @@ export function selectAll(selectedStore: Writable<string[]>, newSelected: string
 }
 
 function setHasAll(set: Set<unknown>, setHas: Set<unknown>) {
-  for (var a of set) if (!setHas.has(a)) return false;
+  for (var a of set) 
+    if (!setHas.has(a)) 
+      return false;
   return true;
 }

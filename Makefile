@@ -57,8 +57,12 @@ uninstall:
 test: test-pytest test-notebooks
 	@echo "Done running tests."
 
-test-all: test-pytest-all test-notebooks
+test-all: test-pytest-all test-notebooks test-canvas
 	@echo "Done running tests."
+
+test-canvas:
+	@echo "Running canvas tests."
+	@cd src/deepview_canvas && yarn test
 
 test-pytest:
 	@echo "Running pytest."
