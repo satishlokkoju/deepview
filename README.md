@@ -2,6 +2,9 @@
 
 <div align="center">
 
+<img src="resources/deepviewlogo.png" alt="DeepView Logo" width="400"/>
+
+
 [![Tests](https://github.com/satishlokkoju/deepview/actions/workflows/tests.yml/badge.svg)](https://github.com/satishlokkoju/deepview/actions/workflows/tests.yml)
 [![codecov](https://codecov.io/gh/satishlokkoju/deepview/branch/main/graph/badge.svg)](https://codecov.io/gh/satishlokkoju/deepview)
 [![Python Versions](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10%20%7C%203.11-blue)](https://github.com/satishlokkoju/deepview)

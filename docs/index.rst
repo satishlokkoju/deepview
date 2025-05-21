@@ -1,7 +1,13 @@
 DeepView – Data and Network Introspection Kit
 =============================================
 
-A Python toolkit for analyzing machine learning models and datasets. DeepView can:
+.. image:: _static/deepviewlogo.png
+   :width: 400px
+   :alt: DeepView Logo
+   :align: center
+   :class: bot-margin
+
+A Python toolkit for analyzing and visualizing machine learning models and datasets. DeepView can:
 
 - :ref:`create a comprehensive dataset analysis report <dataset_report>`
 - :ref:`identify duplicate data samples <duplicates>`
@@ -197,17 +203,17 @@ for more information about the experiments.
 .. toctree::
    :hidden:
    :maxdepth: 1
-   :caption: Utilities
+   :caption: Visualization
 
-   Data Producers <utils/data_producers>
-   Batch Processors <utils/pipeline_stages>
+   Canvas Framework <canvas/index>
 
 .. toctree::
    :hidden:
    :maxdepth: 1
-   :caption: Visualization
+   :caption: Utilities
 
-   Canvas Framework <canvas/index>
+   Data Producers <utils/data_producers>
+   Batch Processors <utils/pipeline_stages>
 
 .. toctree::
    :hidden:

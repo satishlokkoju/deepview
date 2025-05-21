@@ -6,7 +6,7 @@ python_clean_dirs += src/deepview/**/__pycache__ src/deepview/*/**/__pycache__ s
 python_clean_dirs += src/deepview_canvas/**/__pycache__ src/deepview_canvas/*/**/__pycache__ src/deepview_canvas/*/*/**/__pycache__ 
 python_clean_dirs += src/deepview_tensorflow/**/__pycache__ src/deepview_tensorflow/*/**/__pycache__ src/deepview_canvas/canvas_ux/build
 python_clean_dirs += src/deepview_data/**/__pycache__ src/deepview_data/*/**/__pycache__
-python_clean_dirs += src/deepview_torch/**/__pycache__ src/deepview_torch/*/**/__pycache__
+python_clean_dirs += src/deepview_torch/**/__pycache__ src/deepview_torch/*/**/__pycache__ __pycache__
 
 js_clean_dirs := src/deepview_canvas/node_modules src/deepview_canvas/*/node_modules src/deepview_canvas/*/*/node_modules
 js_clean_dirs += src/deepview_canvas/canvas_viz/storybook-static src/deepview_canvas/widgets/*/dist
@@ -91,6 +91,7 @@ doc:
 	@cd src/deepview_canvas && yarn install && yarn run build:storybook
 	@rm -rf docs/_static/storybook-static
 	@cp -r src/deepview_canvas/canvas_viz/storybook-static docs/_static/
+	@cp resources/deepviewlogo.png docs/_static/
 	@pip install -r docs/requirements.txt
 	@$(MAKE) -C docs html
 	@echo "\nOpen docs/_build/html/index.html to get started.\n"

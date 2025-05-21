@@ -4,3 +4,4 @@ List | .. mdinclude:: ../../src/deepview_canvas/widgets/canvas_list/README.md | 
 Scatterplot | .. mdinclude:: ../../src/deepview_canvas/widgets/canvas_scatterplot/README.md | `canvas_scatterplot <https://github.com/satishlokkoju/deepview/tree/main/src/deepview_canvas/widgets/canvas_scatterplot>`__
 Summary | .. mdinclude:: ../../src/deepview_canvas/widgets/canvas_summary/README.md | `canvas_summary <https://github.com/satishlokkoju/deepview/tree/main/src/deepview_canvas/widgets/canvas_summary>`__
 Duplicates | .. mdinclude:: ../../src/deepview_canvas/widgets/canvas_duplicates/README.md | `canvas_duplicates <https://github.com/satishlokkoju/deepview/tree/main/src/deepview_canvas/widgets/canvas_duplicates>`__
+Familiarity | .. mdinclude:: ../../src/deepview_canvas/widgets/canvas_familiarity/README.md | `canvas_familiarity <https://github.com/satishlokkoju/deepview/tree/main/src/deepview_canvas/widgets/canvas_familiarity>`__

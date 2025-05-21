@@ -6,7 +6,7 @@ Installation
 
 .. admonition:: Quick install
 
-    In :ref:`Python3.10 <Python Support>` environment, in a :ref:`conda environment <Conda Environment Creation>`:
+    In :ref:`Python3.11 <Python Support>` environment, in a :ref:`conda environment <Conda Environment Creation>`:
 
     .. code-block:: shell
 
@@ -24,13 +24,13 @@ Installation
 
 Python Support
 --------------
-DeepView currently supports Python version 3.10 or greater for macOS or Linux.
-Python 3.10 is recommended.
+DeepView currently supports Python version 3.11 or greater for macOS or Linux.
+Python 3.11 is recommended.
 
-To install Python version 3.10 (recommended):
+To install Python version 3.11 (recommended):
 
 **MacOS:** The Python installer package can be
-`downloaded <https://www.python.org/ftp/python/3.10.0/python-3.10.0-macos11.pkg>`_ from the
+`downloaded <https://www.python.org/ftp/python/3.11.5/python-3.11.5-macos11.pkg>`_ from the
 `Python.org <https://www.python.org/>`_ website. During installation, deselecting
 GUI applications, UNIX command-line tools, and Python documentation will reduce the size of what
 is installed.
@@ -39,7 +39,7 @@ is installed.
 
 .. code-block:: shell
 
-    sudo apt install -y python3.10-dev python3.10-venv python3.10-tk
+    sudo apt install -y python3.11-dev python3.11-venv python3.11-tk
     sudo apt-get install -y libsm6 libxext6 libxrender-dev libgl1-mesa-glx
 
 Conda Environment Creation
@@ -49,8 +49,8 @@ manage all dependencies:
 
 .. code-block:: shell
 
-    conda create -n deepview python=3.10
-    conda activate deepview
+    conda create -n deepview_dev python=3.11
+    conda activate deepview_dev
 
 And update pip and wheel::
 

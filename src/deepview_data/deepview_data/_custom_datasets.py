@@ -37,6 +37,7 @@ class ImageFolderDataset(Producer, _Logged):
     A dataset that loads images from a directory structure where each subdirectory represents a class.
 
     Example directory structure:
+    
     root_folder/
         class1/
             image1.jpg

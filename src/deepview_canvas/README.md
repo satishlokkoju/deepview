@@ -22,7 +22,7 @@ This project is based on research presented in the paper ["Symphony: Composing I
 
 ### Prerequisites
 - Node.js (Latest LTS version)
-- Python 3.7+
+- Python 3.8+
 - Yarn package manager
 
 ### Setup
