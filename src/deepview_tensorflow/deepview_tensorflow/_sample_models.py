@@ -164,7 +164,76 @@ class TFModelExamples:
     Out-of-the-box TF and Keras models with pre- and post-processing.
     """
 
+    @classmethod
+    def list_supported_models(cls) -> t.Dict[str, t.Callable[..., TFModelWrapper]]:
+        """Returns a dictionary of all supported models keyed by their names.
+
+        Returns:
+            Dictionary mapping model names to their corresponding model factory functions.
+        """
+        return {name: value for name, value in cls.__dict__.items()
+                if callable(value)
+                and name[0].isupper()}
+
+    # MobileNet family
     MobileNet: t.Callable[..., TFModelWrapper] = lambda: (
-        TFModelWrapper.from_keras(tf.keras.applications.mobilenet.MobileNet(),
+        TFModelWrapper.from_keras(tf.keras.applications.MobileNet(),
                                   tf.keras.applications.mobilenet.preprocess_input))
     """Load the MobileNet model and processing stages from Keras into DeepView."""
+
+    MobileNetV2: t.Callable[..., TFModelWrapper] = lambda: (
+        TFModelWrapper.from_keras(tf.keras.applications.MobileNetV2(),
+                                  tf.keras.applications.mobilenet_v2.preprocess_input))
+    """Load the MobileNetV2 model and processing stages from Keras into DeepView."""
+
+    MobileNetV3Small: t.Callable[..., TFModelWrapper] = lambda: (
+        TFModelWrapper.from_keras(tf.keras.applications.MobileNetV3Small(),
+                                  tf.keras.applications.mobilenet_v3.preprocess_input))
+    """Load the MobileNetV3Small model and processing stages from Keras into DeepView."""
+
+    MobileNetV3Large: t.Callable[..., TFModelWrapper] = lambda: (
+        TFModelWrapper.from_keras(tf.keras.applications.MobileNetV3Large(),
+                                  tf.keras.applications.mobilenet_v3.preprocess_input))
+    """Load the MobileNetV3Large model and processing stages from Keras into DeepView."""
+
+    # ResNet family
+    ResNet50: t.Callable[..., TFModelWrapper] = lambda: (
+        TFModelWrapper.from_keras(tf.keras.applications.ResNet50(),
+                                  tf.keras.applications.resnet50.preprocess_input))
+    """Load the ResNet50 model and processing stages from Keras into DeepView."""
+
+    ResNetV250: t.Callable[..., TFModelWrapper] = lambda: (
+        TFModelWrapper.from_keras(tf.keras.applications.ResNet50V2(),
+                                  tf.keras.applications.resnet_v2.preprocess_input))
+    """Load the ResNet50V2 model and processing stages from Keras into DeepView."""
+
+    # EfficientNet family
+    EfficientNetB0: t.Callable[..., TFModelWrapper] = lambda: (
+        TFModelWrapper.from_keras(tf.keras.applications.EfficientNetB0(),
+                                  tf.keras.applications.efficientnet.preprocess_input))
+    """Load the EfficientNetB0 model and processing stages from Keras into DeepView."""
+
+    EfficientNetB1: t.Callable[..., TFModelWrapper] = lambda: (
+        TFModelWrapper.from_keras(tf.keras.applications.EfficientNetB1(),
+                                  tf.keras.applications.efficientnet.preprocess_input))
+    """Load the EfficientNetB1 model and processing stages from Keras into DeepView."""
+
+    EfficientNetB7: t.Callable[..., TFModelWrapper] = lambda: (
+        TFModelWrapper.from_keras(tf.keras.applications.EfficientNetB7(),
+                                  tf.keras.applications.efficientnet.preprocess_input))
+    """Load the EfficientNetB7 model and processing stages from Keras into DeepView."""
+
+    EfficientNetV2B0: t.Callable[..., TFModelWrapper] = lambda: (
+        TFModelWrapper.from_keras(tf.keras.applications.EfficientNetV2B0(),
+                                  tf.keras.applications.efficientnet_v2.preprocess_input))
+    """Load the EfficientNetV2B0 model and processing stages from Keras into DeepView."""
+
+    EfficientNetV2B3: t.Callable[..., TFModelWrapper] = lambda: (
+        TFModelWrapper.from_keras(tf.keras.applications.EfficientNetV2B3(),
+                                  tf.keras.applications.efficientnet_v2.preprocess_input))
+    """Load the EfficientNetV2B3 model and processing stages from Keras into DeepView."""
+
+    EfficientNetV2L: t.Callable[..., TFModelWrapper] = lambda: (
+        TFModelWrapper.from_keras(tf.keras.applications.EfficientNetV2L(),
+                                  tf.keras.applications.efficientnet_v2.preprocess_input))
+    """Load the EfficientNetV2L model and processing stages from Keras into DeepView."""

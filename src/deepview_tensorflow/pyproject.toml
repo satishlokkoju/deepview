@@ -38,7 +38,10 @@ requires = [
 ]
 
 [tool.flit.metadata.requires-extra]
-tf = ["tensorflow>2.15.0"]
+tf = [
+    "tensorflow[and-cuda]>2.15.0; platform_system=='Linux'",
+    "tensorflow>2.15.0; platform_system!='Linux'"
+]
 
 [tool.flit.metadata.urls]
 Documentation = "https://satishlokkoju.github.io/deepview"

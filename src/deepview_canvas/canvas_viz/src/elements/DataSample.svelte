@@ -81,7 +81,8 @@
     }
   }}
   on:click={() => select()}
-  class="relative cursor-pointer"
+  class="relative cursor-pointer" 
+  style="border: 1px solid #d1d5db; border-radius: 0.375rem; margin: 0.15rem;"
 >
   <svelte:component
     this={getComponentForType($canvasSpec.dataType)}

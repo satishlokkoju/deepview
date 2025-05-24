@@ -63,7 +63,7 @@
 <div
   class="flex flex-col relative items-start border-b border-midgrey pb-1 mb-1 overflow-auto flex-1"
 >
-  {#each groupKeys.slice(page * rowsPerPage + 1, page * rowsPerPage + rowsPerPage) as group, i}
+  {#each groupKeys.slice(page * rowsPerPage, (page + 1) * rowsPerPage) as group, i}
     {#if groupedDuplicates[group] !== undefined}
       <div class="py-1 w-full">
         <DatasetDuplicatesList
