@@ -7,7 +7,7 @@ pip install jupyterlab
 cd src/deepview_canvas/canvas_viz
 jlpm prebuild; jlpm ; jlpm install;jlpm build
 cd ../canvas_ux
-jlpm clean;jlpm install;jlpm run build:prod;pip install .
+jlpm clean;jlpm install;jlpm run build:prod;pip install .[test]
 cd ../widgets/canvas_summary
 jlpm clean;jlpm install;jlpm run build:prod;pip install .
 cd ../canvas_list

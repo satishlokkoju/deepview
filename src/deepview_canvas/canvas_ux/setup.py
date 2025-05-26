@@ -130,6 +130,10 @@ setup_args = dict(
             "opencv-python",
             "gitpython"
         ],
+        'test': [
+            "pytest",
+            "pytest-mock"
+        ],
     },
     entry_points={
     },

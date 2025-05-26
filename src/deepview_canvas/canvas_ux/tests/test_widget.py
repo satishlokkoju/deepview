@@ -14,8 +14,6 @@ from canvas_ux import (
     CanvasDataType,
     WidgetSpec
 )
-# from canvas_ux._helpers import get_data_type  # Not needed directly in tests, will mock in canvas.py
-
 
 # Existing fixture
 @pytest.fixture
@@ -50,9 +48,10 @@ def test_widget_spec_update(canvas_widget: CanvasWidget) -> None:
 
 @pytest.fixture
 def sample_pandas_dataframe() -> pd.DataFrame:
+    # Explicitly convert 'id' to pandas string dtype to ensure compatibility with PyArrow
     return pd.DataFrame({
-        'id': ['img1.png', 'img2.jpg', 'img3.jpeg'],
-        'label': ['A', 'B', 'C'],
+        'id': pd.Series(['img1.png', 'img2.jpg', 'img3.jpeg'], dtype='string'),
+        'label': pd.Series(['A', 'B', 'C'], dtype='string'),
         'value': [10, 20, 30]
     })
 
@@ -84,7 +83,11 @@ def test_canvas_init_with_pyarrow_table(sample_pyarrow_table: pa.Table) -> None:
 
 
 def test_canvas_init_with_empty_data(capsys: pytest.CaptureFixture[str]) -> None:
-    empty_df = pd.DataFrame({'id': [], 'value': []})
+    # Ensure empty dataframe has proper dtypes
+    empty_df = pd.DataFrame({
+        'id': pd.Series([], dtype='string'),
+        'value': pd.Series([], dtype='float64')
+    })
     canvas = Canvas(table=empty_df, id_column='id')
     captured = capsys.readouterr()
     assert "Must have at least one row in the table, not initializing Canvas." in captured.out
@@ -95,7 +98,9 @@ def test_canvas_init_data_type_inference(mocker: MockerFixture) -> None:
     mocked_get_data_type = mocker.patch('canvas_ux.canvas.get_data_type')
 
     mocked_get_data_type.return_value = CanvasDataType.IMAGE
-    df_image_ids = pd.DataFrame({'image_id': ['test_image.png']})
+    df_image_ids = pd.DataFrame({
+        'image_id': pd.Series(['test_image.png'], dtype='string')
+    })
     canvas_img = Canvas(table=df_image_ids, id_column='image_id', data_type=None)
     mocked_get_data_type.assert_called_once_with(None, 'test_image.png')
     assert canvas_img._data_type == CanvasDataType.IMAGE
@@ -183,7 +188,9 @@ def test_canvas_init_default_instances_per_page(mocker: MockerFixture) -> None:
     mocker.patch('canvas_ux.canvas.get_data_type', return_value=CanvasDataType.IMAGE)
     mock_get_num = mocker.patch('canvas_ux.canvas.get_num_instances_by_data_type', return_value=40)
 
-    df = pd.DataFrame({'id': ['img1.png']})
+    df = pd.DataFrame({
+        'id': pd.Series(['img1.png'], dtype='string')
+    })
     canvas = Canvas(table=df, id_column='id')
     mock_get_num.assert_called_once_with(None, CanvasDataType.IMAGE)
     assert canvas._canvas_spec.instances_per_page == 40
