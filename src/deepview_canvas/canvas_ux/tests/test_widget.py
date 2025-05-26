@@ -15,6 +15,7 @@ from canvas_ux import (
     WidgetSpec
 )
 
+
 # Existing fixture
 @pytest.fixture
 def canvas_widget() -> CanvasWidget:
