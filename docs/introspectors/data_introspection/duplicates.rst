@@ -75,9 +75,9 @@ A full example pipeline for the CIFAR10 dataset and model
 Visualization
 -------------
 It's recommended to visualize the Duplicates results using
-`Symphony <https://github.com/apple/ml-symphony>`_, as noted in
+`Canvas <https://github.com/satishlokoju/deepview>`_, as noted in
 the :ref:`DatasetReport <dataset_report>` page. There is also an example visualization
-that does not use Symphony in the :ref:`example notebook below <duplicates_example>`.
+that does not use Canvas in the :ref:`example notebook below <duplicates_example>`.
 
 Config Options
 --------------

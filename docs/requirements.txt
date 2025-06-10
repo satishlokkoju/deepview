@@ -15,6 +15,7 @@ sphinx_mdinclude
 myst-parser
 furo
 watermark
+scikit-learn
 
 # Note: Pandoc must be installed system-wide
 # For Ubuntu/Debian: sudo apt-get install -y pandoc
