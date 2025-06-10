@@ -14,7 +14,7 @@ js_clean_dirs += src/deepview_canvas/widgets/*/build src/deepview_canvas/widgets
 js_clean_dirs += src/deepview_canvas/widgets/*/*/standalone src/deepview_canvas/widgets/*/*/labextension
 js_clean_dirs += src/deepview_canvas/widgets/*/*/lib src/deepview_canvas/*/*/lib
 
-docs_clean_dirs := docs/_build docs/_static/storybook-static
+docs_clean_dirs := docs/_build docs/_static/storybook-static docs/notebooks/data_introspection/canvas_cifar
 
 test_clean_dirs := junit*.xml coverage .coverage* notebooks/.verify notebooks/.ipynb_checkpoints
 

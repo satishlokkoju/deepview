@@ -13,6 +13,14 @@ help:
 
 .PHONY: help Makefile
 
+# Special case for html target: build docs and then copy static site files
+html: Makefile
+	@echo "Building docs"
+	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	@echo "Copying static site files"
+	@mkdir -p $(BUILDDIR)/html/notebooks/data_introspection
+	@cp -r notebooks/data_introspection/canvas_cifar $(BUILDDIR)/html/notebooks/data_introspection/ 2>/dev/null || echo "No static site files found"
+
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile

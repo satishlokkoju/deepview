@@ -1,6 +1,6 @@
 {
   "name": "canvas-scatterplot",
-  "version": "3.9.0",
+  "version": "3.9.5",
   "description": "A scatterplot component based on Fritz Leschkas regl-scatterplot. Needs a projection column.",
   "private": true,
   "keywords": [

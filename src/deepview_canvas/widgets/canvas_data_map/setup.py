@@ -115,7 +115,7 @@ setup_args = dict(
         'ipywidgets>=7.0.0',
         "pandas",
         "pyarrow",
-        'canvas_ux>=3.9.0'
+        'canvas_ux>=3.9.5'
     ],
     extras_require={
         'examples': [

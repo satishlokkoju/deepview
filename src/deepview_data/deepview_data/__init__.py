@@ -34,7 +34,7 @@
 
 """Support for custom image datasets in DeepView"""
 
-__version__ = "3.9.0"
+__version__ = "3.9.5"
 
 import deepview
 from ._custom_datasets import CustomDatasets

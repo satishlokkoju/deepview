@@ -1,6 +1,12 @@
 DeepView Open Source Changelog
 ==============================
 
+Version 3.9.5 (2025-06-10)
+--------------------------
+- Enhanced the documentation to include more examples and better explanations.
+- Improved the visualization of the canvas List widget to draw a boundary of the sample image
+
+
 Version 3.7.0 (2025-03-05)
 --------------------------
 - Fixed the bug in canvas_summary nbextension that was causing it to stop working.
