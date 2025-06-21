@@ -32,6 +32,8 @@
 # limitations under the License.
 #
 
+"""Collection of processors for transforming batches in a DeepView pipeline."""
+
 from ._base_processor import Processor
 
 from ._metadata_processors import (

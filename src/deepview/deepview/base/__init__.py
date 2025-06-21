@@ -32,6 +32,7 @@
 # limitations under the License.
 #
 
+"""Core abstractions for data handling, pipelines, and model introspection."""
 
 from ._batch._batch import Batch
 from ._cached_producer import CachedProducer

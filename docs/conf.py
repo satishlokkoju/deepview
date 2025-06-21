@@ -103,7 +103,7 @@ intersphinx_mapping = {
 }
 
 # nbsphinx config
-nbsphinx_allow_errors = True
+nbsphinx_allow_errors = False
 nbsphinx_execute = 'always'
 nbsphinx_timeout = 600
 nbsphinx_prolog = '''

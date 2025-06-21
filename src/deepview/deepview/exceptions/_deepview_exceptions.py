@@ -32,6 +32,8 @@
 # limitations under the License.
 #
 
+"""Custom exceptions and warnings for DeepView."""
+
 import warnings
 
 

@@ -9,5 +9,4 @@
 
 .. automodule:: deepview_torch
     :members:
-    :undoc-members:
     :show-inheritance:

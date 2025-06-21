@@ -32,6 +32,8 @@
 # limitations under the License.
 #
 
+"""Familiarity introspector for scoring data samples based on a density model."""
+
 from dataclasses import dataclass
 
 from deepview.base import (

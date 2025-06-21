@@ -32,6 +32,8 @@
 # limitations under the License.
 #
 
+"""Core DeepView introspection algorithms."""
+
 # DimReduction imports
 from ._dim_reduction._dimension_reduction import DimensionReduction, OneOrManyDimStrategies
 from ._dim_reduction._protocols import DimensionReductionStrategyType

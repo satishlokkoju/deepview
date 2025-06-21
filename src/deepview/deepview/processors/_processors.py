@@ -32,6 +32,8 @@
 # limitations under the License.
 #
 
+"""Core data transformation processors."""
+
 import dataclasses
 import enum
 from functools import partial
