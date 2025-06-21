@@ -31,12 +31,26 @@ install: cmd = install -s --deps=develop --extras=notebook,image,dimreduction,da
 install: $(components)
 	@echo "Done installing DeepView."
 
+# Allow 'make install component_name' syntax
+install-%: cmd = install -s --deps=develop --extras=notebook,image,dimreduction,dataset-report,tf
+install-%:
+	@echo "Installing only $*..."
+	@make install-component component=$* cmd="$(cmd)"
+
 $(components):
 	@if [ "$@" = "deepview_canvas" ]; then \
-		sh ./scripts/dev-install.sh; \
+		cd src/deepview_canvas && yarn build:prod:all && cd -; \
 	else \
 		pip install -U flit$(FLIT_VER) flit_core$(FLIT_VER) && \
 		flit -f src/$@/pyproject.toml $(cmd); \
+	fi
+
+install-component:
+	@if [ "$(component)" = "deepview_canvas" ]; then \
+		cd src/deepview_canvas && yarn build:prod:all && cd -; \
+	else \
+		pip install -U flit$(FLIT_VER) flit_core$(FLIT_VER) && \
+		flit -f src/$(component)/pyproject.toml $(cmd); \
 	fi
 
 uninstall-component:
@@ -45,6 +59,11 @@ uninstall-component:
 	else \
 		pip uninstall -y $(component); \
 	fi
+
+# Allow 'make uninstall component_name' syntax
+uninstall-%:
+	@echo "Uninstalling only $*..."
+	@make uninstall-component component=$*
 
 uninstall:
 	@for comp in $(components); do \

@@ -39,7 +39,8 @@
     "watch": "yarn run watch:nbextension",
     "watch:nbextension": "webpack --watch --mode=development --progress",
     "watch:labextension": "jupyter labextension watch .",
-    "dev": "yarn run watch & python -m http.server --directory ./canvas_scatterplot/standalone 8082"
+    "dev": "yarn run watch & python -m http.server --directory ./canvas_scatterplot/standalone 8082",
+    "install-python": "pip install ."
   },
   "dependencies": {
     "@betterwithdata/canvas_viz": "^1.1.0",
