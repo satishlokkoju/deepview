@@ -273,6 +273,7 @@
           {selected}
           {tooltip}
           {widgetSpecs}
+          {storybook}
           notebook={false}
         />
       </div>

@@ -30,6 +30,7 @@
   export let selected: Writable<string[]>;
   export let canvasSpec: Writable<CanvasSpec>;
   export let tooltip: Writable<TooltipSpec>;
+  export let storybook: boolean = false;
 
   let baseCopyText = 'Copy';
   let copyText = baseCopyText;
@@ -89,7 +90,7 @@
     </div>
     <div class="flex flex-wrap mt-3">
       {#each elements.slice(page * $canvasSpec.instancesPerPage, Math.min(page * $canvasSpec.instancesPerPage + $canvasSpec.instancesPerPage, $selected.length)) as row}
-        <DataSample dataPoint={row} {canvasSpec} {selected} {tooltip} />
+        <DataSample dataPoint={row} {canvasSpec} {selected} {tooltip} {storybook} />
       {/each}
     </div>
     <PaginationControls

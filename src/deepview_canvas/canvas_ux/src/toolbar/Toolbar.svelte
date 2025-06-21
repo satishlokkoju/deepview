@@ -33,6 +33,7 @@
   export let groupedTables: Readable<ColumnTable[]>;
   export let selected: Writable<string[]>;
   export let tooltip: Writable<TooltipSpec>;
+  export let storybook: boolean = false;
 </script>
 
 <div
@@ -45,7 +46,7 @@
     <Settings {canvasSpec} />
     <FilterBar {filter} {filterError} {table} />
     <Grouping {table} {groupColumns} {groupNames} {groupedTables} {filter} />
-    <SelectedItems {table} {canvasSpec} {selected} {tooltip} />
+    <SelectedItems {table} {canvasSpec} {selected} {tooltip} {storybook} />
   </div>
 </div>
 
