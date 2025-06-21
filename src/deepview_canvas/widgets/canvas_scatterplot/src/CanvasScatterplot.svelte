@@ -43,6 +43,9 @@
   export let fullSize: boolean = false;
   export let selected: Writable<string[]>;
 
+  const lassoMinDelay = 10;
+  const lassoMinDist = 2;
+
   let container: HTMLDivElement;
   let scatterCanvas: HTMLCanvasElement;
   let idArray: string[];
@@ -155,7 +158,9 @@
     }
     scatterplot = createScatterplot({
       canvas: scatterCanvas,
-      lassoInitiator: true,
+      lassoOnLongPress: true,
+      lassoMinDelay,
+      lassoMinDist,
       colorBy: 'valueA',
       deselectOnDblClick: false,
       deselectOnEscape: false,
@@ -265,7 +270,9 @@
     }
     scatterplot = createScatterplot({
       canvas: scatterCanvas,
-      lassoInitiator: true,
+      lassoOnLongPress: true,
+      lassoMinDelay,
+      lassoMinDist,
       colorBy: 'valueA',
       deselectOnDblClick: false,
       deselectOnEscape: false,
@@ -312,7 +319,7 @@
       </div>
     {/if}
   </ComponentHeader>
-  <div>Double-click to recenter. Shift-click and drag to lasso-select.</div>
+  <div>Double-click to recenter. Long press to start the lasso selection. Drag to select points.</div>
   <div
     bind:this={container}
     class="flex-grow relative"
