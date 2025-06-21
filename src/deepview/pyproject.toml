@@ -51,19 +51,19 @@ dataset-report = [
 ]
 
 canvas = [
-    "canvas_ux==3.9.5",
-    "canvas_summary==3.9.5",
-    "canvas_scatterplot==3.9.5",
-    "canvas_list==3.9.5",
-    "canvas_duplicates==3.9.5",
-    "canvas_data_map==3.9.5",
-    "canvas_familiarity==3.9.5"
+    "canvas_ux==3.9.6",
+    "canvas_summary==3.9.6",
+    "canvas_scatterplot==3.9.6",
+    "canvas_list==3.9.6",
+    "canvas_duplicates==3.9.6",
+    "canvas_data_map==3.9.6",
+    "canvas_familiarity==3.9.6"
 ]
 
 # MODEL EXTENSIONS
-tensorflow = ["deepview_tensorflow[tf]==3.9.5"]
-data = ["deepview_data==3.9.5"]
-torch = ["deepview_torch==3.9.5"]
+tensorflow = ["deepview_tensorflow[tf]==3.9.6"]
+data = ["deepview_data==3.9.6"]
+torch = ["deepview_torch==3.9.6"]
 
 # DEV EXTENSIONS
 test = [
@@ -88,14 +88,14 @@ notebook = [
     "watermark"
 ]
 complete = [
-    "deepview[image]==3.9.5",
-    "deepview[dimreduction]==3.9.5",
-    "deepview[dataset-report]==3.9.5",
-    "deepview[tensorflow]==3.9.5",
-    "deepview[torch]==3.9.5",
-    "deepview[data]==3.9.5",
-    "deepview[notebook]==3.9.5",
-    "deepview[canvas]==3.9.5",
+    "deepview[image]==3.9.6",
+    "deepview[dimreduction]==3.9.6",
+    "deepview[dataset-report]==3.9.6",
+    "deepview[tensorflow]==3.9.6",
+    "deepview[torch]==3.9.6",
+    "deepview[data]==3.9.6",
+    "deepview[notebook]==3.9.6",
+    "deepview[canvas]==3.9.6",
 ]
 
 [tool.flit.metadata.urls]

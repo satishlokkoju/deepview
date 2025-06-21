@@ -29,7 +29,7 @@ classifiers = [
 requires-python = ">3.9"
 requires = [
     # Internal
-    "deepview==3.9.5",
+    "deepview==3.9.6",
     
     # External
     "tqdm>=4.65.0",

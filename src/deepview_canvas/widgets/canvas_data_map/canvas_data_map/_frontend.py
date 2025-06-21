@@ -21,4 +21,4 @@ Information about the frontend package of the widgets.
 """
 
 module_name = "canvas-data-map"
-module_version = "^3.9.5"
+module_version = "^3.9.6"

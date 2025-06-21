@@ -1,6 +1,13 @@
 DeepView Open Source Changelog
 ==============================
 
+Version 3.9.6 (2025-06-21)
+--------------------------
+- Fixed bug related to Python installation in canvas_ux
+- Fixed lasso selection in Scatterplot
+- Simplified the Make file and improved Canvas building experience
+
+
 Version 3.9.5 (2025-06-10)
 --------------------------
 - Enhanced the documentation to include more examples and better explanations.

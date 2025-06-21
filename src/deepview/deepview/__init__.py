@@ -34,4 +34,4 @@
 
 """Base Data and Network Introspection Kit (DeepView) Library."""
 
-__version__ = "3.9.5"
+__version__ = "3.9.6"
